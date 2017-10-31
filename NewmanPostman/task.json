@@ -1,0 +1,93 @@
+{
+    "id": "4e74f3b0-c5b7-48cf-970e-8d7071818557",
+    "name": "NewmanPostman",
+    "friendlyName": "Newman the cli Companion for Postman",
+    "description": "Using Newman, one can effortlessly run and test a Postman Collections directly from the command-line. Now in a task!",
+    "helpMarkDown": "[More Information](https://url.to/yourmarkdown)",
+    "category": "Test",
+    "visibility": [
+        "Build",
+        "Release"
+    ],
+    "author": "Carlo Wahlstedt",
+    "version": {
+        "Major": 1,
+        "Minor": 0,
+        "Patch": 3
+    },
+    "demands": [],
+    "groups": [
+        {
+            "name": "report",
+            "displayName": "Report",
+            "isExpanded": true
+        },
+        {
+            "name": "ssl",
+            "displayName": "SSL Options",
+            "isExpanded": true
+        }
+    ],
+    "inputs": [
+        {
+            "name": "collectionFileSource",
+            "type": "filePath",
+            "label": "Collection File Source",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Path to the collection file source"
+        },
+        {
+            "name": "environment",
+            "type": "filePath",
+            "label": "Environment",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Path to the environment file"
+        },
+        {
+            "name": "sslClientCert",
+            "type": "filePath",
+            "label": "SSL Client Cert",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Path to the ssl client cert",
+            "groupName": "ssl"
+        },
+        {
+            "name": "sslClientKey",
+            "type": "filePath",
+            "label": "SSL Client Key",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Path to the SSL Client Key",
+            "groupName": "ssl"
+        },
+        {
+            "name": "reporterHtmlTemplate",
+            "type": "filePath",
+            "label": "Reporter Html Template",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Path to html template file",
+            "groupName": "report"
+        },
+        {
+            "name": "reporters",
+            "type": "string",
+            "label": "Reporters",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Options include: cli, json, html, and junit. [Learn More](https://github.com/postmanlabs/newman#configuring-reporters)",
+            "groupName": "report"
+        }
+    ],
+    "instanceNameFormat": "Newman - Postman",
+    "execution": {
+        "PowerShell3": {
+            "target": "$(currentDirectory)\\NewmanPostman.ps1",
+            "argumentFormat": "",
+            "workingDirectory": "$(currentDirectory)"
+        }
+    }
+}

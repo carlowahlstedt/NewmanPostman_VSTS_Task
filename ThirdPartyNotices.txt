@@ -2,4 +2,4 @@
 THIRD-PARTY SOFTWARE NOTICES AND INFORMATION
 Do Not Translate or Localize
 
-//TODO:ADD-3RD-PARTY-NOTICES-HERE
+https://github.com/postmanlabs/newman

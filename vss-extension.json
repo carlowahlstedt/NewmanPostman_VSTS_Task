@@ -1,7 +1,7 @@
 {
   "manifestVersion": 1,
   "id": "NewmanPostman",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "name": "Newman the cli Companion for Postman",
   "scopes": [],
   "description": "Using Newman, one can effortlessly run and test a Postman Collections directly from the command-line. Now in a task!",
@@ -28,11 +28,6 @@
   ],
   "categories": [
     "Build and release"
-  ],
-  "screenshots": [
-    {
-      "path": "static/images/screen1.png"
-    }
   ],
   "content": {
     "license": {

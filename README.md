@@ -16,7 +16,6 @@ Using Newman, one can effortlessly run and test a Postman Collections directly f
 
 The [source](https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task/) to this extension is available. Feel free to take, fork, and extend.
 
-//TODO:Update the 3rd party notices file or remove the view notices reference.
 [View Notices](https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task/blob/master/ThirdPartyNotices.txt) for third party software included in this extension.
 
 ### Minimum supported environments ###

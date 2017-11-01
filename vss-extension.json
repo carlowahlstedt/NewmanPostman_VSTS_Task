@@ -1,17 +1,17 @@
 {
   "manifestVersion": 1,
   "id": "NewmanPostman",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "name": "Newman the cli Companion for Postman",
   "scopes": [],
   "description": "Using Newman, one can effortlessly run and test a Postman Collections directly from the command-line. Now in a task!",
   "publisher": "carlowahlstedt",
-  "galleryFlags": [
-    "Preview"
-  ],
   "icons": {
     "default": "static/images/logo.png"
   },
+  "galleryFlags": [
+    "Public"
+  ],
   "targets": [
     {
       "id": "Microsoft.VisualStudio.Services"
@@ -21,7 +21,10 @@
     "api-version/3.0"
   ],
   "tags": [
-    "Sample"
+    "Newman",
+    "Postman",
+    "Rest",
+    "Test"
   ],
   "categories": [
     "Build and release"
@@ -36,23 +39,23 @@
       "path": "license.md"
     },
     "details": {
-      "path": "overview.md"
+      "path": "README.md"
     }
   },
   "links": {
     "getstarted": {
-      "uri": "https://bit.ly"
+      "uri": "https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task"
     },
     "support": {
-      "uri": "https://bit.ly"
+      "uri": "https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task"
     },
     "issues": {
-      "uri": "https://bit.ly"
+      "uri": "https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task/issues"
     }
   },
   "repository": {
     "type": "git",
-    "uri": "https://bit.ly"
+    "uri": "https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task/"
   },
   "branding": {
     "color": "rgb(0, 165, 255)",

@@ -2,11 +2,15 @@
 
 ## Newman the cli Companion for Postman ##
 
-Using Newman, one can effortlessly run and test a Postman Collections directly from the command-line. Now in a task!
+Using [Newman](https://www.getpostman.com/docs/postman/collection_runs/command_line_integration_with_newman), one can effortlessly run and test a Postman Collections directly from the command-line. Now in a task!
 
 ### Quick steps to get started ###
 
-//TODO:Add a walk-through of key features to your extension. See [Roll-up Board](https://marketplace.visualstudio.com/items?itemName=ms-devlabs.RollUpBoard) for an example.
+_Requires Newman to be previously installed_
+
+Currently supported fields:
+
+![](/static/images/screenshot.png)
 
 ### Known issue(s)
 

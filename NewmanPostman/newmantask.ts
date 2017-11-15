@@ -22,10 +22,13 @@ async function run() {
         let reporterHtmlTemplate = tl.getPathInput('reporterHtmlTemplate', false, true);
         newman.argIf(typeof reporterHtmlTemplate != 'undefined' && reporterHtmlTemplate, ['--reporter-html-template', reporterHtmlTemplate]);
 
+        let reporterJsonExport = tl.getInput('reporterJsonExport');
+        newman.argIf(typeof reporterJsonExport != 'undefined' && reporterJsonExport, ['--reporter-json-export', reporterJsonExport]);
+
         let reporters = tl.getInput('reporters');
         newman.argIf(typeof reporters != 'undefined' && reporters, ['-r', reporters]);
 
-        let delayRequest = tl.getInput('delayRequest', false);
+        let delayRequest = tl.getInput('delayRequest');
         newman.argIf(typeof delayRequest != 'undefined' && delayRequest, ['--delay-request', delayRequest]);
 
         let timeoutRequest = tl.getInput('timeoutRequest');

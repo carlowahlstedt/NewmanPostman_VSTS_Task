@@ -3,7 +3,7 @@
     "name": "NewmanPostman",
     "friendlyName": "Newman the cli Companion for Postman",
     "description": "Using Newman, one can effortlessly run and test a Postman Collections directly from the command-line. Now in a task!",
-    "helpMarkDown": "[More Information](https://url.to/yourmarkdown)",
+    "helpMarkDown": "[More Information](https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task/blob/master/README.md)",
     "category": "Test",
     "visibility": [
         "Build",
@@ -11,12 +11,17 @@
     ],
     "author": "Carlo Wahlstedt",
     "version": {
-        "Major": 1,
+        "Major": 2,
         "Minor": 0,
-        "Patch": 5
+        "Patch": 9
     },
     "demands": [],
     "groups": [
+        {
+            "name": "requestOptions",
+            "displayName": "Request Options",
+            "isExpanded": true
+        },
         {
             "name": "report",
             "displayName": "Report",
@@ -44,6 +49,32 @@
             "defaultValue": "",
             "required": true,
             "helpMarkDown": "Path to the environment file"
+        },
+        {
+            "name": "numberOfIterations",
+            "type": "string",
+            "label": "Number of Iterations",
+            "defaultValue": "1",
+            "required": false,
+            "helpMarkDown": "Define the number of iterations to run [number]"
+        },
+        {
+            "name": "delayRequest",
+            "type": "string",
+            "label": "Delay Request",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Specify a delay (in ms) between requests [number]",
+            "groupName": "requestOptions"
+        },
+        {
+            "name": "timeoutRequest",
+            "type": "string",
+            "label": "Timeout Request",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Specify a request timeout (in ms) for a request [number]",
+            "groupName": "requestOptions"
         },
         {
             "name": "sslClientCert",
@@ -78,16 +109,14 @@
             "label": "Reporters",
             "defaultValue": "",
             "required": false,
-            "helpMarkDown": "Options include: cli, json, html, and junit. [Learn More](https://github.com/postmanlabs/newman#configuring-reporters)",
+            "helpMarkDown": "Options include: cli, json, html, and junit. Must be delineated and encapsulated. Ex: 'cli','json' [Learn More](https://github.com/postmanlabs/newman#configuring-reporters)",
             "groupName": "report"
         }
     ],
     "instanceNameFormat": "Newman - Postman",
     "execution": {
-        "PowerShell3": {
-            "target": "$(currentDirectory)\\NewmanPostman.ps1",
-            "argumentFormat": "",
-            "workingDirectory": "$(currentDirectory)"
+        "Node": {
+            "target": "newmantask.js"
         }
     }
 }

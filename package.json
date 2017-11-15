@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "package": "npm run clean  && tfx extension create  --rev-version",
+    "package": "npm run clean  && npm run compile  && tfx extension create  --rev-version",
     "gallery-publish": "tfx extension publish --rev-version",
     "clean": "rimraf ./*.vsix",
     "compile": "tsc -p .",
@@ -13,5 +13,8 @@
   },
   "name": "vstsexttask",
   "private": true,
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "dependencies": {
+    "vsts-task-lib": "^2.1.0"
+  }
 }

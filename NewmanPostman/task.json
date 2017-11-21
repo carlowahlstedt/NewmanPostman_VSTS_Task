@@ -13,7 +13,7 @@
     "version": {
         "Major": 2,
         "Minor": 0,
-        "Patch": 10
+        "Patch": 11
     },
     "demands": [],
     "groups": [
@@ -101,6 +101,15 @@
             "defaultValue": "",
             "required": false,
             "helpMarkDown": "Path to html template file",
+            "groupName": "report"
+        },
+        {
+            "name": "reporterHtmlExport",
+            "type": "string",
+            "label": "Reporter Html Export",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Specify a path where the output HTML file will be written to disk. If not specified, the file will be written to newman/ in the current working directory.",
             "groupName": "report"
         },
         {

@@ -25,6 +25,8 @@ function run() {
             newman.argIf(typeof sslClientKey != 'undefined' && sslClientKey, ['--ssl-client-key', sslClientKey]);
             let reporterHtmlTemplate = tl.getPathInput('reporterHtmlTemplate', false, true);
             newman.argIf(typeof reporterHtmlTemplate != 'undefined' && reporterHtmlTemplate, ['--reporter-html-template', reporterHtmlTemplate]);
+            let reporterHtmlExport = tl.getPathInput('reporterHtmlExport', false, true);
+            newman.argIf(typeof reporterHtmlExport != 'undefined' && reporterHtmlExport, ['--reporter-html-export', reporterHtmlExport]);
             let reporterJsonExport = tl.getInput('reporterJsonExport');
             newman.argIf(typeof reporterJsonExport != 'undefined' && reporterJsonExport, ['--reporter-json-export', reporterJsonExport]);
             let reporters = tl.getInput('reporters');

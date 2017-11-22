@@ -22,7 +22,7 @@ async function run() {
         let reporterHtmlTemplate = tl.getPathInput('reporterHtmlTemplate', false, true);
         newman.argIf(typeof reporterHtmlTemplate != 'undefined' && reporterHtmlTemplate, ['--reporter-html-template', reporterHtmlTemplate]);
 
-        let reporterHtmlExport = tl.getPathInput('reporterHtmlExport', false, true);
+        let reporterHtmlExport = tl.getInput('reporterHtmlExport');
         newman.argIf(typeof reporterHtmlExport != 'undefined' && reporterHtmlExport, ['--reporter-html-export', reporterHtmlExport]);
 
         let reporterJsonExport = tl.getInput('reporterJsonExport');

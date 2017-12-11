@@ -48,7 +48,7 @@
             "label": "Contents",
             "defaultValue": "**/collection.json",
             "required": true,
-            "helpMarkDown": "File paths to include as part of the copy. Supports multiple lines of match patterns. [More Information](https://go.microsoft.com/fwlink/?LinkID=708389)"
+            "helpMarkDown": "File paths to include as part of the collection run. Supports multiple lines of match patterns."
         },
         {
             "name": "environment",

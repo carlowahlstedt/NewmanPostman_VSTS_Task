@@ -56,6 +56,9 @@ async function run() {
                     }
                 });
             }
+            else {
+                taskSuccess = false;
+            }
         }
         else {
             var newman: trm.ToolRunner = GetToolRunner();

@@ -58,6 +58,9 @@ function run() {
                         }
                     });
                 }
+                else {
+                    taskSuccess = false;
+                }
             }
             else {
                 var newman = GetToolRunner();

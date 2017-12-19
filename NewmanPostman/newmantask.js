@@ -12,6 +12,7 @@ const path = require("path");
 const tl = require("vsts-task-lib/task");
 function GetToolRunner() {
     var newman = tl.tool(tl.which('newman', true));
+    newman.arg('run');
     let sslClientCert = tl.getPathInput('sslClientCert', false, true);
     newman.argIf(typeof sslClientCert != 'undefined' && sslClientCert, ['--ssl-client-cert', sslClientCert]);
     let sslClientKey = tl.getPathInput('sslClientKey', false, true);
@@ -30,6 +31,7 @@ function GetToolRunner() {
     newman.argIf(typeof timeoutRequest != 'undefined' && timeoutRequest, ['--timeout-request', timeoutRequest]);
     let numberOfIterations = tl.getInput('numberOfIterations');
     newman.argIf(typeof numberOfIterations != 'undefined' && numberOfIterations, ['-n', numberOfIterations]);
+    newman.arg(['-e', tl.getPathInput('environment', true, true)]);
     return newman;
 }
 function run() {
@@ -49,24 +51,22 @@ function run() {
                 if (matchedFiles.length > 0) {
                     matchedFiles.forEach((file) => {
                         var newman = GetToolRunner();
-                        newman.arg('run');
                         newman.arg(file);
-                        newman.arg(['-e', tl.getPathInput('environment', true, true)]);
                         var execResponse = newman.execSync();
                         if (execResponse.code === 1) {
+                            console.log(execResponse);
                             taskSuccess = false;
                         }
                     });
                 }
                 else {
+                    console.log("Could not find any collection files in the path provided");
                     taskSuccess = false;
                 }
             }
             else {
                 var newman = GetToolRunner();
-                newman.arg('run');
                 newman.arg(collectionFileSource);
-                newman.arg(['-e', tl.getPathInput('environment', true, true)]);
                 yield newman.exec();
             }
             if (taskSuccess) {

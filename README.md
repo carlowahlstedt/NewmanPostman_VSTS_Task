@@ -30,6 +30,7 @@ The [source](https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task/) to this
 ### Contributors ###
 
 We thank the following contributor(s) for this extension:
+[sunmorgus](https://github.com/sunmorgus)
 
 ### Feedback ###
 - Add a review below.

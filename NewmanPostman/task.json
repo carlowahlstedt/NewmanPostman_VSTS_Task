@@ -40,7 +40,15 @@
             "label": "Collection File Source",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Path to the collection file source"
+            "helpMarkDown": "Path to the folder containing collection file source(s)"
+        },
+        {
+            "name": "Contents",
+            "type": "multiLine",
+            "label": "Contents",
+            "defaultValue": "**/collection.json",
+            "required": true,
+            "helpMarkDown": "File paths to include as part of the collection run. Supports multiple lines of match patterns."
         },
         {
             "name": "environment",

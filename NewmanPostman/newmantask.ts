@@ -5,10 +5,14 @@ import trm = require('vsts-task-lib/toolrunner');
 function GetToolRunner() {
     var newman: trm.ToolRunner = tl.tool(tl.which('newman', true));
     newman.arg('run');
+
     let sslClientCert = tl.getPathInput('sslClientCert', false, true);
     newman.argIf(typeof sslClientCert != 'undefined' && sslClientCert, ['--ssl-client-cert', sslClientCert]);
     let sslClientKey = tl.getPathInput('sslClientKey', false, true);
     newman.argIf(typeof sslClientKey != 'undefined' && sslClientKey, ['--ssl-client-key', sslClientKey]);
+    let sslStrict = tl.getPathInput('sslStrict', false, true);
+    newman.argIf(typeof sslStrict != 'undefined' && sslStrict, ['--insecure', sslStrict]);
+
     let reporterHtmlTemplate = tl.getPathInput('reporterHtmlTemplate', false, true);
     newman.argIf(typeof reporterHtmlTemplate != 'undefined' && reporterHtmlTemplate, ['--reporter-html-template', reporterHtmlTemplate]);
     let reporterHtmlExport = tl.getInput('reporterHtmlExport');
@@ -17,15 +21,17 @@ function GetToolRunner() {
     newman.argIf(typeof reporterJsonExport != 'undefined' && reporterJsonExport, ['--reporter-json-export', reporterJsonExport]);
     let reporters = tl.getInput('reporters');
     newman.argIf(typeof reporters != 'undefined' && reporters, ['-r', reporters]);
+
     let delayRequest = tl.getInput('delayRequest');
     newman.argIf(typeof delayRequest != 'undefined' && delayRequest, ['--delay-request', delayRequest]);
     let timeoutRequest = tl.getInput('timeoutRequest');
     newman.argIf(typeof timeoutRequest != 'undefined' && timeoutRequest, ['--timeout-request', timeoutRequest]);
     let numberOfIterations = tl.getInput('numberOfIterations');
     newman.argIf(typeof numberOfIterations != 'undefined' && numberOfIterations, ['-n', numberOfIterations]);
+    let globalVariable = tl.getPathInput('globalVariables', false, true);
+    newman.argIf(typeof globalVariable != 'undefined' && globalVariable, ['--globals', globalVariable]);
+
     newman.arg(['-e', tl.getPathInput('environment', true, true)]);
-    let globalVariable = tl.getPathInput('globalVariables',false,true);
-    newman.argIf(typeof globalVariable !='undefined'&& globalVariable,['--globals',globalVariable]);
     return newman;
 }
 

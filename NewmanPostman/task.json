@@ -13,7 +13,7 @@
     "version": {
         "Major": 2,
         "Minor": 0,
-        "Patch": 13
+        "Patch": 14
     },
     "demands": [],
     "groups": [
@@ -56,15 +56,15 @@
             "label": "Environment",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Path to the environment file"
+            "helpMarkDown": "Path to the Postman environment file as JSON"
         },
         {
-            "name":"globalVariables",
+            "name": "globalVariables",
             "type": "filePath",
-            "label":"Global",
-            "defaultValue":"",
-            "required":false,
-            "helpMarkDown":"Path to the global variables file"
+            "label": "Global",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Path to the Postman global variables file as JSON"
         },
         {
             "name": "numberOfIterations",
@@ -108,6 +108,13 @@
             "defaultValue": "",
             "required": false,
             "helpMarkDown": "Path to the SSL Client Key",
+            "groupName": "ssl"
+        },
+        {
+            "name": "sslStrict",
+            "type": "boolean",
+            "label": "Disable Strict SSL",
+            "helpMarkDown": "Disables strict ssl",
             "groupName": "ssl"
         },
         {

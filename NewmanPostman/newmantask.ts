@@ -24,6 +24,8 @@ function GetToolRunner() {
     let numberOfIterations = tl.getInput('numberOfIterations');
     newman.argIf(typeof numberOfIterations != 'undefined' && numberOfIterations, ['-n', numberOfIterations]);
     newman.arg(['-e', tl.getPathInput('environment', true, true)]);
+    let globalVariable = tl.getPathInput('globalVariables',false,true);
+    newman.argIf(typeof globalVariable !='undefined'&& globalVariable,['--globals',globalVariable]);
     return newman;
 }
 

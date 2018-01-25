@@ -59,6 +59,14 @@
             "helpMarkDown": "Path to the environment file"
         },
         {
+            "name":"globalVariables",
+            "type": "filePath",
+            "label":"Global",
+            "defaultValue":"",
+            "required":false,
+            "helpMarkDown":"Path to the global variables file"
+        },
+        {
             "name": "numberOfIterations",
             "type": "string",
             "label": "Number of Iterations",

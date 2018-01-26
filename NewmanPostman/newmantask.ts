@@ -10,8 +10,8 @@ function GetToolRunner() {
     newman.argIf(typeof sslClientCert != 'undefined' && sslClientCert, ['--ssl-client-cert', sslClientCert]);
     let sslClientKey = tl.getPathInput('sslClientKey', false, true);
     newman.argIf(typeof sslClientKey != 'undefined' && sslClientKey, ['--ssl-client-key', sslClientKey]);
-    let sslStrict = tl.getPathInput('sslStrict', false, true);
-    newman.argIf(typeof sslStrict != 'undefined' && sslStrict, ['--insecure', sslStrict]);
+    let sslStrict = tl.getBoolInput('sslStrict');
+    newman.argIf(sslStrict, ['--insecure']);
 
     let reporterHtmlTemplate = tl.getPathInput('reporterHtmlTemplate', false, true);
     newman.argIf(typeof reporterHtmlTemplate != 'undefined' && reporterHtmlTemplate, ['--reporter-html-template', reporterHtmlTemplate]);
@@ -29,7 +29,7 @@ function GetToolRunner() {
     let numberOfIterations = tl.getInput('numberOfIterations');
     newman.argIf(typeof numberOfIterations != 'undefined' && numberOfIterations, ['-n', numberOfIterations]);
     let globalVariable = tl.getPathInput('globalVariables', false, true);
-    newman.argIf(typeof globalVariable != 'undefined' && globalVariable, ['--globals', globalVariable]);
+    newman.argIf(typeof globalVariable != 'undefined' && tl.filePathSupplied('globalVariables'), ['--globals', globalVariable]);
 
     newman.arg(['-e', tl.getPathInput('environment', true, true)]);
     return newman;

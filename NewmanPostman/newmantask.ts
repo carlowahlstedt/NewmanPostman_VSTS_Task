@@ -26,11 +26,19 @@ function GetToolRunner() {
     newman.argIf(typeof delayRequest != 'undefined' && delayRequest, ['--delay-request', delayRequest]);
     let timeoutRequest = tl.getInput('timeoutRequest');
     newman.argIf(typeof timeoutRequest != 'undefined' && timeoutRequest, ['--timeout-request', timeoutRequest]);
+    let timeoutGlobal = tl.getInput('timeoutGlobal', false);
+    newman.argIf(typeof timeoutGlobal != 'undefined' && timeoutGlobal, ['--timeout', timeoutGlobal]);
+    let timeoutScript = tl.getInput('timeoutScript', false);
+    newman.argIf(typeof timeoutScript != 'undefined' && timeoutScript, ['--timeout-script', timeoutScript]);
+    
     let numberOfIterations = tl.getInput('numberOfIterations');
     newman.argIf(typeof numberOfIterations != 'undefined' && numberOfIterations, ['-n', numberOfIterations]);
     let globalVariable = tl.getPathInput('globalVariables', false, true);
     newman.argIf(typeof globalVariable != 'undefined' && tl.filePathSupplied('globalVariables'), ['--globals', globalVariable]);
-
+    let dataFile = tl.getPathInput('dataFile', false, true);
+    newman.argIf(typeof globalVariable != 'undefined' && tl.filePathSupplied('dataFile'), ['--iteration-data', dataFile]);
+  
+    
     newman.arg(['-e', tl.getPathInput('environment', true, true)]);
     return newman;
 }

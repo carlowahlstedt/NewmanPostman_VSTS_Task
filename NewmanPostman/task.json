@@ -31,6 +31,11 @@
             "name": "ssl",
             "displayName": "SSL Options",
             "isExpanded": true
+        },
+        {
+            "name":"timeout",
+            "displayName":"Timeout Options",
+            "isExpanded":true
         }
     ],
     "inputs": [
@@ -67,6 +72,14 @@
             "helpMarkDown": "Path to the Postman global variables file as JSON"
         },
         {
+            "name": "dataFile",
+            "type": "filePath",
+            "label": "Data",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Path to the data source file as CSV"
+        },
+        {
             "name": "numberOfIterations",
             "type": "string",
             "label": "Number of Iterations",
@@ -81,15 +94,6 @@
             "defaultValue": "",
             "required": false,
             "helpMarkDown": "Specify a delay (in ms) between requests [number]",
-            "groupName": "requestOptions"
-        },
-        {
-            "name": "timeoutRequest",
-            "type": "string",
-            "label": "Timeout Request",
-            "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "Specify a request timeout (in ms) for a request [number]",
             "groupName": "requestOptions"
         },
         {
@@ -152,6 +156,33 @@
             "required": false,
             "helpMarkDown": "Options include: cli, json, html, and junit. Must be delineated and encapsulated. Ex: 'cli','json' [Learn More](https://github.com/postmanlabs/newman#configuring-reporters)",
             "groupName": "report"
+        },
+        {
+            "name": "timeoutGlobal",
+            "type": "string",
+            "label": "Timeout ",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Specify entire collection timeout (in ms) to complete [number]",
+            "groupName": "timeout"
+        },
+        {
+            "name": "timeoutRequest",
+            "type": "string",
+            "label": "Timeout Request",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Specify a request timeout (in ms) for a request [number]",
+            "groupName": "timeout"
+        },
+        {
+            "name": "timeoutScript",
+            "type": "string",
+            "label": "Timeout Script",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Specify a request timeout (in ms) for script to complete [number]",
+            "groupName": "timeout"
         }
     ],
     "instanceNameFormat": "Newman - Postman",

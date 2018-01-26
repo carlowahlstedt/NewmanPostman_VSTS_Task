@@ -10,8 +10,8 @@ function GetToolRunner() {
     newman.argIf(typeof sslClientCert != 'undefined' && sslClientCert, ['--ssl-client-cert', sslClientCert]);
     let sslClientKey = tl.getPathInput('sslClientKey', false, true);
     newman.argIf(typeof sslClientKey != 'undefined' && sslClientKey, ['--ssl-client-key', sslClientKey]);
-    let sslStrict = tl.getPathInput('sslStrict', false, true);
-    newman.argIf(typeof sslStrict != 'undefined' && sslStrict, ['--insecure', sslStrict]);
+    let sslStrict = tl.getBoolInput('sslStrict');
+    newman.argIf(sslStrict, ['--insecure']);
 
     let reporterHtmlTemplate = tl.getPathInput('reporterHtmlTemplate', false, true);
     newman.argIf(typeof reporterHtmlTemplate != 'undefined' && reporterHtmlTemplate, ['--reporter-html-template', reporterHtmlTemplate]);

@@ -19,6 +19,8 @@ function GetToolRunner() {
     newman.argIf(typeof reporterHtmlExport != 'undefined' && reporterHtmlExport, ['--reporter-html-export', reporterHtmlExport]);
     let reporterJsonExport = tl.getInput('reporterJsonExport');
     newman.argIf(typeof reporterJsonExport != 'undefined' && reporterJsonExport, ['--reporter-json-export', reporterJsonExport]);
+    let reporterJUnitExport = tl.getPathInput('reporterJUnitExport', false, true);
+    newman.argIf(typeof reporterJUnitExport != 'undefined' && tl.filePathSupplied('reporterJUnitExport'), ['--reporter-junit-export', reporterJUnitExport]);
     let reporters = tl.getInput('reporters');
     newman.argIf(typeof reporters != 'undefined' && reporters, ['-r', reporters]);
 
@@ -30,15 +32,29 @@ function GetToolRunner() {
     newman.argIf(typeof timeoutGlobal != 'undefined' && timeoutGlobal, ['--timeout', timeoutGlobal]);
     let timeoutScript = tl.getInput('timeoutScript', false);
     newman.argIf(typeof timeoutScript != 'undefined' && timeoutScript, ['--timeout-script', timeoutScript]);
-    
+
     let numberOfIterations = tl.getInput('numberOfIterations');
     newman.argIf(typeof numberOfIterations != 'undefined' && numberOfIterations, ['-n', numberOfIterations]);
     let globalVariable = tl.getPathInput('globalVariables', false, true);
     newman.argIf(typeof globalVariable != 'undefined' && tl.filePathSupplied('globalVariables'), ['--globals', globalVariable]);
     let dataFile = tl.getPathInput('dataFile', false, true);
     newman.argIf(typeof globalVariable != 'undefined' && tl.filePathSupplied('dataFile'), ['--iteration-data', dataFile]);
-  
+    let folder = tl.getInput('folder');
+    newman.argIf(typeof folder != 'undefined' && folder, ['--folder', folder]);
+    let globalVars: string[] = tl.getDelimitedInput('globalVars', '\n');
+    globalVars.forEach(globVar => {
+        newman.arg(['--global-var', globVar]);
+    });
+    let ignoreRedirect = tl.getBoolInput('ignoreRedirect');
+    newman.argIf(ignoreRedirect, ['--ignore-redirects']);
     
+    let exportEnvironment = tl.getPathInput('exportEnvironment');
+    newman.argIf(tl.filePathSupplied('exportEnvironment'), ['--export-environment', exportEnvironment]);
+    let exportGlobals = tl.getPathInput('exportGlobals');
+    newman.argIf(tl.filePathSupplied('exportGlobals'), ['--export-globals', exportGlobals]);
+    let exportCollection = tl.getPathInput('exportCollection');
+    newman.argIf(tl.filePathSupplied('exportCollection'), ['--export-collection', exportCollection]);
+
     newman.arg(['-e', tl.getPathInput('environment', true, true)]);
     return newman;
 }

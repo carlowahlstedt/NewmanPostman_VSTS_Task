@@ -33,9 +33,14 @@
             "isExpanded": true
         },
         {
-            "name":"timeout",
-            "displayName":"Timeout Options",
-            "isExpanded":true
+            "name": "timeout",
+            "displayName": "Timeout Options",
+            "isExpanded": true
+        },
+        {
+            "name": "export",
+            "displayName": "Export Options",
+            "isExpanded": false
         }
     ],
     "inputs": [
@@ -56,6 +61,14 @@
             "helpMarkDown": "File paths to include as part of the collection run. Supports multiple lines of match patterns."
         },
         {
+            "name": "folder",
+            "type": "string",
+            "label": "Folder",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Run requests within a particular folder in a collection"
+        },
+        {
             "name": "environment",
             "type": "filePath",
             "label": "Environment",
@@ -70,6 +83,14 @@
             "defaultValue": "",
             "required": false,
             "helpMarkDown": "Path to the Postman global variables file as JSON"
+        },
+        {
+            "name": "globalVars",
+            "type": "multiline",
+            "label": "Global Variables",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Global variables to provide to command line in a key=value format. Multiple values can be added."
         },
         {
             "name": "dataFile",
@@ -94,6 +115,14 @@
             "defaultValue": "",
             "required": false,
             "helpMarkDown": "Specify a delay (in ms) between requests [number]",
+            "groupName": "requestOptions"
+        },
+        {
+            "name": "ignoreRedirect",
+            "type": "boolean",
+            "label": "Ignore Redirect",
+            "required": false,
+            "helpMarkDown": "Prevents newman from automatically following 3XX redirect responses.",
             "groupName": "requestOptions"
         },
         {
@@ -149,6 +178,15 @@
             "groupName": "report"
         },
         {
+            "name": "reporterJUnitExport",
+            "type": "filePath",
+            "label": "Reporter JUnit Export",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Specify a path where the output JUnit file will be written to disk. If not specified, the file will be written to newman/ in the current working directory.",
+            "groupName": "report"
+        },
+        {
             "name": "reporters",
             "type": "string",
             "label": "Reporters",
@@ -183,6 +221,33 @@
             "required": false,
             "helpMarkDown": "Specify a request timeout (in ms) for script to complete [number]",
             "groupName": "timeout"
+        },
+        {
+            "name": "exportEnvironment",
+            "type": "filePath",
+            "label": "Export Environment",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Specify a path where the environment variables file will be output before completing a run",
+            "groupName": "export"
+        },
+        {
+            "name": "exportGlobals",
+            "type": "filePath",
+            "label": "Export Globals",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Specify a path where the global variable files will be output before completing a run",
+            "groupName": "export"
+        },
+        {
+            "name": "exportCollection",
+            "type": "filePath",
+            "label": "Export Collections",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Specify a path where the collection file will be output before completing a run",
+            "groupName": "export"
         }
     ],
     "instanceNameFormat": "Newman - Postman",

@@ -126,6 +126,27 @@
             "groupName": "requestOptions"
         },
         {
+            "name": "bail",
+            "type": "boolean",
+            "label": "Stop on first error",
+            "required": false,
+            "helpMarkDown": "Specify wether or not to stop a collection on first error",
+            "groupName": "requestOptions"
+        },
+        {
+            "name": "bailmodifier",
+            "type": "picklist",
+            "label": "Option",
+            "required": false,
+            "visibleRule": "bail=true",
+            "helpMarkDown": "'folder' will stop collection execution in case of incorrect folder configuration, 'failure' will gracefully stop collection on first test failure",
+            "groupName": "requestOptions",
+            "options": {
+                "folder": "folder",
+                "failre": "failure"
+            }
+        },
+        {
             "name": "sslClientCert",
             "type": "filePath",
             "label": "SSL Client Cert",

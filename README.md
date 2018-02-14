@@ -8,9 +8,7 @@ Using [Newman](https://www.getpostman.com/docs/postman/collection_runs/command_l
 
 _Requires Newman to be previously installed_
 
-Currently supported fields:
-
-![](/static/images/screenshot.png)
+All command line options are currently supported.
 
 ### Known issue(s)
 
@@ -35,4 +33,5 @@ We thank the following contributor(s) for this extension:
 
 ### Feedback ###
 - Add a review below.
+- [Post an issue on Github](https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task/issues/new)
 - Send us an [email](mailto:carlowahlstedt@gmail.com).

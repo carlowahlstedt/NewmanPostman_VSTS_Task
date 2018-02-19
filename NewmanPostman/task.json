@@ -182,7 +182,7 @@
         },
         {
             "name": "reporterHtmlExport",
-            "type": "string",
+            "type": "filePath",
             "label": "Reporter Html Export",
             "defaultValue": "",
             "required": false,
@@ -191,7 +191,7 @@
         },
         {
             "name": "reporterJsonExport",
-            "type": "string",
+            "type": "filePath",
             "label": "Reporter Json Export",
             "defaultValue": "",
             "required": false,

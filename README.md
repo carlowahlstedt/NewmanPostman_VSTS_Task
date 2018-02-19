@@ -2,6 +2,8 @@
 
 ## Newman the cli Companion for Postman ##
 
+[![Join the chat at https://gitter.im/NewmanPostman_VSTS_Task/Lobby](https://badges.gitter.im/NewmanPostman_VSTS_Task/Lobby.svg)](https://gitter.im/NewmanPostman_VSTS_Task/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Using [Newman](https://www.getpostman.com/docs/postman/collection_runs/command_line_integration_with_newman), one can effortlessly run and test a Postman Collections directly from the command-line. Now in a task!
 
 ### Quick steps to get started ###

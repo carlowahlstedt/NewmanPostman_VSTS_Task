@@ -1,7 +1,8 @@
 {
   "scripts": {
     "package": "npm run clean  && npm run compile  && tfx extension create  --rev-version",
-    "gallery-publish": "tfx extension publish --rev-version",
+    "gallery-publish": "tfx extension publish",
+    "gallery-publish-rev": "tfx extension publish --rev-version",
     "clean": "rimraf ./*.vsix",
     "compile": "tsc -p .",
     "install-task-lib": "cd NewmanPostman && npm install --save-dev"

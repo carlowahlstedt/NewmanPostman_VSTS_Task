@@ -14,11 +14,11 @@ function GetToolRunner() {
     newman.argIf(sslStrict, ['--insecure']);
 
     let reporterHtmlTemplate = tl.getPathInput('reporterHtmlTemplate', false, true);
-    newman.argIf(typeof reporterHtmlTemplate != 'undefined' && reporterHtmlTemplate, ['--reporter-html-template', reporterHtmlTemplate]);
-    let reporterHtmlExport = tl.getInput('reporterHtmlExport');
-    newman.argIf(typeof reporterHtmlExport != 'undefined' && reporterHtmlExport, ['--reporter-html-export', reporterHtmlExport]);
-    let reporterJsonExport = tl.getInput('reporterJsonExport');
-    newman.argIf(typeof reporterJsonExport != 'undefined' && reporterJsonExport, ['--reporter-json-export', reporterJsonExport]);
+    newman.argIf(typeof reporterHtmlTemplate != 'undefined' && tl.filePathSupplied('reporterHtmlTemplate'), ['--reporter-html-template', reporterHtmlTemplate]);
+    let reporterHtmlExport = tl.getPathInput('reporterHtmlExport');
+    newman.argIf(typeof reporterHtmlExport != 'undefined' && tl.filePathSupplied('reporterHtmlExport'), ['--reporter-html-export', reporterHtmlExport]);
+    let reporterJsonExport = tl.getPathInput('reporterJsonExport');
+    newman.argIf(typeof reporterJsonExport != 'undefined' && tl.filePathSupplied('reporterJsonExport'), ['--reporter-json-export', reporterJsonExport]);
     let reporterJUnitExport = tl.getPathInput('reporterJUnitExport', false, true);
     newman.argIf(typeof reporterJUnitExport != 'undefined' && tl.filePathSupplied('reporterJUnitExport'), ['--reporter-junit-export', reporterJUnitExport]);
     let reporters = tl.getInput('reporters');

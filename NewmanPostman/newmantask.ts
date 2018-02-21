@@ -21,8 +21,8 @@ function GetToolRunner() {
     newman.argIf(typeof reporterJsonExport != 'undefined' && tl.filePathSupplied('reporterJsonExport'), ['--reporter-json-export', reporterJsonExport]);
     let reporterJUnitExport = tl.getPathInput('reporterJUnitExport', false, true);
     newman.argIf(typeof reporterJUnitExport != 'undefined' && tl.filePathSupplied('reporterJUnitExport'), ['--reporter-junit-export', reporterJUnitExport]);
-    let reporters = tl.getInput('reporters');
-    newman.argIf(typeof reporters != 'undefined' && reporters, ['-r', reporters]);
+    let reporterList = tl.getInput('reporters');
+    newman.argIf(typeof reporterList != 'undefined' && (reporterList.split(',').length != 0), ['-r', reporterList]);
 
     let delayRequest = tl.getInput('delayRequest');
     newman.argIf(typeof delayRequest != 'undefined' && delayRequest, ['--delay-request', delayRequest]);
@@ -47,7 +47,7 @@ function GetToolRunner() {
     });
     let ignoreRedirect = tl.getBoolInput('ignoreRedirect');
     newman.argIf(ignoreRedirect, ['--ignore-redirects']);
-    
+
     let exportEnvironment = tl.getPathInput('exportEnvironment');
     newman.argIf(tl.filePathSupplied('exportEnvironment'), ['--export-environment', exportEnvironment]);
     let exportGlobals = tl.getPathInput('exportGlobals');

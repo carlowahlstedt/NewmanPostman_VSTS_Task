@@ -209,11 +209,19 @@
         },
         {
             "name": "reporters",
-            "type": "string",
+            "type": "picklist",
             "label": "Reporters",
-            "defaultValue": "",
+            "properties": {
+                "MultiSelectFlatList": "True"
+            },
+            "options": {
+                "cli": "cli",
+                "json": "json",
+                "html": "html",
+                "junit": "junit"
+            },
             "required": false,
-            "helpMarkDown": "Options include: cli, json, html, and junit. Must be delineated and encapsulated. Ex: 'cli','json' [Learn More](https://github.com/postmanlabs/newman#configuring-reporters)",
+            "helpMarkDown": "Format of report. Multi selection allowed.",
             "groupName": "report"
         },
         {

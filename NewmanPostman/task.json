@@ -211,14 +211,14 @@
             "name": "reporters",
             "type": "picklist",
             "label": "Reporters",
-            "properties" :{
+            "properties": {
                 "MultiSelectFlatList": "True"
             },
             "options": {
-                "cli":"cli",
-                "json":"json",
-                "html":"html",
-                "junit":"junit"
+                "cli": "cli",
+                "json": "json",
+                "html": "html",
+                "junit": "junit"
             },
             "required": false,
             "helpMarkDown": "Format of report. Multi selection allowed.",

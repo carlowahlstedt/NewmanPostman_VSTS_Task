@@ -1,4 +1,4 @@
-![](/static/images/logo.png)
+![](https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task/blob/master/static/images/logo.png?raw=true)
 
 ## Newman the cli Companion for Postman ##
 
@@ -34,6 +34,6 @@ We thank the following contributor(s) for this extension:
 * [sebcaps](https://github.com/sebcaps)
 
 ### Feedback ###
-- Add a review below.
+- [Add a review](https://marketplace.visualstudio.com/items?itemName=carlowahlstedt.NewmanPostman#review-details)
 - [Post an issue on Github](https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task/issues/new)
-- Send us an [email](mailto:carlowahlstedt@gmail.com).
+- Send us an [email](mailto:carlowahlstedt@gmail.com)

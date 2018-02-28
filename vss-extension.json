@@ -1,7 +1,7 @@
 {
   "manifestVersion": 1,
   "id": "NewmanPostman",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "name": "Newman the cli Companion for Postman",
   "scopes": [],
   "description": "Using Newman, one can effortlessly run and test a Postman Collections directly from the command-line. Now in a task!",
@@ -56,6 +56,10 @@
   "repository": {
     "type": "git",
     "uri": "https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task/"
+  },
+  "CustomerQnASupport": {
+    "enableqna": "false",
+    "url": "https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task/issues"
   },
   "branding": {
     "color": "rgb(0, 165, 255)",

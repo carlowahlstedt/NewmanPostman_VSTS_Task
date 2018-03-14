@@ -6,17 +6,55 @@
 
 Using [Newman](https://www.getpostman.com/docs/postman/collection_runs/command_line_integration_with_newman), one can effortlessly run and test a Postman Collections directly from the command-line. Now in a task!
 
-### Quick steps to get started ###
+## How to ##
 
-_Requires Newman to be previously installed_
+You can include this task to a build & publish pipeline. Here's a quick 'How To'
 
-All command line options are currently supported.
+### Requisites ###
 
-### Known issue(s)
+Add a [npm task](https://docs.microsoft.com/fr-fr/vsts/build-release/tasks/package/npm) to install Newman before execution.
+
+Set a display name (eg : 'Install Newman').
+
+Set `custom` as command
+
+As 'Command and arguments' set `install newmann -g`
+
+### Execution ###
+
+Configure this task as per your requirements. (see [here](https://github.com/postmanlabs/newman#command-line-options) and [here](#Limitations) for options)
+
+### Report ###
+
+Test report can be integrated in Team Services.
+
+To do so :
+
+- Select **at least** `junit` as a reporter option (others can be added).
+- Optionnaly specify path to export junit report.
+- Add a 'Publish Test Result' task, to process generated Junit report. Specify format (JUnit) and path and to xml file.
+
+Execution are now reported with test statistics.
+
+![alt text](https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task/blob/master/static/images/testresult.png?raw=true "Test result")
+
+### Limitations ###
+
+Following command line options are **not supported**:
+
+- `-x`,`--suppress-exit-code`
+- `-color`
+- `--no-color`
+- `--disable-unicode`
+- `--disable-unicode`
+- `--ssl-client-passphrase`
+- None of the [CLI option](https://github.com/postmanlabs/newman#cli-reporter-options)
+
+### Known issue(s) ###
 
 - None
 
-### Learn More
+### Learn More ###
 
 The [source](https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task/) to this extension is available. Feel free to take, fork, and extend.
 
@@ -30,10 +68,12 @@ The [source](https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task/) to this
 ### Contributors ###
 
 We thank the following contributor(s) for this extension:
-* [sunmorgus](https://github.com/sunmorgus)
-* [sebcaps](https://github.com/sebcaps)
+
+- [sunmorgus](https://github.com/sunmorgus)
+- [sebcaps](https://github.com/sebcaps)
 
 ### Feedback ###
+
 - [Add a review](https://marketplace.visualstudio.com/items?itemName=carlowahlstedt.NewmanPostman#review-details)
 - [Post an issue on Github](https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task/issues/new)
 - Send us an [email](mailto:carlowahlstedt@gmail.com)

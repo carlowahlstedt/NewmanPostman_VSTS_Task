@@ -11,17 +11,17 @@ Using [Newman](https://www.getpostman.com/docs/postman/collection_runs/command_l
 
 ## How to ##
 
-You can include this task to a build & publish pipeline. Here's a quick 'How To'
+You can include this task in a build or release pipeline. Here's a quick 'How To'
 
 ### Requisites ###
 
-Add a [npm task](https://docs.microsoft.com/fr-fr/vsts/build-release/tasks/package/npm) to install Newman before execution.
+1. Add a [npm task](https://docs.microsoft.com/fr-fr/vsts/build-release/tasks/package/npm) to install Newman before execution.
 
-Set a display name (eg : 'Install Newman').
+1. Set a display name (eg : 'Install Newman').
 
-Set `custom` as command
+1. Set `custom` as command
 
-As 'Command and arguments' set `install newman -g`
+1. As 'Command and arguments' set `install newman -g`
 
 ### Execution ###
 

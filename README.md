@@ -18,7 +18,7 @@ Set a display name (eg : 'Install Newman').
 
 Set `custom` as command
 
-As 'Command and arguments' set `install newmann -g`
+As 'Command and arguments' set `install newman -g`
 
 ### Execution ###
 

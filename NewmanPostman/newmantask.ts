@@ -7,9 +7,9 @@ function GetToolRunner() {
     newman.arg('run');
 
     let sslClientCert = tl.getPathInput('sslClientCert', false, true);
-    newman.argIf(typeof sslClientCert != 'undefined' && sslClientCert, ['--ssl-client-cert', sslClientCert]);
+    newman.argIf(typeof sslClientCert != 'undefined' && tl.filePathSupplied('sslClientCert'), ['--ssl-client-cert', sslClientCert]);
     let sslClientKey = tl.getPathInput('sslClientKey', false, true);
-    newman.argIf(typeof sslClientKey != 'undefined' && sslClientKey, ['--ssl-client-key', sslClientKey]);
+    newman.argIf(typeof sslClientKey != 'undefined' && tl.filePathSupplied('sslClientKey'), ['--ssl-client-key', sslClientKey]);
     let sslStrict = tl.getBoolInput('sslStrict');
     newman.argIf(sslStrict, ['--insecure']);
 

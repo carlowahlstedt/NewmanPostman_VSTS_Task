@@ -2,7 +2,7 @@ import path = require('path');
 import tl = require('vsts-task-lib/task');
 import trm = require('vsts-task-lib/toolrunner');
 
-function GetToolRunner(collectionToRun) {
+function GetToolRunner(collectionToRun:string) {
     var newman: trm.ToolRunner = tl.tool(tl.which('newman', true));
     newman.arg('run');
     newman.arg(collectionToRun);

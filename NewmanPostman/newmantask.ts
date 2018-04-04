@@ -2,9 +2,10 @@ import path = require('path');
 import tl = require('vsts-task-lib/task');
 import trm = require('vsts-task-lib/toolrunner');
 
-function GetToolRunner() {
+function GetToolRunner(collectionToRun:string) {
     var newman: trm.ToolRunner = tl.tool(tl.which('newman', true));
     newman.arg('run');
+    newman.arg(collectionToRun);
 
     let sslClientCert = tl.getPathInput('sslClientCert', false, true);
     newman.argIf(typeof sslClientCert != 'undefined' && tl.filePathSupplied('sslClientCert'), ['--ssl-client-cert', sslClientCert]);
@@ -78,9 +79,7 @@ async function run() {
 
             if (matchedFiles.length > 0) {
                 matchedFiles.forEach((file: string) => {
-                    var newman: trm.ToolRunner = GetToolRunner();
-                    newman.arg(file);
-
+                    var newman: trm.ToolRunner = GetToolRunner(file);
                     var execResponse = newman.execSync();
 
                     if (execResponse.code === 1) {
@@ -95,9 +94,7 @@ async function run() {
             }
         }
         else {
-            var newman: trm.ToolRunner = GetToolRunner();
-            newman.arg(collectionFileSource);
-
+            var newman: trm.ToolRunner = GetToolRunner(collectionFileSource);
             await newman.exec();
         }
 

@@ -47,9 +47,6 @@ Following command line options are **not supported**:
 
 - `-x`,`--suppress-exit-code`
 - `-color`
-- `--no-color`
-- `--disable-unicode`
-- `--disable-unicode`
 - `--ssl-client-passphrase`
 - None of the [CLI option](https://github.com/postmanlabs/newman#cli-reporter-options)
 

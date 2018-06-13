@@ -23,6 +23,11 @@
             "isExpanded": true
         },
         {
+            "name": "output",
+            "displayName": "Output Options",
+            "isExpanded": true
+        },
+        {
             "name": "report",
             "displayName": "Report",
             "isExpanded": true
@@ -107,6 +112,24 @@
             "defaultValue": "1",
             "required": false,
             "helpMarkDown": "Define the number of iterations to run [number]"
+        },
+        {
+            "name": "unicodeDisabled",
+            "type": "boolean",
+            "label": "Disable Unicode",
+            "defaultValue": false,
+            "required": false,
+            "helpMarkDown": "Specify whether or not to force the unicode disable option. When supplied, all symbols in the output will be replaced by their plain text equivalents.",
+            "groupName": "output"
+        },
+        {
+            "name": "forceNoColor",
+            "type": "boolean",
+            "label": "No color",
+            "defaultValue": false,
+            "required": false,
+            "helpMarkDown": "Turn off usage of color in terminal output.",
+            "groupName": "output"
         },
         {
             "name": "delayRequest",

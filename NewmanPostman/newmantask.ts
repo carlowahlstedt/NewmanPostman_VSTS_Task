@@ -14,6 +14,12 @@ function GetToolRunner(collectionToRun:string) {
     let sslStrict = tl.getBoolInput('sslStrict');
     newman.argIf(sslStrict, ['--insecure']);
 
+    let unicodeDisabled= tl.getBoolInput('unicodeDisabled');
+    newman.argIf(unicodeDisabled, ['--disable-unicode']);
+
+    let forceNoColor= tl.getBoolInput('forceNoColor');
+    newman.argIf(forceNoColor, ['--no-color']);
+
     let reporterHtmlTemplate = tl.getPathInput('reporterHtmlTemplate', false, true);
     newman.argIf(typeof reporterHtmlTemplate != 'undefined' && tl.filePathSupplied('reporterHtmlTemplate'), ['--reporter-html-template', reporterHtmlTemplate]);
     let reporterHtmlExport = tl.getPathInput('reporterHtmlExport');

@@ -10,15 +10,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const path = require("path");
 const tl = require("vsts-task-lib/task");
-function GetToolRunner() {
+run();
+function GetToolRunner(collectionToRun) {
     var newman = tl.tool(tl.which('newman', true));
     newman.arg('run');
+    newman.arg(collectionToRun);
     let sslClientCert = tl.getPathInput('sslClientCert', false, true);
-    newman.argIf(typeof sslClientCert != 'undefined' && sslClientCert, ['--ssl-client-cert', sslClientCert]);
+    newman.argIf(typeof sslClientCert != 'undefined' && tl.filePathSupplied('sslClientCert'), ['--ssl-client-cert', sslClientCert]);
     let sslClientKey = tl.getPathInput('sslClientKey', false, true);
-    newman.argIf(typeof sslClientKey != 'undefined' && sslClientKey, ['--ssl-client-key', sslClientKey]);
+    newman.argIf(typeof sslClientKey != 'undefined' && tl.filePathSupplied('sslClientKey'), ['--ssl-client-key', sslClientKey]);
     let sslStrict = tl.getBoolInput('sslStrict');
     newman.argIf(sslStrict, ['--insecure']);
+    let unicodeDisabled = tl.getBoolInput('unicodeDisabled');
+    newman.argIf(unicodeDisabled, ['--disable-unicode']);
+    let forceNoColor = tl.getBoolInput('forceNoColor');
+    newman.argIf(forceNoColor, ['--no-color']);
     let reporterHtmlTemplate = tl.getPathInput('reporterHtmlTemplate', false, true);
     newman.argIf(typeof reporterHtmlTemplate != 'undefined' && tl.filePathSupplied('reporterHtmlTemplate'), ['--reporter-html-template', reporterHtmlTemplate]);
     let reporterHtmlExport = tl.getPathInput('reporterHtmlExport');
@@ -28,7 +34,17 @@ function GetToolRunner() {
     let reporterJUnitExport = tl.getPathInput('reporterJUnitExport', false, true);
     newman.argIf(typeof reporterJUnitExport != 'undefined' && tl.filePathSupplied('reporterJUnitExport'), ['--reporter-junit-export', reporterJUnitExport]);
     let reporterList = tl.getInput('reporters');
-    newman.argIf(typeof reporterList != 'undefined' && (reporterList.split(',').length != 0), ['-r', reporterList]);
+    let customReporter = tl.getInput('customReporter');
+    let newReporterList = reporterList;
+    if (reporterList.includes('custom')) {
+        if (typeof customReporter != 'undefined' && customReporter) {
+            newReporterList = reporterList.replace('custom', customReporter);
+        }
+        else {
+            newReporterList = reporterList.replace(',custom', '');
+        }
+    }
+    newman.argIf(typeof newReporterList != 'undefined' && (newReporterList.split(',').length != 0), ['-r', newReporterList]);
     let delayRequest = tl.getInput('delayRequest');
     newman.argIf(typeof delayRequest != 'undefined' && delayRequest, ['--delay-request', delayRequest]);
     let timeoutRequest = tl.getInput('timeoutRequest');
@@ -76,8 +92,7 @@ function run() {
                 console.log("found %d files", matchedFiles.length);
                 if (matchedFiles.length > 0) {
                     matchedFiles.forEach((file) => {
-                        var newman = GetToolRunner();
-                        newman.arg(file);
+                        var newman = GetToolRunner(file);
                         var execResponse = newman.execSync();
                         if (execResponse.code === 1) {
                             console.log(execResponse);
@@ -91,8 +106,7 @@ function run() {
                 }
             }
             else {
-                var newman = GetToolRunner();
-                newman.arg(collectionFileSource);
+                var newman = GetToolRunner(collectionFileSource);
                 yield newman.exec();
             }
             if (taskSuccess) {

@@ -2,7 +2,7 @@ import path = require('path');
 import tl = require('vsts-task-lib/task');
 import trm = require('vsts-task-lib/toolrunner');
 
-function GetToolRunner(collectionToRun:string) {
+function GetToolRunner(collectionToRun: string) {
     var newman: trm.ToolRunner = tl.tool(tl.which('newman', true));
     newman.arg('run');
     newman.arg(collectionToRun);
@@ -14,10 +14,10 @@ function GetToolRunner(collectionToRun:string) {
     let sslStrict = tl.getBoolInput('sslStrict');
     newman.argIf(sslStrict, ['--insecure']);
 
-    let unicodeDisabled= tl.getBoolInput('unicodeDisabled');
+    let unicodeDisabled = tl.getBoolInput('unicodeDisabled');
     newman.argIf(unicodeDisabled, ['--disable-unicode']);
 
-    let forceNoColor= tl.getBoolInput('forceNoColor');
+    let forceNoColor = tl.getBoolInput('forceNoColor');
     newman.argIf(forceNoColor, ['--no-color']);
 
     let reporterHtmlTemplate = tl.getPathInput('reporterHtmlTemplate', false, true);
@@ -28,8 +28,26 @@ function GetToolRunner(collectionToRun:string) {
     newman.argIf(typeof reporterJsonExport != 'undefined' && tl.filePathSupplied('reporterJsonExport'), ['--reporter-json-export', reporterJsonExport]);
     let reporterJUnitExport = tl.getPathInput('reporterJUnitExport', false, true);
     newman.argIf(typeof reporterJUnitExport != 'undefined' && tl.filePathSupplied('reporterJUnitExport'), ['--reporter-junit-export', reporterJUnitExport]);
+
     let reporterList = tl.getInput('reporters');
-    newman.argIf(typeof reporterList != 'undefined' && (reporterList.split(',').length != 0), ['-r', reporterList]);
+    let customReporter = tl.getInput('customReporter');
+    let newReporterList = "";
+
+    if (customReporter != 'undefined' && customReporter) {
+        console.info("Custom report configuration detected");
+        if (reporterList != 'undefined' && reporterList.split(',').length != 0) { //there is at least one reporter from select
+            //append custom one to the list
+            newReporterList = reporterList + "," + customReporter.trim();
+        } else { //only custom report
+            newReporterList = customReporter.trim();
+        }
+    } else {
+        console.info("No custom report configured");
+        newReporterList = reporterList;
+    }
+    console.info("Reporter list is : " + newReporterList);
+
+    newman.argIf(typeof newReporterList != 'undefined' && (newReporterList.split(',').length != 0), ['-r', newReporterList]);
 
     let delayRequest = tl.getInput('delayRequest');
     newman.argIf(typeof delayRequest != 'undefined' && delayRequest, ['--delay-request', delayRequest]);

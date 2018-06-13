@@ -248,6 +248,14 @@
             "groupName": "report"
         },
         {
+            "label": "Custom reporter name",
+            "name": "customReporter",
+            "groupName": "report",
+            "type": "string",
+            "required": false,
+            "helpMarkDown": "Name of custom reporter to output result. If non empty will be added to the list of reporter. See Newman doc for details."
+        },
+        {
             "name": "timeoutGlobal",
             "type": "string",
             "label": "Timeout ",

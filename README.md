@@ -34,10 +34,10 @@ Test report can be integrated in Team Services.
 To do so :
 
 - Select **at least** `junit` as a reporter option (others can be added).
-- Optionnaly specify path to export junit report.
+- Optionaly specify path to export junit report.
 - Add a 'Publish Test Result' task, to process generated Junit report. Specify format (JUnit) and path and to xml file.
 
-Execution are now reported with test statistics.
+Execution is now reported with test statistics.
 
 ![alt text](https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task/blob/master/static/images/testresult.png?raw=true "Test result")
 

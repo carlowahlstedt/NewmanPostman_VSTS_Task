@@ -4,6 +4,12 @@ import trm = require('vsts-task-lib/toolrunner');
 
 function GetToolRunner(collectionToRun: string) {
     var newman: trm.ToolRunner = tl.tool(tl.which('newman', true));
+
+    let pathToNewman = tl.getInput('pathToNewman');
+    if (typeof pathToNewman != 'undefined' && pathToNewman) {
+        newman = tl.tool(pathToNewman);
+    }
+
     newman.arg('run');
     newman.arg(collectionToRun);
 

@@ -13,7 +13,7 @@
     "version": {
         "Major": 3,
         "Minor": 0,
-        "Patch": 9
+        "Patch": 10
     },
     "demands": [],
     "groups": [
@@ -112,6 +112,14 @@
             "defaultValue": "1",
             "required": false,
             "helpMarkDown": "Define the number of iterations to run [number]"
+        },
+        {
+            "name": "pathToNewman",
+            "type": "string",
+            "label": "Path to Newman",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Use if your build agent can't find newman automatically and you want to specify the path"
         },
         {
             "name": "unicodeDisabled",

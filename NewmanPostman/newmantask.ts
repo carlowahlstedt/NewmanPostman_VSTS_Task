@@ -47,7 +47,7 @@ function GetToolRunner(collectionToRun: string) {
     }
     console.info("Reporter list is : " + newReporterList);
 
-    newman.argIf(typeof newReporterList != 'undefined' && (newReporterList.split(',').length != 0), ['-r', newReporterList]);
+    newman.argIf(newReporterList != null && (newReporterList.split(',').length != 0), ['-r', newReporterList]);
 
     let delayRequest = tl.getInput('delayRequest');
     newman.argIf(typeof delayRequest != 'undefined' && delayRequest, ['--delay-request', delayRequest]);

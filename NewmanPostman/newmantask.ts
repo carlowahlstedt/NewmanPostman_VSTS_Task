@@ -7,7 +7,11 @@ function GetToolRunner(collectionToRun: string) {
 
     let pathToNewman = tl.getInput('pathToNewman');
     if (typeof pathToNewman != 'undefined' && pathToNewman) {
-        newman = tl.tool(pathToNewman);
+        tl.debug("Path to newman is : " + pathToNewman);
+        newman = tl.tool(tl.which(pathToNewman, true));
+        
+        //newman: trm.ToolRunner = tl.tool()
+
     }
 
     newman.arg('run');
@@ -111,7 +115,7 @@ async function run() {
                 matchedFiles.forEach((file: string) => {
                     var newman: trm.ToolRunner = GetToolRunner(file);
                     var execResponse = newman.execSync();
-
+                    tl.debug(execResponse.stdout);
                     if (execResponse.code === 1) {
                         console.log(execResponse);
                         taskSuccess = false;

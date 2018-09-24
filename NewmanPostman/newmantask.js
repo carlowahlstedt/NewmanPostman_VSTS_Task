@@ -10,9 +10,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const path = require("path");
 const tl = require("vsts-task-lib/task");
-run();
 function GetToolRunner(collectionToRun) {
     var newman = tl.tool(tl.which('newman', true));
+    let pathToNewman = tl.getInput('pathToNewman');
+    if (typeof pathToNewman != 'undefined' && pathToNewman) {
+        tl.debug("Path to newman is : " + pathToNewman);
+        newman = tl.tool(tl.which(pathToNewman, true));
+        //newman: trm.ToolRunner = tl.tool()
+    }
     newman.arg('run');
     newman.arg(collectionToRun);
     let sslClientCert = tl.getPathInput('sslClientCert', false, true);
@@ -35,16 +40,23 @@ function GetToolRunner(collectionToRun) {
     newman.argIf(typeof reporterJUnitExport != 'undefined' && tl.filePathSupplied('reporterJUnitExport'), ['--reporter-junit-export', reporterJUnitExport]);
     let reporterList = tl.getInput('reporters');
     let customReporter = tl.getInput('customReporter');
-    let newReporterList = reporterList;
-    if (reporterList.includes('custom')) {
-        if (typeof customReporter != 'undefined' && customReporter) {
-            newReporterList = reporterList.replace('custom', customReporter);
+    let newReporterList = "";
+    if (customReporter != 'undefined' && customReporter) {
+        console.info("Custom report configuration detected");
+        if (reporterList != 'undefined' && reporterList.split(',').length != 0) { //there is at least one reporter from select
+            //append custom one to the list
+            newReporterList = reporterList + "," + customReporter.trim();
         }
-        else {
-            newReporterList = reporterList.replace(',custom', '');
+        else { //only custom report
+            newReporterList = customReporter.trim();
         }
     }
-    newman.argIf(typeof newReporterList != 'undefined' && (newReporterList.split(',').length != 0), ['-r', newReporterList]);
+    else {
+        console.info("No custom report configured");
+        newReporterList = reporterList;
+    }
+    console.info("Reporter list is : " + newReporterList);
+    newman.argIf(newReporterList != null && (newReporterList.split(',').length != 0), ['-r', newReporterList]);
     let delayRequest = tl.getInput('delayRequest');
     newman.argIf(typeof delayRequest != 'undefined' && delayRequest, ['--delay-request', delayRequest]);
     let timeoutRequest = tl.getInput('timeoutRequest');
@@ -94,6 +106,7 @@ function run() {
                     matchedFiles.forEach((file) => {
                         var newman = GetToolRunner(file);
                         var execResponse = newman.execSync();
+                        tl.debug(execResponse.stdout);
                         if (execResponse.code === 1) {
                             console.log(execResponse);
                             taskSuccess = false;

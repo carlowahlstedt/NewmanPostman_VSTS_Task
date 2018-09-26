@@ -1,0 +1,167 @@
+{
+    "compilerOptions": {
+        /* --------------------------------------------------------------------------- */
+        /* Basic Options */
+        /* --------------------------------------------------------------------------- */
+
+        /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'. */
+        "target": "ES5",
+        "rootDir": "src/",
+        "outDir": "dist/",
+        /* Specify module code generation: 'commonjs', 'amd', 'system', 'umd' or 'es2015'. */
+        "module": "commonjs",
+
+        /* Specify library files to be included in the compilation:  */
+        "lib": ["es2015", "dom", "es2015.promise", "es2015.collection", "es2015.iterable"],        
+
+        /* Allow javascript files to be compiled but, it cannot be specified with option 'declaration' */
+        "allowJs": false,
+
+        /* Report errors in .js files. */
+        // "checkJs": true,
+
+        /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */
+        // "jsx": "preserve",
+
+        /* Generates corresponding '.d.ts' file. */
+        "declaration": true,
+
+        /* Generates corresponding '.map' file. */
+        "sourceMap": true,
+
+        /* Concatenate and emit output to single file. */
+        // "outFile": "./",
+
+        /* Redirect output structure to the directory. */
+        // "outDir": "./dist",
+
+        /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
+        // "rootDir": "./",
+
+        /* Do not emit comments to output. */
+        // "removeComments": true,
+
+        /* Do not emit outputs. */
+        // "noEmit": true,
+
+        /* Import emit helpers from 'tslib'. */
+        "importHelpers": true,
+
+        /* Provide full support for iterables in 'for-of', spread, and destructuring when targeting 'ES5' or 'ES3'. */
+        "downlevelIteration": true,
+
+        /* Transpile each file as a separate module (similar to 'ts.transpileModule'). */
+        // "isolatedModules": true,
+
+        /* Do not erase const enum declarations in generated code. */
+        "preserveConstEnums":true,
+
+
+        /* --------------------------------------------------------------------------- */
+        /* Strict Type-Checking Options */
+        /* --------------------------------------------------------------------------- */
+
+        /* Enable all strict type-checking options. */
+        "strict": true,
+
+        /* Parse in strict mode and emit "use strict" for each source file. */
+        "alwaysStrict": true,
+
+        /* Enable strict null checks. */
+        "strictNullChecks": true,
+
+        /* Raise error on expressions and declarations with an implied 'any' type. */
+        "noImplicitAny": false,
+        "suppressImplicitAnyIndexErrors": true,
+
+        /* Raise error on 'this' expressions with an implied 'any' type. */
+        //"noImplicitThis": true,
+
+
+        /* --------------------------------------------------------------------------- */
+        /* Additional Checks */
+        /* --------------------------------------------------------------------------- */
+
+        /* Report errors on unused locals. */
+        "noUnusedLocals": false,
+
+        /* Report errors on unused parameters. */
+        // "noUnusedParameters": true,
+
+        /* Report error when not all code paths in function return a value. */
+        "noImplicitReturns": true,
+
+        /* Report errors for fallthrough cases in switch statement. */
+        "noFallthroughCasesInSwitch": true,
+
+
+        /* --------------------------------------------------------------------------- */
+        /* Module Resolution Options */
+        /* --------------------------------------------------------------------------- */
+
+        /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
+        "moduleResolution": "node",
+
+        /* Base directory to resolve non-absolute module names. */
+        // "baseUrl": "./",
+
+        /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
+        // "paths": {},
+
+        /* List of root folders whose combined content represents the structure of the project at runtime. */
+        // "rootDirs": [],
+
+        /* List of folders to include type definitions from. */
+        "typeRoots": ["node_modules/@types"],
+
+        /* Type declaration files to be included in compilation. */
+        "types": ["node", "reflect-metadata"],
+
+        /* Allow default imports from modules with no default export. This does not affect code emit, just typechecking. */
+        // "allowSyntheticDefaultImports": true,
+
+
+        /* --------------------------------------------------------------------------- */
+        /* Source Map Options */
+        /* --------------------------------------------------------------------------- */
+
+        /* Specify the location where debugger should locate TypeScript files instead of source locations. */
+        //"sourceRoot": "src",
+
+        /* Specify the location where debugger should locate map files instead of generated locations. */
+        // "mapRoot": "./",
+
+        /* Emit a single file with source maps instead of having a separate file. */
+        "inlineSourceMap": false,
+
+        /* Emit the source alongside the sourcemaps within a single file; requires '--inlineSourceMap' or '--sourceMap' to be set. */
+        "inlineSources": false,
+
+
+        /* --------------------------------------------------------------------------- */
+        /* Experimental Options */
+        /* --------------------------------------------------------------------------- */
+
+        /* Enables experimental support for ES7 decorators. */
+        "experimentalDecorators": true,
+
+        /* Enables experimental support for emitting type metadata for decorators. */
+        "emitDecoratorMetadata": true
+    },
+    /* end compilerOptions */
+  "include": [
+    "./**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "bower_components",
+    "jspm_packages",
+    "tmp",
+    "temp",
+    "dist"
+  ],
+  "compileOnSave": true,
+  "atom": {
+    "rewriteTsconfig": false
+  }
+}

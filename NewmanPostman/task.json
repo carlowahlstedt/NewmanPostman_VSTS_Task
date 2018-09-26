@@ -13,7 +13,7 @@
     "version": {
         "Major": 3,
         "Minor": 0,
-        "Patch": 10
+        "Patch": 12
     },
     "demands": [],
     "groups": [
@@ -321,7 +321,7 @@
     "instanceNameFormat": "Newman - Postman",
     "execution": {
         "Node": {
-            "target": "newmantask.js"
+            "target": "./dist/newmantask.js"
         }
     }
 }

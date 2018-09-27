@@ -4,7 +4,7 @@
     "gallery-publish": "tfx extension publish",
     "gallery-publish-rev": "tfx extension publish --rev-version",
     "clean": "rimraf ./*.vsix",
-    "compile": "tsc -p .",
+    "compile": "tsc -p ./NewmanPostman",
     "install-task-lib": "cd NewmanPostman && npm install --save-dev"
   },
   "devDependencies": {

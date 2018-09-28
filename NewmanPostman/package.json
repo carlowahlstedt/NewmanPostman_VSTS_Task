@@ -2,15 +2,9 @@
   "name": "task",
   "version": "1.0.0",
   "description": "package.json for task lib",
-  "main": "dist/newmantask.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "files": [
-    "src/",
-    "dist/",
-    "config/"
-  ],
   "dependencies": {
     "vsts-task-lib": "^2.0.5",
     "reflect-metadata": "^0.1.12",

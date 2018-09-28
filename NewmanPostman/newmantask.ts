@@ -8,7 +8,7 @@ function GetToolRunner(collectionToRun: string) {
     tl.debug("in GetToolRunner");
     let pathToNewman: string = tl.getInput('pathToNewman', false);
     tl.debug("Path to newman is : " + pathToNewman);
-    if (pathToNewman.length == 0) {
+    if (typeof pathToNewman != 'undefined' && pathToNewman.length == 0) {
         pathToNewman = "newman";
     }
     var newman: trm.ToolRunner = tl.tool(tl.which(pathToNewman, true));

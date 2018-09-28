@@ -1,13 +1,11 @@
 import path = require('path');
-
-import * as tl from 'vsts-task-lib';
+import tl = require('vsts-task-lib/task');
 import trm = require('vsts-task-lib/toolrunner');
 
 function GetToolRunner(collectionToRun: string) {
-    tl.debug("in GetToolRunner");
     let pathToNewman = tl.getInput('pathToNewman', false);
-    tl.debug("Path to newman is : " + pathToNewman);
     if (pathToNewman != null && typeof pathToNewman != 'undefined' && pathToNewman.length == 0) {
+        console.info("No specific path to newman");
         pathToNewman = "newman";
     }
     var newman: trm.ToolRunner = tl.tool(tl.which(pathToNewman, true));
@@ -94,7 +92,7 @@ function GetToolRunner(collectionToRun: string) {
 
 async function run() {
     try {
-        tl.debug('executing newman')
+        // tl.debug('executing newman')
         tl.setResourcePath(path.join(__dirname, 'task.json'));
 
         let collectionFileSource = tl.getPathInput('collectionFileSource', true, true);
@@ -113,7 +111,7 @@ async function run() {
                 matchedFiles.forEach((file: string) => {
                     var newman: trm.ToolRunner = GetToolRunner(file);
                     var execResponse = newman.execSync();
-                    tl.debug(execResponse.stdout);
+                    // tl.debug(execResponse.stdout);
                     if (execResponse.code === 1) {
                         console.log(execResponse);
                         taskSuccess = false;

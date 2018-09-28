@@ -1,0 +1,47 @@
+resources:
+- repo: self
+  clean: true
+queue:
+  name: Hosted VS2017
+  demands: npm
+
+#Your build pipeline references an undefined variable named ‘Extension.OutputPath’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+steps:
+- task: Npm@1
+  displayName: 'npm install'
+  inputs:
+    verbose: false
+
+
+- task: Npm@1
+  displayName: 'npm install-task-lib'
+  inputs:
+    command: custom
+
+    verbose: false
+
+    customCommand: 'run install-task-lib'
+
+
+- task: Npm@1
+  displayName: 'npm compile'
+  inputs:
+    command: custom
+
+    verbose: false
+
+    customCommand: 'run compile'
+
+
+- task: ms-devlabs.vsts-developer-tools-build-tasks.package-extension-build-task.PackageVSTSExtension@1
+  displayName: 'Package Extension: '
+  inputs:
+    outputPath: 'drop\output.vsix'
+
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: drop'
+  inputs:
+    PathtoPublish: '$(Extension.OutputPath)'
+
+

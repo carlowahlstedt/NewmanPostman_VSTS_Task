@@ -62,7 +62,7 @@ The [source](https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task/) to this
 
 ### Minimum supported environments ###
 
-- Visual Studio Team Services
+- Azure DevOps Services
 - Team Foundation Server
 
 ### Contributors ###

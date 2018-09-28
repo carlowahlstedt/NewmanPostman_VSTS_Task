@@ -4,12 +4,11 @@ import * as tl from 'vsts-task-lib';
 import trm = require('vsts-task-lib/toolrunner');
 
 function GetToolRunner(collectionToRun: string) {
-    
+
     tl.debug("in GetToolRunner");
-    let pathToNewman:string = tl.getInput('pathToNewman',false);
+    let pathToNewman: string = tl.getInput('pathToNewman', false);
     tl.debug("Path to newman is : " + pathToNewman);
-    if(pathToNewman.length == 0)
-    {
+    if (pathToNewman.length == 0) {
         pathToNewman = "newman";
     }
     var newman: trm.ToolRunner = tl.tool(tl.which(pathToNewman, true));
@@ -97,7 +96,7 @@ function GetToolRunner(collectionToRun: string) {
 async function run() {
     try {
         tl.debug('executing newman')
-        tl.setResourcePath(path.join(__dirname, './../task.json'));
+        tl.setResourcePath(path.join(__dirname, 'task.json'));
 
         let collectionFileSource = tl.getPathInput('collectionFileSource', true, true);
         var taskSuccess = true;

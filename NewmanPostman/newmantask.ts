@@ -4,7 +4,7 @@ import trm = require('vsts-task-lib/toolrunner');
 
 function GetToolRunner(collectionToRun: string) {
     let pathToNewman = tl.getInput('pathToNewman', false);
-    if (pathToNewman != null && typeof pathToNewman != 'undefined' && pathToNewman.length == 0) {
+    if (typeof pathToNewman == 'undefined' || pathToNewman.length == 0) {
         console.info("No specific path to newman");
         pathToNewman = "newman";
     }

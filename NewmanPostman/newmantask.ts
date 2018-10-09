@@ -3,14 +3,15 @@ import tl = require('vsts-task-lib/task');
 import trm = require('vsts-task-lib/toolrunner');
 
 function GetToolRunner(collectionToRun: string) {
-    // let pathToNewman = tl.getInput('pathToNewman', false);
-    // if (typeof pathToNewman == 'undefined' || pathToNewman.length == 0) {
-    //     console.info("No specific path to newman");
-    //     pathToNewman = "newman";
-    // }
-    // var newman: trm.ToolRunner = tl.tool(tl.which(pathToNewman, true));
+    let pathToNewman = tl.getInput('pathToNewman', false);
+    if (typeof pathToNewman != 'undefined' && pathToNewman) {
+        console.info("Specific path to newman found");
+    } else {
+        console.info("No specific path to newman, using default of 'newman'");
+        pathToNewman = "newman";
+    }
 
-    var newman: trm.ToolRunner = tl.tool(tl.which("newman", true));
+    var newman: trm.ToolRunner = tl.tool(tl.which(pathToNewman, true));
 
     newman.arg('run');
     newman.arg(collectionToRun);

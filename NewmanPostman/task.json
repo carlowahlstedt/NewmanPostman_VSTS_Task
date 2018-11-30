@@ -78,7 +78,7 @@
             "type": "filePath",
             "label": "Environment",
             "defaultValue": "",
-            "required": true,
+            "required": false,
             "helpMarkDown": "Path to the Postman environment file as JSON"
         },
         {

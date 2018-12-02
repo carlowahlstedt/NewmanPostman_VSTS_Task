@@ -80,7 +80,9 @@ function GetToolRunner(collectionToRun: string) {
     let exportCollection = tl.getPathInput('exportCollection');
     newman.argIf(tl.filePathSupplied('exportCollection'), ['--export-collection', exportCollection]);
 
-    newman.arg(['-e', tl.getPathInput('environment', true, true)]);
+    let environment = tl.getPathInput('environment');
+    newman.argIf(typeof environment != 'undefined' && tl.filePathSupplied('environment'), ['-e', environment]);
+
     return newman;
 }
 

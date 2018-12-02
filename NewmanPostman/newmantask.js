@@ -9,12 +9,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const path = require("path");
-const tl = require("vsts-task-lib");
+const tl = require("vsts-task-lib/task");
 function GetToolRunner(collectionToRun) {
-    tl.debug("in GetToolRunner");
     let pathToNewman = tl.getInput('pathToNewman', false);
-    tl.debug("Path to newman is : " + pathToNewman);
-    if (pathToNewman.length == 0) {
+    if (typeof pathToNewman != 'undefined' && pathToNewman) {
+        console.info("Specific path to newman found");
+    }
+    else {
+        console.info("No specific path to newman, using default of 'newman'");
         pathToNewman = "newman";
     }
     var newman = tl.tool(tl.which(pathToNewman, true));
@@ -91,8 +93,8 @@ function GetToolRunner(collectionToRun) {
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            tl.debug('executing newman');
-            tl.setResourcePath(path.join(__dirname, './../task.json'));
+            // tl.debug('executing newman')
+            tl.setResourcePath(path.join(__dirname, 'task.json'));
             let collectionFileSource = tl.getPathInput('collectionFileSource', true, true);
             var taskSuccess = true;
             if (tl.stats(collectionFileSource).isDirectory()) {
@@ -106,7 +108,7 @@ function run() {
                     matchedFiles.forEach((file) => {
                         var newman = GetToolRunner(file);
                         var execResponse = newman.execSync();
-                        tl.debug(execResponse.stdout);
+                        // tl.debug(execResponse.stdout);
                         if (execResponse.code === 1) {
                             console.log(execResponse);
                             taskSuccess = false;

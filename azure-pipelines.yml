@@ -43,5 +43,5 @@ steps:
   displayName: 'Publish Artifact: drop'
   inputs:
     PathtoPublish: '$(Extension.OutputPath)'
-
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
 

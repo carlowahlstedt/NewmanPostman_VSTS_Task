@@ -23,3 +23,4 @@ answers.checkPath['newman'] = true;
 answers.stats[filePath] = true;
 runner.setAnswers(answers);
 runner.run();
+//# sourceMappingURL=folderTest.js.map

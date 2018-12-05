@@ -30,3 +30,5 @@ bld/
 node_modules
 .vscode
 *.vsix
+*.map
+*.js

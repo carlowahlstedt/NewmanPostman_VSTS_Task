@@ -30,3 +30,4 @@ runner.registerMockExport('stats', (itemPath) => {
     }
 });
 runner.run();
+//# sourceMappingURL=emptyContents.js.map

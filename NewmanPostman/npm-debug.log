@@ -1,0 +1,48 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'run',
+1 verbose cli   'test' ]
+2 info using npm@3.10.10
+3 info using node@v7.2.1
+4 verbose run-script [ 'pretest', 'test', 'posttest' ]
+5 info lifecycle task@1.0.0~pretest: task@1.0.0
+6 silly lifecycle task@1.0.0~pretest: no script for pretest, continuing
+7 info lifecycle task@1.0.0~test: task@1.0.0
+8 verbose lifecycle task@1.0.0~test: unsafe-perm in lifecycle true
+9 verbose lifecycle task@1.0.0~test: PATH: C:\Program Files\nodejs\node_modules\npm\bin\node-gyp-bin;F:\DocSéb\NewmanPostman_VSTS_Task\NewmanPostman\node_modules\.bin;C:\Python27\;C:\Python27\Scripts;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Java\jdk1.8.0_45\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;E:\wamp\bin\php\php5.5.12;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files (x86)\Skype\Phone\;C:\Program Files\Git\;C:\WINDOWS\System32\OpenSSH\;E:\wamp\bin\php\php5.6.35;C:\ProgramData\ComposerSetup\bin;C:\Program Files\Microsoft VS Code\bin;C:\Applications\Atlassian\atlassian-plugin-sdk-6.1.0\bin;C:\Users\seb\AppData\Local\Microsoft\WindowsApps;C:\Program Files (x86)\Arduino\hardware\tools\avr\bin;C:\Users\seb\AppData\Roaming\npm;C:\Program Files\Microsoft VS Code\bin;C:\Users\seb\AppData\Roaming\Composer\vendor\bin;C:\SysGCC\esp8266\bin
+10 verbose lifecycle task@1.0.0~test: CWD: F:\DocSéb\NewmanPostman_VSTS_Task\NewmanPostman
+11 silly lifecycle task@1.0.0~test: Args: [ '/d /s /c', 'echo "Error: no test specified" && exit 1' ]
+12 silly lifecycle task@1.0.0~test: Returned: code: 1  signal: null
+13 info lifecycle task@1.0.0~test: Failed to exec test script
+14 verbose stack Error: task@1.0.0 test: `echo "Error: no test specified" && exit 1`
+14 verbose stack Exit status 1
+14 verbose stack     at EventEmitter.<anonymous> (C:\Program Files\nodejs\node_modules\npm\lib\utils\lifecycle.js:255:16)
+14 verbose stack     at emitTwo (events.js:106:13)
+14 verbose stack     at EventEmitter.emit (events.js:191:7)
+14 verbose stack     at ChildProcess.<anonymous> (C:\Program Files\nodejs\node_modules\npm\lib\utils\spawn.js:40:14)
+14 verbose stack     at emitTwo (events.js:106:13)
+14 verbose stack     at ChildProcess.emit (events.js:191:7)
+14 verbose stack     at maybeClose (internal/child_process.js:885:16)
+14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
+15 verbose pkgid task@1.0.0
+16 verbose cwd F:\DocSéb\NewmanPostman_VSTS_Task\NewmanPostman
+17 error Windows_NT 10.0.17134
+18 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run" "test"
+19 error node v7.2.1
+20 error npm  v3.10.10
+21 error code ELIFECYCLE
+22 error task@1.0.0 test: `echo "Error: no test specified" && exit 1`
+22 error Exit status 1
+23 error Failed at the task@1.0.0 test script 'echo "Error: no test specified" && exit 1'.
+23 error Make sure you have the latest version of node.js and npm installed.
+23 error If you do, this is most likely a problem with the task package,
+23 error not with npm itself.
+23 error Tell the author that this fails on your system:
+23 error     echo "Error: no test specified" && exit 1
+23 error You can get information on how to open an issue for this project with:
+23 error     npm bugs task
+23 error Or if that isn't available, you can get their info via:
+23 error     npm owner ls task
+23 error There is likely additional logging output above.
+24 verbose exit [ 1, true ]

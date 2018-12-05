@@ -25,3 +25,4 @@ answers.stats[filePath] = true;
 answers.checkPath[globalVariables] = true;
 runner.setAnswers(answers);
 runner.run();
+//# sourceMappingURL=globalVarFileTest.js.map

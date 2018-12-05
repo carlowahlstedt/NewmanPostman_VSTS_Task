@@ -19,6 +19,7 @@ describe('Mandatory arguments', function () {
         let testPath = path.join(__dirname, 'emptyContents.js');
         let runner = new mocktest.MockTestRunner(testPath);
         runner.run();
+        console.error(runner.stdout);
         assert(runner.stdOutContained('Input required: Contents'), 'Empty content raise an error if collection is a directory');
         done();
     });
@@ -70,3 +71,4 @@ describe('Other arguments', function () {
         done();
     });
 });
+//# sourceMappingURL=TestSuite.js.map

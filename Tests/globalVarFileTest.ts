@@ -10,10 +10,11 @@ let runner: mockrun.TaskMockRunner = new mockrun.TaskMockRunner(taskPath);
 let filePath = path.join(__dirname, '/assets/Core.postman_collection.json');
 let environment = path.join(__dirname, 'assets/Core.postman_collection.json');
 let globalVariables =__dirname;
-
+runner.setInput("collectionSourceType",'file');
+runner.setInput("environmentSourceType",'file');
 runner.setInput("collectionFileSource", filePath);
 runner.setInput("Contents", path.normalize("**/collection.json"));
-runner.setInput ("environment",environment);
+runner.setInput ("environmentFile",environment);
 runner.setInput("globalVariables",globalVariables);
 
 let answers = <mockanswer.TaskLibAnswers>{

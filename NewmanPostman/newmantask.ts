@@ -90,15 +90,21 @@ function GetToolRunner(collectionToRun: string) {
     let exportCollection = tl.getPathInput('exportCollection');
     newman.argIf(tl.filePathSupplied('exportCollection'), ['--export-collection', exportCollection]);
 
-    if (tl.getInput('environmentSourceType') == 'file') { //environment is a file
+    let envType = tl.getInput('environmentSourceType');
+    if (envType == 'file') { //environment is a file
+        console.info("File used for environment");
         newman.arg(['-e', tl.getPathInput('environmentFile', true, true)]);
-    } else {
+    } else if (envType == 'url') {
         let envURl = tl.getInput('environmentUrl', true);
         if (isurl(envURl)) {
+            console.info("URL used for environment");
             newman.arg(['-e', envURl]);
         } else {
             tl.setResult(tl.TaskResult.Failed, 'Provided string "' + envURl + '" for environment is not a valid url');
         }
+    } else {
+        //no environement used. Don't add argument, just log info.
+        console.info('No environment set, no need to add it in argument');
     }
     return newman;
 }

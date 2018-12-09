@@ -5,13 +5,17 @@ import path = require('path')
 
 let taskPath = path.join(__dirname, '..', 'NewmanPostman','newmantask.js');
 
-console.info(taskPath);
+
 let runner: mockrun.TaskMockRunner = new mockrun.TaskMockRunner(taskPath);
-let filePath='';
+let filePath = path.join(__dirname, '/assets/Core.postman_collection.json');
 let environment = path.join(__dirname, 'assets/Core.postman_collection.json');
+let globalVariables =__dirname;
 runner.setInput("collectionSourceType",'file');
+runner.setInput("environmentSourceType",'file');
 runner.setInput("collectionFileSource", filePath);
 runner.setInput("Contents", path.normalize("**/collection.json"));
+runner.setInput ("environmentFile",environment);
+
 
 let answers = <mockanswer.TaskLibAnswers>{
     checkPath: {},
@@ -21,8 +25,10 @@ let answers = <mockanswer.TaskLibAnswers>{
     stats:{}
 };
 answers.checkPath[filePath] = true;
+answers.checkPath[environment]=true;
 answers.checkPath['newman'] = true;
 answers.stats[filePath]=true;
+answers.checkPath[globalVariables]=true;
 runner.setAnswers(answers);
 
 runner.run();

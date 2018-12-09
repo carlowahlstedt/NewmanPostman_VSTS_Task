@@ -7,6 +7,7 @@ console.info(taskPath);
 let runner = new mockrun.TaskMockRunner(taskPath);
 let filePath = '';
 let environment = path.join(__dirname, 'assets/Core.postman_collection.json');
+runner.setInput("collectionSourceType", 'file');
 runner.setInput("collectionFileSource", filePath);
 runner.setInput("Contents", path.normalize("**/collection.json"));
 let answers = {

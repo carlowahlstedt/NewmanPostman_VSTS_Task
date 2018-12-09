@@ -55,7 +55,8 @@
             "options": {
                 "file": "File(s)",
                 "url": "Url"
-            }
+            },
+            "helpMarkDown": "Specify either to use file(s) as collection or url (eg : shared collections)"
         }, {
             "name": "collectionFileSource",
             "type": "filePath",
@@ -93,10 +94,13 @@
             "name": "environmentSourceType",
             "type": "radio",
             "defaultValue": "file",
+            "required": false,
             "options": {
                 "file": "File",
-                "url": "Url"
-            }
+                "url": "Url",
+                "none": "None"
+            },
+            "helpMarkDown": "Specify either to use file(s), url (eg : shared environment) or nothing as environment"
         },
         {
             "name": "environmentFile",
@@ -111,7 +115,7 @@
             "name": "environmentUrl",
             "type": "string",
             "label": "Environment Url",
-            "defaultValue": "",
+            "defaultValue": "http://",
             "required": false,
             "helpMarkDown": "URL to the Postman environment file as JSON",
             "visibleRule": "environmentSourceType = url"

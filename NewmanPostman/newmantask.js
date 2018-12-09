@@ -9,12 +9,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const path = require("path");
-const tl = require("vsts-task-lib");
+const tl = require("vsts-task-lib/task");
+const isurl = require("is-url");
 function GetToolRunner(collectionToRun) {
-    tl.debug("in GetToolRunner");
     let pathToNewman = tl.getInput('pathToNewman', false);
-    tl.debug("Path to newman is : " + pathToNewman);
-    if (pathToNewman.length == 0) {
+    if (typeof pathToNewman != 'undefined' && pathToNewman) {
+        console.info("Specific path to newman found");
+    }
+    else {
+        console.info("No specific path to newman, using default of 'newman'");
         pathToNewman = "newman";
     }
     var newman = tl.tool(tl.which(pathToNewman, true));
@@ -85,42 +88,65 @@ function GetToolRunner(collectionToRun) {
     newman.argIf(tl.filePathSupplied('exportGlobals'), ['--export-globals', exportGlobals]);
     let exportCollection = tl.getPathInput('exportCollection');
     newman.argIf(tl.filePathSupplied('exportCollection'), ['--export-collection', exportCollection]);
-    newman.arg(['-e', tl.getPathInput('environment', true, true)]);
+    if (tl.getInput('environmentSourceType') == 'file') {
+        newman.arg(['-e', tl.getPathInput('environmentFile', true, true)]);
+    }
+    else {
+        let envURl = tl.getInput('environmentUrl', true);
+        if (isurl(envURl)) {
+            newman.arg(['-e', envURl]);
+        }
+        else {
+            tl.setResult(tl.TaskResult.Failed, 'Provided string "' + envURl + '" for environment is not a valid url');
+        }
+    }
     return newman;
 }
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            tl.debug('executing newman');
-            tl.setResourcePath(path.join(__dirname, './../task.json'));
-            let collectionFileSource = tl.getPathInput('collectionFileSource', true, true);
-            var taskSuccess = true;
-            if (tl.stats(collectionFileSource).isDirectory()) {
-                let contents = tl.getDelimitedInput('Contents', '\n', true);
-                collectionFileSource = path.normalize(collectionFileSource);
-                let allPaths = tl.find(collectionFileSource);
-                let matchedPaths = tl.match(allPaths, contents, collectionFileSource);
-                let matchedFiles = matchedPaths.filter((itemPath) => !tl.stats(itemPath).isDirectory());
-                console.log("found %d files", matchedFiles.length);
-                if (matchedFiles.length > 0) {
-                    matchedFiles.forEach((file) => {
-                        var newman = GetToolRunner(file);
-                        var execResponse = newman.execSync();
-                        tl.debug(execResponse.stdout);
-                        if (execResponse.code === 1) {
-                            console.log(execResponse);
-                            taskSuccess = false;
-                        }
-                    });
+            // tl.debug('executing newman')
+            tl.setResourcePath(path.join(__dirname, 'task.json'));
+            if (tl.getInput('collectionSourceType', true) == 'file') {
+                let collectionFileSource = tl.getPathInput('collectionFileSource', true, true);
+                var taskSuccess = true;
+                if (tl.stats(collectionFileSource).isDirectory()) {
+                    let contents = tl.getDelimitedInput('Contents', '\n', true);
+                    collectionFileSource = path.normalize(collectionFileSource);
+                    let allPaths = tl.find(collectionFileSource);
+                    let matchedPaths = tl.match(allPaths, contents, collectionFileSource);
+                    let matchedFiles = matchedPaths.filter((itemPath) => !tl.stats(itemPath).isDirectory());
+                    console.log("found %d files", matchedFiles.length);
+                    if (matchedFiles.length > 0) {
+                        matchedFiles.forEach((file) => {
+                            var newman = GetToolRunner(file);
+                            var execResponse = newman.execSync();
+                            // tl.debug(execResponse.stdout);
+                            if (execResponse.code === 1) {
+                                console.log(execResponse);
+                                taskSuccess = false;
+                            }
+                        });
+                    }
+                    else {
+                        console.log("Could not find any collection files in the path provided");
+                        taskSuccess = false;
+                    }
                 }
                 else {
-                    console.log("Could not find any collection files in the path provided");
-                    taskSuccess = false;
+                    var newman = GetToolRunner(collectionFileSource);
+                    yield newman.exec();
                 }
             }
             else {
-                var newman = GetToolRunner(collectionFileSource);
-                yield newman.exec();
+                let collectionFileUrl = tl.getInput('collectionURL', true);
+                if (isurl(collectionFileUrl)) {
+                    var newman = GetToolRunner(collectionFileUrl);
+                    yield newman.exec();
+                }
+                else {
+                    tl.setResult(tl.TaskResult.Failed, 'Provided string "' + collectionFileUrl + '" for collection is not a valid url');
+                }
             }
             if (taskSuccess) {
                 tl.setResult(tl.TaskResult.Succeeded, "Success");

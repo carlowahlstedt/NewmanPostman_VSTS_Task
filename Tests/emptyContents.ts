@@ -1,4 +1,3 @@
-import fs = require('fs');
 import mockanswer = require('vsts-task-lib/mock-answer');
 import mockrun = require('vsts-task-lib/mock-run');
 import path = require('path')
@@ -9,16 +8,16 @@ console.info(taskPath);
 let runner: mockrun.TaskMockRunner = new mockrun.TaskMockRunner(taskPath);
 let filePath = path.join(__dirname, '/assets/Core.postman_collection.json');
 let environment = path.join(__dirname, 'assets/Core.postman_collection.json');
-runner.setInput("collectionSourceType",'file');
+runner.setInput("collectionSourceType", 'file');
 runner.setInput("collectionFileSource", filePath);
-runner.setInput("Contents",'');
+runner.setInput("Contents", '');
 
 let answers = <mockanswer.TaskLibAnswers>{
-    checkPath: {},
-    which: {
+    "checkPath": {},
+    "which": {
         'newman': 'newman'
     },
-    stats: {}
+    "stats": {}
 };
 answers.checkPath[filePath] = true;
 answers.checkPath['newman'] = true;

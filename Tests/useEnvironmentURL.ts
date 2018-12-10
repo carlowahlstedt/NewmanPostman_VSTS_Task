@@ -8,22 +8,22 @@ let taskPath = path.join(__dirname, '..', 'NewmanPostman', 'newmantask.js');
 console.info(taskPath);
 let runner: mockrun.TaskMockRunner = new mockrun.TaskMockRunner(taskPath);
 let filePath = path.join(__dirname, '/assets/Core.postman_collection.json');
-runner.setInput("collectionSourceType",'file');
+runner.setInput("collectionSourceType", 'file');
 runner.setInput("collectionFileSource", filePath);
-runner.setInput("environmentSourceType",'url');
-runner.setInput("environmentUrl","https://api.getpostman.com/environments?apikey=$apiKey")
+runner.setInput("environmentSourceType", 'url');
+runner.setInput("environmentUrl", "https://api.getpostman.com/environments?apikey=$apiKey")
 
 
 let answers = <mockanswer.TaskLibAnswers>{
-    checkPath: {},
-    which: {
+    "checkPath": {},
+    "which": {
         'newman': 'newman'
     },
-    stats:{}
+    "stats": {}
 };
 answers.checkPath[filePath] = true;
 answers.checkPath['newman'] = true;
-answers.stats[filePath]=true;
+answers.stats[filePath] = true;
 runner.setAnswers(answers);
 
 runner.run();

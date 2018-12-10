@@ -11,11 +11,11 @@ runner.setInput("collectionSourceType", 'file');
 runner.setInput("collectionFileSource", filePath);
 runner.setInput("Contents", '');
 let answers = {
-    checkPath: {},
-    which: {
+    "checkPath": {},
+    "which": {
         'newman': 'newman'
     },
-    stats: {}
+    "stats": {}
 };
 answers.checkPath[filePath] = true;
 answers.checkPath['newman'] = true;
@@ -31,4 +31,3 @@ runner.registerMockExport('stats', (itemPath) => {
     }
 });
 runner.run();
-//# sourceMappingURL=emptyContents.js.map

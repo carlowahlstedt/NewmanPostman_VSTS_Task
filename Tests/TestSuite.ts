@@ -76,13 +76,13 @@ describe('Normal behavior', function () {
         assert(runner.stdOutContained('No environment set, no need to add it in argument'), 'No error if no envt is set');
         done();
     })
-    it ('When environment file is set, it\'s used', (done:MochaDone)=>{
+    it('When environment file is set, it\'s used', (done: MochaDone) => {
         this.timeout(1000);
         let testPath = path.join(__dirname, 'useEnvironmentFile.js');
         let runner: mocktest.MockTestRunner = new mocktest.MockTestRunner(testPath);
         runner.run();
         // console.error(runner.stdout);
-        assert(runner.stdOutContained('-e '+path.join(__dirname, 'assets/Core.postman_collection.json')), 'environment file can be used');
+        assert(runner.stdOutContained('-e ' + path.join(__dirname, 'assets/Core.postman_collection.json')), 'environment file can be used');
         done();
     });
     it('URL can be set for collection', (done: MochaDone) => {

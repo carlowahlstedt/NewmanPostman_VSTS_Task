@@ -14,11 +14,11 @@ runner.setInput("Contents", path.normalize("**/collection.json"));
 runner.setInput("environmentFile", environment);
 runner.setInput("globalVars", globalVars);
 let answers = {
-    checkPath: {},
-    which: {
+    "checkPath": {},
+    "which": {
         'newman': 'newman'
     },
-    stats: {}
+    "stats": {}
 };
 answers.checkPath[filePath] = true;
 answers.checkPath[environment] = true;
@@ -26,4 +26,3 @@ answers.checkPath['newman'] = true;
 answers.stats[filePath] = true;
 runner.setAnswers(answers);
 runner.run();
-//# sourceMappingURL=globalVarTest.js.map

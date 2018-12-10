@@ -168,4 +168,3 @@ function run() {
     });
 }
 run();
-//# sourceMappingURL=newmantask.js.map

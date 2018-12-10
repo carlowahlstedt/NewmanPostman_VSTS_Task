@@ -143,4 +143,3 @@ describe('Normal behavior', function () {
         done();
     });
 });
-//# sourceMappingURL=TestSuite.js.map

@@ -14,7 +14,7 @@
 10 verbose lifecycle task@1.0.0~test: CWD: F:\DocSéb\NewmanPostman_VSTS_Task\NewmanPostman
 11 silly lifecycle task@1.0.0~test: Args: [ '/d /s /c', 'echo "Error: no test specified" && exit 1' ]
 12 silly lifecycle task@1.0.0~test: Returned: code: 1  signal: null
-13 info lifecycle task@1.0.0~test: Failed to exec test script
+13 info lifecycl  e task@1.0.0~test: Failed to exec test script
 14 verbose stack Error: task@1.0.0 test: `echo "Error: no test specified" && exit 1`
 14 verbose stack Exit status 1
 14 verbose stack     at EventEmitter.<anonymous> (C:\Program Files\nodejs\node_modules\npm\lib\utils\lifecycle.js:255:16)

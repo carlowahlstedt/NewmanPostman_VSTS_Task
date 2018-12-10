@@ -32,3 +32,5 @@ node_modules
 *.vsix
 *.map
 *.js
+NewmanPostman/npm-debug.log
+.taskkey

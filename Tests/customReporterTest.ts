@@ -1,4 +1,3 @@
-import fs = require('fs');
 import mockanswer = require('vsts-task-lib/mock-answer');
 import mockrun = require('vsts-task-lib/mock-run');
 import path = require('path')
@@ -17,11 +16,11 @@ runner.setInput("environmentFile", environment);
 runner.setInput("reporters", 'cli,json');
 
 let answers = <mockanswer.TaskLibAnswers>{
-    checkPath: {},
-    which: {
+    "checkPath": {},
+    "which": {
         'newman': 'newman'
     },
-    stats: {}
+    "stats": {}
 };
 answers.checkPath[filePath] = true;
 answers.checkPath[environment] = true;

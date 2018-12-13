@@ -1,4 +1,4 @@
-import * as mocktest from 'vsts-task-lib/mock-test';
+import * as mocktest from 'azure-pipelines-task-lib/mock-test';
 import * as path from 'path';
 import * as assert from 'assert';
 

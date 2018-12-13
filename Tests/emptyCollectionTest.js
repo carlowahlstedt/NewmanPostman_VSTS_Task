@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const mockrun = require("vsts-task-lib/mock-run");
+const mockrun = require("azure-pipelines-task-lib/mock-run");
 const path = require("path");
 let taskPath = path.join(__dirname, '..', 'NewmanPostman', 'newmantask.js');
 console.info(taskPath);

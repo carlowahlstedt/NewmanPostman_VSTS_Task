@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const mocktest = require("vsts-task-lib/mock-test");
+const mocktest = require("azure-pipelines-task-lib/mock-test");
 const path = require("path");
 const assert = require("assert");
 describe('Error handling', function () {

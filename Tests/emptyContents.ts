@@ -6,8 +6,8 @@ let taskPath = path.join(__dirname, '..', 'NewmanPostman', 'newmantask.js');
 
 console.info(taskPath);
 let runner: mockrun.TaskMockRunner = new mockrun.TaskMockRunner(taskPath);
-let filePath = path.join(__dirname, '/assets/Core.postman_collection.json');
-let environment = path.join(__dirname, 'assets/Core.postman_collection.json');
+let filePath = path.normalize('/srcDir/collection.json');
+
 runner.setInput("collectionSourceType", 'file');
 runner.setInput("collectionFileSource", filePath);
 runner.setInput("Contents", '');

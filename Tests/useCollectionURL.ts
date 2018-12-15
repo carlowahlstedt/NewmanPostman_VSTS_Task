@@ -4,11 +4,11 @@ import path = require('path')
 
 let taskPath = path.join(__dirname, '..', 'NewmanPostman', 'newmantask.js');
 
-console.info(taskPath);
+let collectionUrl = "https://api.getpostman.com/collections/4b34e87f2bd3fbbaf1a4";
 let runner: mockrun.TaskMockRunner = new mockrun.TaskMockRunner(taskPath);
-let filePath = path.join(__dirname, '/assets/Core.postman_collection.json');
+
 runner.setInput("collectionSourceType", 'url');
-runner.setInput("collectionUrl", "https://api.getpostman.com/collections/$collectionUid?apikey=$apiKey");
+runner.setInput("collectionUrl", collectionUrl);
 runner.setInput("environmentSourceType", 'none');
 
 
@@ -17,11 +17,13 @@ let answers = <mockanswer.TaskLibAnswers>{
     "which": {
         'newman': 'newman'
     },
-    "stats": {}
+    "stats": {},
+    "exec": {}
 };
-answers.checkPath[filePath] = true;
+
 answers.checkPath['newman'] = true;
-answers.stats[filePath] = true;
 runner.setAnswers(answers);
+
+answers.exec[`newman run ${collectionUrl}`] = { 'code': 0, 'stdout': 'OK' }
 
 runner.run();

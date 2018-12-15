@@ -6,7 +6,7 @@ let taskPath = path.join(__dirname, '..', 'NewmanPostman', 'newmantask.js');
 
 console.info(taskPath);
 let runner: mockrun.TaskMockRunner = new mockrun.TaskMockRunner(taskPath);
-let filePath = path.join(__dirname, '/assets/Core.postman_collection.json');
+let filePath = path.normalize('/srcDir/postman_collection.json')
 runner.setInput("collectionSourceType", 'file');
 runner.setInput("collectionFileSource", filePath);
 runner.setInput("environmentSourceType", "none")
@@ -16,9 +16,11 @@ let answers = <mockanswer.TaskLibAnswers>{
     "which": {
         'newman': 'newman'
     },
-    "stats": {}
+    "stats": {},
+    "exec": {}
 };
 answers.checkPath[filePath] = true;
+answers.exec[`newman run ${filePath}`] = { 'code': 0, 'stdout': 'OK' }
 answers.checkPath['newman'] = true;
 answers.stats[filePath] = true;
 runner.setAnswers(answers);

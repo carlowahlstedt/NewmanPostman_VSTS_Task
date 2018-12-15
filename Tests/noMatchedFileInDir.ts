@@ -1,20 +1,16 @@
 import mockanswer = require('azure-pipelines-task-lib/mock-answer');
 import mockrun = require('azure-pipelines-task-lib/mock-run');
 import path = require('path')
+import { ENOENT } from 'constants';
 
 let taskPath = path.join(__dirname, '..', 'NewmanPostman', 'newmantask.js');
 
-
 let runner: mockrun.TaskMockRunner = new mockrun.TaskMockRunner(taskPath);
-let filePath = path.normalize('/srcDir/collection.json');
-let environment = path.normalize('/srcDir/environment.json');
+let filePath = path.normalize('/srcDir/');
 
 runner.setInput("collectionSourceType", 'file');
-runner.setInput("environmentSourceType", 'file');
 runner.setInput("collectionFileSource", filePath);
-runner.setInput("Contents", path.normalize("**/collection.json"));
-runner.setInput("environmentFile", environment);
-runner.setInput("reporters", 'cli,json');
+runner.setInput("Contents", '**/collection1.json\n**/collection2.json');
 
 let answers = <mockanswer.TaskLibAnswers>{
     "checkPath": {},
@@ -22,13 +18,26 @@ let answers = <mockanswer.TaskLibAnswers>{
         'newman': 'newman'
     },
     "stats": {},
-    "exec": {}
+    "find": {}
 };
 answers.checkPath[filePath] = true;
-answers.checkPath[environment] = true;
 answers.checkPath['newman'] = true;
-answers.stats[filePath] = true;
-runner.setAnswers(answers);
 
-answers.exec[`newman run ${filePath} -r cli,json -e ${environment}`] = { 'code': 0, 'stdout': 'OK' }
+answers.stats[filePath] = true;
+answers.find[filePath] = [
+    path.normalize('/srcDir/collection3.json')
+]
+runner.setAnswers(answers);
+runner.registerMockExport('stats', (itemPath: string) => {
+    console.log('##vso[task.debug]stats ' + itemPath);
+    switch (itemPath) {
+        case path.normalize('/srcDir/'):
+            return { isDirectory: () => true };
+        case path.normalize('/srcDir/collection3.json'):
+            return { isDirectory: () => false };
+        default:
+            throw { code: 'ENOENT' };
+    }
+})
+
 runner.run();

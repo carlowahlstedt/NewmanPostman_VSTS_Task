@@ -114,9 +114,9 @@ function run() {
         try {
             // tl.debug('executing newman')
             tl.setResourcePath(path.join(__dirname, 'task.json'));
+            var taskSuccess = true;
             if (tl.getInput('collectionSourceType', true) == 'file') {
                 let collectionFileSource = tl.getPathInput('collectionFileSource', true, true);
-                var taskSuccess = true;
                 if (tl.stats(collectionFileSource).isDirectory()) {
                     let contents = tl.getDelimitedInput('Contents', '\n', true);
                     collectionFileSource = path.normalize(collectionFileSource);
@@ -136,7 +136,7 @@ function run() {
                         });
                     }
                     else {
-                        console.log("Could not find any collection files in the path provided");
+                        tl.error("Could not find any collection files in the path provided");
                         taskSuccess = false;
                     }
                 }

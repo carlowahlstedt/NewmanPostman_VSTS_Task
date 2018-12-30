@@ -1,6 +1,7 @@
 import path = require('path');
-import tl = require('vsts-task-lib/task');
-import trm = require('vsts-task-lib/toolrunner');
+import tl = require('azure-pipelines-task-lib/task');
+import trm = require('azure-pipelines-task-lib/toolrunner');
+import isurl = require('is-url');
 
 function GetToolRunner(collectionToRun: string) {
     let pathToNewman = tl.getInput('pathToNewman', false);
@@ -89,7 +90,22 @@ function GetToolRunner(collectionToRun: string) {
     let exportCollection = tl.getPathInput('exportCollection');
     newman.argIf(tl.filePathSupplied('exportCollection'), ['--export-collection', exportCollection]);
 
-    newman.arg(['-e', tl.getPathInput('environment', true, true)]);
+    let envType = tl.getInput('environmentSourceType');
+    if (envType == 'file') { //environment is a file
+        console.info("File used for environment");
+        newman.arg(['-e', tl.getPathInput('environmentFile', true, true)]);
+    } else if (envType == 'url') {
+        let envURl = tl.getInput('environmentUrl', true);
+        if (isurl(envURl)) {
+            console.info("URL used for environment");
+            newman.arg(['-e', envURl]);
+        } else {
+            tl.setResult(tl.TaskResult.Failed, 'Provided string "' + envURl + '" for environment is not a valid url');
+        }
+    } else {
+        //no environement used. Don't add argument, just log info.
+        console.info('No environment set, no need to add it in argument');
+    }
     return newman;
 }
 
@@ -97,40 +113,48 @@ async function run() {
     try {
         // tl.debug('executing newman')
         tl.setResourcePath(path.join(__dirname, 'task.json'));
-
-        let collectionFileSource = tl.getPathInput('collectionFileSource', true, true);
         var taskSuccess = true;
-        if (tl.stats(collectionFileSource).isDirectory()) {
-            let contents: string[] = tl.getDelimitedInput('Contents', '\n', true);
-            collectionFileSource = path.normalize(collectionFileSource);
+        if (tl.getInput('collectionSourceType', true) == 'file') {
+            let collectionFileSource = tl.getPathInput('collectionFileSource', true, true);
+            if (tl.stats(collectionFileSource).isDirectory()) {
+                let contents: string[] = tl.getDelimitedInput('Contents', '\n', true);
+                collectionFileSource = path.normalize(collectionFileSource);
 
-            let allPaths: string[] = tl.find(collectionFileSource);
-            let matchedPaths: string[] = tl.match(allPaths, contents, collectionFileSource);
-            let matchedFiles: string[] = matchedPaths.filter((itemPath: string) => !tl.stats(itemPath).isDirectory());
+                let allPaths: string[] = tl.find(collectionFileSource);
+                let matchedPaths: string[] = tl.match(allPaths, contents, collectionFileSource);
+                let matchedFiles: string[] = matchedPaths.filter((itemPath: string) => !tl.stats(itemPath).isDirectory());
 
-            console.log("found %d files", matchedFiles.length);
+                console.log("found %d files", matchedFiles.length);
 
-            if (matchedFiles.length > 0) {
-                matchedFiles.forEach((file: string) => {
-                    var newman: trm.ToolRunner = GetToolRunner(file);
-                    var execResponse = newman.execSync();
-                    // tl.debug(execResponse.stdout);
-                    if (execResponse.code === 1) {
-                        console.log(execResponse);
-                        taskSuccess = false;
-                    }
-                });
+                if (matchedFiles.length > 0) {
+                    matchedFiles.forEach((file: string) => {
+                        var newman: trm.ToolRunner = GetToolRunner(file);
+                        var execResponse = newman.execSync();
+                        // tl.debug(execResponse.stdout);
+                        if (execResponse.code === 1) {
+                            console.log(execResponse);
+                            taskSuccess = false;
+                        }
+                    });
+                }
+                else {
+                    tl.error("Could not find any collection files in the path provided");
+                    taskSuccess = false;
+                }
             }
             else {
-                console.log("Could not find any collection files in the path provided");
-                taskSuccess = false;
+                var newman: trm.ToolRunner = GetToolRunner(collectionFileSource);
+                await newman.exec();
+            }
+        } else {
+            let collectionFileUrl = tl.getInput('collectionURL', true);
+            if (isurl(collectionFileUrl)) {
+                var newman: trm.ToolRunner = GetToolRunner(collectionFileUrl);
+                await newman.exec();
+            } else {
+                tl.setResult(tl.TaskResult.Failed, 'Provided string "' + collectionFileUrl + '" for collection is not a valid url');
             }
         }
-        else {
-            var newman: trm.ToolRunner = GetToolRunner(collectionFileSource);
-            await newman.exec();
-        }
-
         if (taskSuccess) {
             tl.setResult(tl.TaskResult.Succeeded, "Success");
         }

@@ -30,3 +30,7 @@ bld/
 node_modules
 .vscode
 *.vsix
+*.map
+*.js
+NewmanPostman/npm-debug.log
+.taskkey

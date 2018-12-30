@@ -16,8 +16,7 @@
         "Patch": 21
     },
     "demands": [],
-    "groups": [
-        {
+    "groups": [{
             "name": "requestOptions",
             "displayName": "Request Options",
             "isExpanded": true
@@ -48,24 +47,42 @@
             "isExpanded": false
         }
     ],
-    "inputs": [
-        {
+    "inputs": [{
+            "name": "collectionSourceType",
+            "type": "radio",
+            "defaultValue": "file",
+            "required": true,
+            "options": {
+                "file": "File(s)",
+                "url": "Url"
+            },
+            "helpMarkDown": "Specify either to use file(s) as collection or url (eg : shared collections)"
+        }, {
             "name": "collectionFileSource",
             "type": "filePath",
             "label": "Collection File Source",
             "defaultValue": "",
-            "required": true,
-            "helpMarkDown": "Path to the folder containing collection file source(s)"
+            "required": false,
+            "helpMarkDown": "Path to the folder containing collection file source(s)",
+            "visibleRule": "collectionSourceType = file"
         },
         {
             "name": "Contents",
             "type": "multiLine",
             "label": "Contents",
             "defaultValue": "**/collection.json",
-            "required": true,
-            "helpMarkDown": "File paths to include as part of the collection run. Supports multiple lines of match patterns."
+            "required": false,
+            "helpMarkDown": "File paths to include as part of the collection run. Supports multiple lines of match patterns.",
+            "visibleRule": "collectionSourceType = file"
         },
         {
+            "name": "collectionURL",
+            "type": "string",
+            "defaultValue": "http://",
+            "required": false,
+            "helpMarkDown": "Url to shared collection",
+            "visibleRule": "collectionSourceType = url"
+        }, {
             "name": "folder",
             "type": "string",
             "label": "Folder",
@@ -74,12 +91,34 @@
             "helpMarkDown": "Run requests within a particular folder in a collection"
         },
         {
-            "name": "environment",
+            "name": "environmentSourceType",
+            "type": "radio",
+            "defaultValue": "file",
+            "required": false,
+            "options": {
+                "file": "File",
+                "url": "Url",
+                "none": "None"
+            },
+            "helpMarkDown": "Specify either to use file(s), url (eg : shared environment) or nothing as environment"
+        },
+        {
+            "name": "environmentFile",
             "type": "filePath",
-            "label": "Environment",
+            "label": "Environment File",
             "defaultValue": "",
-            "required": true,
-            "helpMarkDown": "Path to the Postman environment file as JSON"
+            "required": false,
+            "helpMarkDown": "Path to the Postman environment file as JSON",
+            "visibleRule": "environmentSourceType = file"
+        },
+        {
+            "name": "environmentUrl",
+            "type": "string",
+            "label": "Environment Url",
+            "defaultValue": "http://",
+            "required": false,
+            "helpMarkDown": "URL to the Postman environment file as JSON",
+            "visibleRule": "environmentSourceType = url"
         },
         {
             "name": "globalVariables",

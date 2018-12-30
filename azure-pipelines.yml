@@ -17,19 +17,23 @@ steps:
   displayName: 'npm install-task-lib'
   inputs:
     command: custom
-
     verbose: false
-
     customCommand: 'run install-task-lib'
+
+
+- task: Npm@1
+  displayName: 'npm test'
+  inputs:
+    command: custom
+    verbose: false
+    customCommand: 'run test'
 
 
 - task: Npm@1
   displayName: 'npm compile'
   inputs:
     command: custom
-
     verbose: false
-
     customCommand: 'run compile'
 
 

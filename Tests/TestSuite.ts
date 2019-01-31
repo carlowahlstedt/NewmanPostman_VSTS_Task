@@ -13,6 +13,7 @@ describe('Error handling', function () {
         let runner: mocktest.MockTestRunner = new mocktest.MockTestRunner(testPath);
         runner.run();
         // console.error(runner.stdout);
+        console.log(runner.stderr);
         assert(runner.failed, 'Should be in Failed status');
         assert(runner.stdOutContained('Input required: collectionFileSource'), 'Empty Collection file source should raise an error');
         done();
@@ -89,7 +90,7 @@ describe('Normal behavior', function () {
         let testPath = path.join(__dirname, 'noEnvironment.js');
         let runner: mocktest.MockTestRunner = new mocktest.MockTestRunner(testPath);
         runner.run();
-        console.log(runner.stdout);
+        // console.error(runner.stdout);
         assert(runner.succeeded, 'Should in success');
         assert(runner.stdOutContained('No environment set, no need to add it in argument'), 'No error if no envt is set');
         done();

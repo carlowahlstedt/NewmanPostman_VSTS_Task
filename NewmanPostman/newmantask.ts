@@ -130,7 +130,7 @@ async function run() {
                     matchedFiles.forEach((file: string) => {
                         var newman: trm.ToolRunner = GetToolRunner(file);
                         var execResponse = newman.execSync();
-                        // tl.debug(execResponse.stdout);
+                        tl.debug(execResponse.stdout);
                         if (execResponse.code === 1) {
                             console.log(execResponse);
                             taskSuccess = false;

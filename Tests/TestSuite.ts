@@ -103,8 +103,8 @@ describe('Normal behavior', function () {
         assert(runner.succeeded, 'Should be in success')
         assert(runner.stdOutContained('found 2 files'), '2 files are found');
         assert(runner.invokedToolCount == 2, 'should have call n two times. Actual:' + runner.invokedToolCount);
-        assert(runner.stdOutContained('n run \\srcDir\\collection1.json'), 'Should have user collection1.json');
-        assert(runner.stdOutContained('n run \\srcDir\\collection2.json'), 'Should have used collection2.json');
+        assert(runner.stdOutContained('n run /srcDir/collection1.json'), 'Should have used collection1.json');
+        assert(runner.stdOutContained('n run /srcDir/collection2.json'), 'Should have used collection2.json');
 
         done();
     })

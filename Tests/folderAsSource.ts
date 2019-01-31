@@ -1,10 +1,8 @@
 import mockanswer = require('azure-pipelines-task-lib/mock-answer');
 import mockrun = require('azure-pipelines-task-lib/mock-run');
 import path = require('path')
-import { ENOENT } from 'constants';
 
 let taskPath = path.join(__dirname, '..', 'NewmanPostman', 'newmantask.js');
-
 
 let runner: mockrun.TaskMockRunner = new mockrun.TaskMockRunner(taskPath);
 let filePath = path.normalize('/srcDir/');
@@ -29,8 +27,8 @@ answers.find[filePath] = [
     path.normalize('/srcDir/collection2.json'),
     path.normalize('/srcDir/collection3.json'),
 ]
-answers.exec[`newman run ${filePath}\collection1.json`] = { 'code': 0, 'stdout': 'OK' }
-answers.exec[`newman run ${filePath}\collection2.json`] = { 'code': 0, 'stdout': 'OK' }
+answers.exec[`newman run ${filePath}collection1.json`] = { 'code': 0, 'stdout': 'OK' }
+answers.exec[`newman run ${filePath}collection2.json`] = { 'code': 0, 'stdout': 'OK' }
 
 runner.setAnswers(answers);
 runner.registerMockExport('stats', (itemPath: string) => {

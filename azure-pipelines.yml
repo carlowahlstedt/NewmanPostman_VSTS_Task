@@ -26,7 +26,7 @@ steps:
   inputs:
     command: custom
     verbose: false
-    customCommand: 'npx mocha Tests//TestSuite.js'
+    customCommand: 'run test'
 
 - task: PublishTestResults@2
   inputs:

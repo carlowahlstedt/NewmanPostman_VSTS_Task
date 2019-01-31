@@ -89,7 +89,7 @@ describe('Normal behavior', function () {
         let testPath = path.join(__dirname, 'noEnvironment.js');
         let runner: mocktest.MockTestRunner = new mocktest.MockTestRunner(testPath);
         runner.run();
-        // console.error(runner.stdout);
+        console.log(runner.stdout);
         assert(runner.succeeded, 'Should in success');
         assert(runner.stdOutContained('No environment set, no need to add it in argument'), 'No error if no envt is set');
         done();

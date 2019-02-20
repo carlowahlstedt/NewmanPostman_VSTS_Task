@@ -36,7 +36,7 @@ function GetToolRunner(collectionToRun: string) {
     newman.argIf(typeof reporterHtmlExport != 'undefined' && tl.filePathSupplied('reporterHtmlExport'), ['--reporter-html-export', reporterHtmlExport]);
     let reporterJsonExport = tl.getPathInput('reporterJsonExport');
     newman.argIf(typeof reporterJsonExport != 'undefined' && tl.filePathSupplied('reporterJsonExport'), ['--reporter-json-export', reporterJsonExport]);
-    let reporterJUnitExport = tl.getPathInput('reporterJUnitExport', false, true);
+    let reporterJUnitExport = tl.getPathInput('reporterJUnitExport', false, false);
     newman.argIf(typeof reporterJUnitExport != 'undefined' && tl.filePathSupplied('reporterJUnitExport'), ['--reporter-junit-export', reporterJUnitExport]);
 
     let reporterList = tl.getInput('reporters');

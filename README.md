@@ -72,6 +72,7 @@ We thank the following contributor(s) for this extension:
 - [sunmorgus](https://github.com/sunmorgus)
 - [sebcaps](https://github.com/sebcaps)
 - [jeffpriz](https://github.com/jeffpriz)
+- [esbenbach](https://github.com/esbenbach)
 
 ### Feedback ###
 

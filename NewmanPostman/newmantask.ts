@@ -93,7 +93,7 @@ function GetToolRunner(collectionToRun: string) {
     let envType = tl.getInput('environmentSourceType');
     if (envType == 'file') {
         console.info("File used for environment");
-        newman.arg(['-e', tl.getPathInput('environmentFile', true, true)]);
+        newman.arg(['-e', tl.getPathInput('environment', true, true)]);
     } else if (envType == 'url') {
         let envURl = tl.getInput('environmentUrl', true);
         if (isurl(envURl)) {

@@ -105,7 +105,7 @@
             "helpMarkDown": "Specify either to use file(s), url (eg : shared environment) or nothing as environment"
         },
         {
-            "name": "environmentFile",
+            "name": "environment",
             "type": "filePath",
             "label": "Environment File",
             "defaultValue": "",

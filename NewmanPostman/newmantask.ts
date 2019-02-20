@@ -91,7 +91,7 @@ function GetToolRunner(collectionToRun: string) {
     newman.argIf(tl.filePathSupplied('exportCollection'), ['--export-collection', exportCollection]);
 
     let envType = tl.getInput('environmentSourceType');
-    if (envType == 'file') { //environment is a file
+    if (envType == 'file') {
         console.info("File used for environment");
         newman.arg(['-e', tl.getPathInput('environmentFile', true, true)]);
     } else if (envType == 'url') {
@@ -115,6 +115,7 @@ async function run() {
         tl.setResourcePath(path.join(__dirname, 'task.json'));
         var taskSuccess = true;
         if (tl.getInput('collectionSourceType', true) == 'file') {
+            console.log("Collection Source Type is set to file");
             let collectionFileSource = tl.getPathInput('collectionFileSource', true, true);
             if (tl.stats(collectionFileSource).isDirectory()) {
                 let contents: string[] = tl.getDelimitedInput('Contents', '\n', true);

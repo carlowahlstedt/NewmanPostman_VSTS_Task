@@ -109,7 +109,7 @@
             "type": "filePath",
             "label": "Environment File",
             "defaultValue": "",
-            "required": false,
+            "required": true,
             "helpMarkDown": "Path to the Postman environment file as JSON",
             "visibleRule": "environmentSourceType = file"
         },
@@ -118,7 +118,7 @@
             "type": "string",
             "label": "Environment Url",
             "defaultValue": "http://",
-            "required": false,
+            "required": true,
             "helpMarkDown": "URL to the Postman environment file as JSON",
             "visibleRule": "environmentSourceType = url"
         },

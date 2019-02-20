@@ -51,6 +51,7 @@
             "name": "collectionSourceType",
             "type": "radio",
             "defaultValue": "file",
+            "label": "Collection Source Type",
             "required": true,
             "options": {
                 "file": "File(s)",
@@ -94,6 +95,7 @@
             "name": "environmentSourceType",
             "type": "radio",
             "defaultValue": "file",
+            "label": "Environment Source Type",
             "required": false,
             "options": {
                 "file": "File",

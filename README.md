@@ -60,6 +60,8 @@ The [source](https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task/) to this
 
 [View Notices](https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task/blob/master/ThirdPartyNotices.txt) for third party software included in this extension.
 
+If you use a [Postman Enterprise](https://www.getpostman.com/enterprise) account workspace check out [this task](https://marketplace.visualstudio.com/items?itemName=OneLuckiDev.getPostmanJSON) to use in a pipeline. Here's [the post explaining it](http://blog.oneluckidev.com/post/using-postman-and-newman-in-your-azure-devops-pipeline) from the tasks author.
+
 ### Minimum supported environments ###
 
 - Azure DevOps Services

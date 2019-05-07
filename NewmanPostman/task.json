@@ -1,368 +1,413 @@
 {
-    "id": "4e74f3b0-c5b7-48cf-970e-8d7071818557",
-    "name": "NewmanPostman",
-    "friendlyName": "Newman the cli Companion for Postman",
-    "description": "Using Newman, one can effortlessly run and test a Postman Collections directly from the command-line. Now in a task!",
-    "helpMarkDown": "[More Information](https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task/blob/master/README.md)",
-    "category": "Test",
-    "visibility": [
-        "Build",
-        "Release"
-    ],
-    "author": "Carlo Wahlstedt",
-    "version": {
-        "Major": 3,
-        "Minor": 0,
-        "Patch": 23
+  "id": "4e74f3b0-c5b7-48cf-970e-8d7071818557",
+  "name": "NewmanPostman",
+  "friendlyName": "Newman the cli Companion for Postman",
+  "description": "Using Newman, one can effortlessly run and test a Postman Collections directly from the command-line. Now in a task!",
+  "helpMarkDown": "[More Information](https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task/blob/master/README.md)",
+  "category": "Test",
+  "visibility": [
+    "Build",
+    "Release"
+  ],
+  "author": "Carlo Wahlstedt",
+  "version": {
+    "Major": 3,
+    "Minor": 0,
+    "Patch": 23
+  },
+  "demands": [],
+  "groups": [
+    {
+      "name": "requestOptions",
+      "displayName": "Request Options",
+      "isExpanded": true
     },
-    "demands": [],
-    "groups": [{
-            "name": "requestOptions",
-            "displayName": "Request Options",
-            "isExpanded": true
-        },
-        {
-            "name": "output",
-            "displayName": "Output Options",
-            "isExpanded": true
-        },
-        {
-            "name": "report",
-            "displayName": "Report",
-            "isExpanded": true
-        },
-        {
-            "name": "ssl",
-            "displayName": "SSL Options",
-            "isExpanded": true
-        },
-        {
-            "name": "timeout",
-            "displayName": "Timeout Options",
-            "isExpanded": true
-        },
-        {
-            "name": "export",
-            "displayName": "Export Options",
-            "isExpanded": false
-        }
-    ],
-    "inputs": [{
-            "name": "collectionSourceType",
-            "type": "radio",
-            "defaultValue": "file",
-            "label": "Collection Source Type",
-            "required": true,
-            "options": {
-                "file": "File(s)",
-                "url": "Url"
-            },
-            "helpMarkDown": "Specify either to use file(s) as collection or url (eg : shared collections)"
-        }, {
-            "name": "collectionFileSource",
-            "type": "filePath",
-            "label": "Collection File Source",
-            "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "Path to the folder containing collection file source(s)",
-            "visibleRule": "collectionSourceType = file"
-        },
-        {
-            "name": "Contents",
-            "type": "multiLine",
-            "label": "Contents",
-            "defaultValue": "**/collection.json",
-            "required": false,
-            "helpMarkDown": "File paths to include as part of the collection run. Supports multiple lines of match patterns.",
-            "visibleRule": "collectionSourceType = file"
-        },
-        {
-            "name": "collectionURL",
-            "type": "string",
-            "defaultValue": "http://",
-            "required": false,
-            "helpMarkDown": "Url to shared collection",
-            "visibleRule": "collectionSourceType = url"
-        }, {
-            "name": "folder",
-            "type": "string",
-            "label": "Folder",
-            "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "Run requests within a particular folder in a collection"
-        },
-        {
-            "name": "environmentSourceType",
-            "type": "radio",
-            "defaultValue": "file",
-            "label": "Environment Source Type",
-            "required": false,
-            "options": {
-                "file": "File",
-                "url": "Url",
-                "none": "None"
-            },
-            "helpMarkDown": "Specify either to use file(s), url (eg : shared environment) or nothing as environment"
-        },
-        {
-            "name": "environment",
-            "type": "filePath",
-            "label": "Environment File",
-            "defaultValue": "",
-            "required": true,
-            "helpMarkDown": "Path to the Postman environment file as JSON",
-            "visibleRule": "environmentSourceType = file"
-        },
-        {
-            "name": "environmentUrl",
-            "type": "string",
-            "label": "Environment Url",
-            "defaultValue": "http://",
-            "required": true,
-            "helpMarkDown": "URL to the Postman environment file as JSON",
-            "visibleRule": "environmentSourceType = url"
-        },
-        {
-            "name": "globalVariables",
-            "type": "filePath",
-            "label": "Global",
-            "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "Path to the Postman global variables file as JSON"
-        },
-        {
-            "name": "globalVars",
-            "type": "multiline",
-            "label": "Global Variables",
-            "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "Global variables to provide to command line in a key=value format. Multiple values can be added."
-        },
-        {
-            "name": "dataFile",
-            "type": "filePath",
-            "label": "Data",
-            "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "Path to the data source file as CSV"
-        },
-        {
-            "name": "numberOfIterations",
-            "type": "string",
-            "label": "Number of Iterations",
-            "defaultValue": "1",
-            "required": false,
-            "helpMarkDown": "Define the number of iterations to run [number]"
-        },
-        {
-            "name": "pathToNewman",
-            "type": "string",
-            "label": "Path to Newman",
-            "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "Use if your build agent can't find newman automatically and you want to specify the path"
-        },
-        {
-            "name": "unicodeDisabled",
-            "type": "boolean",
-            "label": "Disable Unicode",
-            "defaultValue": false,
-            "required": false,
-            "helpMarkDown": "Specify whether or not to force the unicode disable option. When supplied, all symbols in the output will be replaced by their plain text equivalents.",
-            "groupName": "output"
-        },
-        {
-            "name": "forceNoColor",
-            "type": "boolean",
-            "label": "No color",
-            "defaultValue": false,
-            "required": false,
-            "helpMarkDown": "Turn off usage of color in terminal output.",
-            "groupName": "output"
-        },
-        {
-            "name": "delayRequest",
-            "type": "string",
-            "label": "Delay Request",
-            "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "Specify a delay (in ms) between requests [number]",
-            "groupName": "requestOptions"
-        },
-        {
-            "name": "ignoreRedirect",
-            "type": "boolean",
-            "label": "Ignore Redirect",
-            "required": false,
-            "helpMarkDown": "Prevents newman from automatically following 3XX redirect responses.",
-            "groupName": "requestOptions"
-        },
-        {
-            "name": "bail",
-            "type": "boolean",
-            "label": "Stop on first error",
-            "required": false,
-            "helpMarkDown": "Specify wether or not to stop a collection on first error",
-            "groupName": "requestOptions"
-        },
-        {
-            "name": "bailmodifier",
-            "type": "picklist",
-            "label": "Option",
-            "required": false,
-            "visibleRule": "bail=true",
-            "helpMarkDown": "'folder' will stop collection execution in case of incorrect folder configuration, 'failure' will gracefully stop collection on first test failure",
-            "groupName": "requestOptions",
-            "options": {
-                "folder": "folder",
-                "failre": "failure"
-            }
-        },
-        {
-            "name": "sslClientCert",
-            "type": "filePath",
-            "label": "SSL Client Cert",
-            "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "Path to the ssl client cert",
-            "groupName": "ssl"
-        },
-        {
-            "name": "sslClientKey",
-            "type": "filePath",
-            "label": "SSL Client Key",
-            "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "Path to the SSL Client Key",
-            "groupName": "ssl"
-        },
-        {
-            "name": "sslStrict",
-            "type": "boolean",
-            "label": "Disable Strict SSL",
-            "helpMarkDown": "Disables strict ssl",
-            "groupName": "ssl"
-        },
-        {
-            "name": "reporterHtmlTemplate",
-            "type": "filePath",
-            "label": "Reporter Html Template",
-            "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "Path to html template file",
-            "groupName": "report"
-        },
-        {
-            "name": "reporterHtmlExport",
-            "type": "filePath",
-            "label": "Reporter Html Export",
-            "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "Specify a path where the output HTML file will be written to disk. If not specified, the file will be written to newman/ in the current working directory.",
-            "groupName": "report"
-        },
-        {
-            "name": "reporterJsonExport",
-            "type": "filePath",
-            "label": "Reporter Json Export",
-            "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "Specify a path where the output JSON file will be written to disk. If not specified, the file will be written to newman/ in the current working directory.",
-            "groupName": "report"
-        },
-        {
-            "name": "reporterJUnitExport",
-            "type": "filePath",
-            "label": "Reporter JUnit Export",
-            "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "Specify a path where the output JUnit file will be written to disk. If not specified, the file will be written to newman/ in the current working directory.",
-            "groupName": "report"
-        },
-        {
-            "name": "reporters",
-            "type": "picklist",
-            "label": "Reporters",
-            "properties": {
-                "MultiSelectFlatList": "True"
-            },
-            "options": {
-                "cli": "cli",
-                "json": "json",
-                "html": "html",
-                "junit": "junit"
-            },
-            "required": false,
-            "helpMarkDown": "Format of report. Multi selection allowed.",
-            "groupName": "report"
-        },
-        {
-            "label": "Custom reporter name",
-            "name": "customReporter",
-            "groupName": "report",
-            "type": "string",
-            "required": false,
-            "helpMarkDown": "Name of custom reporter to output result. If non empty will be added to the list of reporter. See Newman doc for details."
-        },
-        {
-            "name": "timeoutGlobal",
-            "type": "string",
-            "label": "Timeout ",
-            "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "Specify entire collection timeout (in ms) to complete [number]",
-            "groupName": "timeout"
-        },
-        {
-            "name": "timeoutRequest",
-            "type": "string",
-            "label": "Timeout Request",
-            "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "Specify a request timeout (in ms) for a request [number]",
-            "groupName": "timeout"
-        },
-        {
-            "name": "timeoutScript",
-            "type": "string",
-            "label": "Timeout Script",
-            "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "Specify a request timeout (in ms) for script to complete [number]",
-            "groupName": "timeout"
-        },
-        {
-            "name": "exportEnvironment",
-            "type": "filePath",
-            "label": "Export Environment",
-            "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "Specify a path where the environment variables file will be output before completing a run",
-            "groupName": "export"
-        },
-        {
-            "name": "exportGlobals",
-            "type": "filePath",
-            "label": "Export Globals",
-            "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "Specify a path where the global variable files will be output before completing a run",
-            "groupName": "export"
-        },
-        {
-            "name": "exportCollection",
-            "type": "filePath",
-            "label": "Export Collections",
-            "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "Specify a path where the collection file will be output before completing a run",
-            "groupName": "export"
-        }
-    ],
-    "instanceNameFormat": "Newman - Postman",
-    "execution": {
-        "Node": {
-            "target": "newmantask.js"
-        }
+    {
+      "name": "output",
+      "displayName": "Output Options",
+      "isExpanded": true
+    },
+    {
+      "name": "report",
+      "displayName": "Report",
+      "isExpanded": true
+    },
+    {
+      "name": "ssl",
+      "displayName": "SSL Options",
+      "isExpanded": true
+    },
+    {
+      "name": "timeout",
+      "displayName": "Timeout Options",
+      "isExpanded": true
+    },
+    {
+      "name": "export",
+      "displayName": "Export Options",
+      "isExpanded": false
     }
+  ],
+  "inputs": [
+    {
+      "name": "collectionSourceType",
+      "type": "radio",
+      "defaultValue": "file",
+      "label": "Collection Source Type",
+      "required": true,
+      "options": {
+        "file": "File(s)",
+        "url": "Url"
+      },
+      "helpMarkDown": "Specify either to use file(s) as collection or url (eg : shared collections)"
+    },
+    {
+      "name": "collectionFileSource",
+      "type": "filePath",
+      "label": "Collection File Source",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Path to the folder containing collection file source(s)",
+      "visibleRule": "collectionSourceType = file"
+    },
+    {
+      "name": "Contents",
+      "type": "multiLine",
+      "label": "Contents",
+      "defaultValue": "**/collection.json",
+      "required": false,
+      "helpMarkDown": "File paths to include as part of the collection run. Supports multiple lines of match patterns.",
+      "visibleRule": "collectionSourceType = file"
+    },
+    {
+      "name": "collectionURL",
+      "type": "string",
+      "defaultValue": "http://",
+      "required": false,
+      "helpMarkDown": "Url to shared collection",
+      "visibleRule": "collectionSourceType = url"
+    },
+    {
+      "name": "folder",
+      "type": "string",
+      "label": "Folder",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Run requests within a particular folder in a collection"
+    },
+    {
+      "name": "environmentSourceType",
+      "type": "radio",
+      "defaultValue": "file",
+      "label": "Environment Source Type",
+      "required": false,
+      "options": {
+        "file": "File",
+        "url": "Url",
+        "none": "None"
+      },
+      "helpMarkDown": "Specify either to use file(s), url (eg : shared environment) or nothing as environment"
+    },
+    {
+      "name": "environment",
+      "type": "filePath",
+      "label": "Environment File",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "Path to the Postman environment file as JSON",
+      "visibleRule": "environmentSourceType = file"
+    },
+    {
+      "name": "environmentUrl",
+      "type": "string",
+      "label": "Environment Url",
+      "defaultValue": "http://",
+      "required": true,
+      "helpMarkDown": "URL to the Postman environment file as JSON",
+      "visibleRule": "environmentSourceType = url"
+    },
+    {
+      "name": "globalVariables",
+      "type": "filePath",
+      "label": "Global",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Path to the Postman global variables file as JSON"
+    },
+    {
+      "name": "globalVars",
+      "type": "multiline",
+      "label": "Global Variables",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Global variables to provide to command line in a key=value format. Multiple values can be added."
+    },
+    {
+      "name": "dataFile",
+      "type": "filePath",
+      "label": "Data",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Path to the data source file as CSV"
+    },
+    {
+      "name": "numberOfIterations",
+      "type": "string",
+      "label": "Number of Iterations",
+      "defaultValue": "1",
+      "required": false,
+      "helpMarkDown": "Define the number of iterations to run [number]"
+    },
+    {
+      "name": "pathToNewman",
+      "type": "string",
+      "label": "Path to Newman",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Use if your build agent can't find newman automatically and you want to specify the path"
+    },
+    {
+      "name": "unicodeDisabled",
+      "type": "boolean",
+      "label": "Disable Unicode",
+      "defaultValue": false,
+      "required": false,
+      "helpMarkDown": "Specify whether or not to force the unicode disable option. When supplied, all symbols in the output will be replaced by their plain text equivalents.",
+      "groupName": "output"
+    },
+    {
+      "name": "forceNoColor",
+      "type": "boolean",
+      "label": "No color",
+      "defaultValue": false,
+      "required": false,
+      "helpMarkDown": "Turn off usage of color in terminal output.",
+      "groupName": "output"
+    },
+    {
+      "name": "delayRequest",
+      "type": "string",
+      "label": "Delay Request",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Specify a delay (in ms) between requests [number]",
+      "groupName": "requestOptions"
+    },
+    {
+      "name": "ignoreRedirect",
+      "type": "boolean",
+      "label": "Ignore Redirect",
+      "required": false,
+      "helpMarkDown": "Prevents newman from automatically following 3XX redirect responses.",
+      "groupName": "requestOptions"
+    },
+    {
+      "name": "bail",
+      "type": "boolean",
+      "label": "Stop on first error",
+      "required": false,
+      "helpMarkDown": "Specify wether or not to stop a collection on first error",
+      "groupName": "requestOptions"
+    },
+    {
+      "name": "bailmodifier",
+      "type": "picklist",
+      "label": "Option",
+      "required": false,
+      "visibleRule": "bail=true",
+      "helpMarkDown": "'folder' will stop collection execution in case of incorrect folder configuration, 'failure' will gracefully stop collection on first test failure",
+      "groupName": "requestOptions",
+      "options": {
+        "folder": "folder",
+        "failre": "failure"
+      }
+    },
+    {
+      "name": "sslClientCert",
+      "type": "filePath",
+      "label": "SSL Client Cert",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Path to the ssl client cert",
+      "groupName": "ssl"
+    },
+    {
+      "name": "sslClientKey",
+      "type": "filePath",
+      "label": "SSL Client Key",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Path to the SSL Client Key",
+      "groupName": "ssl"
+    },
+    {
+      "name": "sslStrict",
+      "type": "boolean",
+      "label": "Disable Strict SSL",
+      "helpMarkDown": "Disables strict ssl",
+      "groupName": "ssl"
+    },
+    {
+      "name": "reporters",
+      "type": "picklist",
+      "label": "Reporters",
+      "properties": {
+        "MultiSelectFlatList": "True"
+      },
+      "options": {
+        "cli": "cli",
+        "json": "json",
+        "html": "html",
+        "htmlextra": "htmlextra",
+        "junit": "junit"
+      },
+      "required": false,
+      "helpMarkDown": "Format of report. Multi selection allowed.",
+      "groupName": "report"
+    },
+    {
+      "name": "reporterHtmlTemplate",
+      "type": "filePath",
+      "label": "Reporter Html Template",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Path to html template file",
+      "groupName": "report"
+    },
+    {
+      "name": "reporterHtmlExport",
+      "type": "filePath",
+      "label": "Reporter Html Export",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Specify a path where the output HTML file will be written to disk. If not specified, the file will be written to newman/ in the current working directory.",
+      "groupName": "report"
+    },
+    {
+      "name": "reporterHtmlExtraTemplate",
+      "type": "filePath",
+      "label": "Reporter Html Extra Template",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Path to html extra template file",
+      "groupName": "report"
+    },
+    {
+      "name": "reporterHtmlExtraExport",
+      "type": "filePath",
+      "label": "Reporter HtmlExtra Export",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Specify a path where the output HTMLExtra file will be written to disk. If not specified, the file will be written to newman/ in the current working directory.",
+      "groupName": "report"
+    },
+    {
+      "name": "htmlExtraDarkTheme",
+      "type": "boolean",
+      "label": "Enable HTML Extra Dark Theme",
+      "helpMarkDown": "Use this optional flag to switch the reporter template to the Dark Theme dashboard.",
+      "groupName": "report"
+    },
+    {
+      "name": "htmlExtraTestPaging",
+      "type": "boolean",
+      "label": "Enable pagination.",
+      "helpMarkDown": "Use this optional flag to add pagination to the tests in the request view.",
+      "groupName": "report"
+    },
+    {
+      "label": "HTML Extra Report Title",
+      "name": "htmlExtraReportTitle",
+      "groupName": "report",
+      "type": "string",
+      "required": false,
+      "helpMarkDown": "This optional flag can be used to give your report a different main Title in the centre of the report. If this is not set, the report will show Newman Run Dashboard."
+    },
+    {
+      "name": "reporterJsonExport",
+      "type": "filePath",
+      "label": "Reporter Json Export",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Specify a path where the output JSON file will be written to disk. If not specified, the file will be written to newman/ in the current working directory.",
+      "groupName": "report"
+    },
+    {
+      "name": "reporterJUnitExport",
+      "type": "filePath",
+      "label": "Reporter JUnit Export",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Specify a path where the output JUnit file will be written to disk. If not specified, the file will be written to newman/ in the current working directory.",
+      "groupName": "report"
+    },
+    {
+      "label": "Custom reporter name",
+      "name": "customReporter",
+      "groupName": "report",
+      "type": "string",
+      "required": false,
+      "helpMarkDown": "Name of custom reporter to output result. If non empty will be added to the list of reporter. See Newman doc for details."
+    },
+    {
+      "name": "timeoutGlobal",
+      "type": "string",
+      "label": "Timeout ",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Specify entire collection timeout (in ms) to complete [number]",
+      "groupName": "timeout"
+    },
+    {
+      "name": "timeoutRequest",
+      "type": "string",
+      "label": "Timeout Request",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Specify a request timeout (in ms) for a request [number]",
+      "groupName": "timeout"
+    },
+    {
+      "name": "timeoutScript",
+      "type": "string",
+      "label": "Timeout Script",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Specify a request timeout (in ms) for script to complete [number]",
+      "groupName": "timeout"
+    },
+    {
+      "name": "exportEnvironment",
+      "type": "filePath",
+      "label": "Export Environment",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Specify a path where the environment variables file will be output before completing a run",
+      "groupName": "export"
+    },
+    {
+      "name": "exportGlobals",
+      "type": "filePath",
+      "label": "Export Globals",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Specify a path where the global variable files will be output before completing a run",
+      "groupName": "export"
+    },
+    {
+      "name": "exportCollection",
+      "type": "filePath",
+      "label": "Export Collections",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Specify a path where the collection file will be output before completing a run",
+      "groupName": "export"
+    }
+  ],
+  "instanceNameFormat": "Newman - Postman",
+  "execution": {
+    "Node": {
+      "target": "newmantask.js"
+    }
+  }
 }

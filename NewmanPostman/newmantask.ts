@@ -34,6 +34,20 @@ function GetToolRunner(collectionToRun: string) {
     newman.argIf(typeof reporterHtmlTemplate != 'undefined' && tl.filePathSupplied('reporterHtmlTemplate'), ['--reporter-html-template', reporterHtmlTemplate]);
     let reporterHtmlExport = tl.getPathInput('reporterHtmlExport');
     newman.argIf(typeof reporterHtmlExport != 'undefined' && tl.filePathSupplied('reporterHtmlExport'), ['--reporter-html-export', reporterHtmlExport]);
+    /**
+    * Items for HTML extra https://www.npmjs.com/package/newman-reporter-htmlextra.
+    */
+    let reporterHtmlExtraTemplate = tl.getPathInput('reporterHtmlExtraTemplate', false, true);
+    newman.argIf(typeof reporterHtmlExtraTemplate != 'undefined' && tl.filePathSupplied('reporterHtmlExtraTemplate'), ['--reporter-htmlextra-template ', reporterHtmlTemplate]);
+    let reporterHtmlExtraExport = tl.getPathInput('reporterHtmlExtraExport');
+    newman.argIf(typeof reporterHtmlExtraExport != 'undefined' && tl.filePathSupplied('reporterHtmlExtraExport'), ['--reporter-htmlextra-export', reporterHtmlExtraExport]);
+    let htmlExtraDarkTheme = tl.getBoolInput('htmlExtraDarkTheme');
+    newman.argIf(htmlExtraDarkTheme, ['--reporter-htmlextra-darkTheme']);
+    let htmlExtraTestPaging = tl.getBoolInput('htmlExtraTestPaging');
+    newman.argIf(htmlExtraTestPaging, ['--reporter-htmlextra-testPaging']);
+    let htmlExtraReportTitle = tl.getInput('htmlExtraReportTitle');
+    newman.argIf(htmlExtraReportTitle, ['--reporter-htmlextra-title', htmlExtraReportTitle]);
+
     let reporterJsonExport = tl.getPathInput('reporterJsonExport');
     newman.argIf(typeof reporterJsonExport != 'undefined' && tl.filePathSupplied('reporterJsonExport'), ['--reporter-json-export', reporterJsonExport]);
     let reporterJUnitExport = tl.getPathInput('reporterJUnitExport', false, false);

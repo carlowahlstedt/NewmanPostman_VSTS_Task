@@ -290,8 +290,7 @@
       "defaultValue": "",
       "required": false,
       "helpMarkDown": "Path to html extra template file",
-      "groupName": "report",
-      "visibleRule": "reporters = htmlextra"
+      "groupName": "report"
     },
     {
       "name": "reporterHtmlExtraExport",
@@ -300,24 +299,21 @@
       "defaultValue": "",
       "required": false,
       "helpMarkDown": "Specify a path where the output HTMLExtra file will be written to disk. If not specified, the file will be written to newman/ in the current working directory.",
-      "groupName": "report",
-      "visibleRule": "reporters = htmlextra"
+      "groupName": "report"
     },
     {
       "name": "htmlExtraDarkTheme",
       "type": "boolean",
       "label": "Enable HTML Extra Dark Theme",
       "helpMarkDown": "Use this optional flag to switch the reporter template to the Dark Theme dashboard.",
-      "groupName": "report",
-      "visibleRule": "reporters = htmlextra"
+      "groupName": "report"
     },
     {
       "name": "htmlExtraTestPaging",
       "type": "boolean",
       "label": "Enable pagination.",
       "helpMarkDown": "Use this optional flag to add pagination to the tests in the request view.",
-      "groupName": "report",
-      "visibleRule": "reporters = htmlextra"
+      "groupName": "report"
     },
     {
       "label": "HTML Extra Report Title",
@@ -325,8 +321,7 @@
       "groupName": "report",
       "type": "string",
       "required": false,
-      "helpMarkDown": "This optional flag can be used to give your report a different main Title in the centre of the report. If this is not set, the report will show Newman Run Dashboard.",
-      "visibleRule": "reporters = htmlextra"
+      "helpMarkDown": "This optional flag can be used to give your report a different main Title in the centre of the report. If this is not set, the report will show Newman Run Dashboard."
     },
     {
       "name": "reporterJsonExport",

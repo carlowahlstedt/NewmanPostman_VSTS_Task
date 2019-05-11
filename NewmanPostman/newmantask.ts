@@ -46,7 +46,7 @@ function GetToolRunner(collectionToRun: string) {
     let htmlExtraTestPaging = tl.getBoolInput('htmlExtraTestPaging');
     newman.argIf(htmlExtraTestPaging, ['--reporter-htmlextra-testPaging']);
     let htmlExtraReportTitle = tl.getInput('htmlExtraReportTitle');
-    newman.argIf(htmlExtraReportTitle, ['--reporter-htmlextra-title', htmlExtraReportTitle]);
+    newman.argIf(typeof htmlExtraReportTitle != 'undefined' && htmlExtraReportTitle, ['--reporter-htmlextra-title', htmlExtraReportTitle]);
 
     let reporterJsonExport = tl.getPathInput('reporterJsonExport');
     newman.argIf(typeof reporterJsonExport != 'undefined' && tl.filePathSupplied('reporterJsonExport'), ['--reporter-json-export', reporterJsonExport]);

@@ -22,7 +22,7 @@ function GetToolRunner(collectionToRun: string) {
     let sslClientKey = tl.getPathInput('sslClientKey', false, true);
     newman.argIf(typeof sslClientKey != 'undefined' && tl.filePathSupplied('sslClientKey'), ['--ssl-client-key', sslClientKey]);
     let sslStrict = tl.getBoolInput('sslStrict');
-    newman.argIf(sslStrict, ['--insecure']);
+    newman.argIf(!sslStrict, ['--insecure']);
 
     let unicodeDisabled = tl.getBoolInput('unicodeDisabled');
     newman.argIf(unicodeDisabled, ['--disable-unicode']);

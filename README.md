@@ -41,6 +41,18 @@ Execution is now reported with test statistics.
 
 ![alt text](https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task/blob/master/static/images/testresult.png?raw=true "Test result")
 
+### Report - HTML Extra ###
+
+1. Add a [npm task](https://docs.microsoft.com/fr-fr/vsts/build-release/tasks/package/npm) to install Newman-reporter-htmlextra before execution.
+
+1. Set a display name (eg : 'Install Newman-reporter-htmlextra').
+
+1. Set `custom` as command
+
+1. As 'Command and arguments' set `install -g newman-reporter-htmlextra`
+
+1. Select "htmlextra" from the reports list
+
 ### Limitations ###
 
 Following command line options are **not supported**:

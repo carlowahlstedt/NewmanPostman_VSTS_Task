@@ -20,6 +20,7 @@
   "version": "0.0.1",
   "dependencies": {
     "azure-pipelines-task-lib": "^2.7.7",
+    "is-url": "^1.2.4",
     "mocha": "^5.2.0"
   }
 }

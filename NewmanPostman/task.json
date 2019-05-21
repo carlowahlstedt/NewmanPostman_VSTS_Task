@@ -11,9 +11,9 @@
   ],
   "author": "Carlo Wahlstedt",
   "version": {
-    "Major": 3,
+    "Major": 4,
     "Minor": 0,
-    "Patch": 23
+    "Patch": 0
   },
   "demands": [],
   "groups": [
@@ -241,7 +241,7 @@
       "groupName": "ssl"
     },
     {
-      "name": "sslStrict",
+      "name": "sslInsecure",
       "type": "boolean",
       "label": "Disable Strict SSL",
       "helpMarkDown": "Disables strict ssl",

@@ -1,6 +1,7 @@
 ![](https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task/blob/master/static/images/logo.png?raw=true)
 
 ## Newman the cli Companion for Postman ##
+### ** Not an official task **
 
 [![Join the chat at https://gitter.im/NewmanPostman_VSTS_Task/Lobby](https://badges.gitter.im/NewmanPostman_VSTS_Task/Lobby.svg)](https://gitter.im/NewmanPostman_VSTS_Task/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 ![](https://carlo.visualstudio.com/_apis/public/build/definitions/2a4da4b3-df80-44fa-b40f-1f86827ea145/11/badge)
@@ -87,6 +88,7 @@ We thank the following contributor(s) for this extension:
 - [sebcaps](https://github.com/sebcaps)
 - [jeffpriz](https://github.com/jeffpriz)
 - [esbenbach](https://github.com/esbenbach)
+- [Scott-Emberson](https://github.com/Scott-Emberson)
 
 ### Feedback ###
 

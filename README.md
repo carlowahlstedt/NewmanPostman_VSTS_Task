@@ -1,4 +1,4 @@
-![](https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task/blob/master/static/images/logo.png?raw=true =120x120)
+![](https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task/blob/master/static/images/logo.png?raw=true)
 
 ## Newman the cli Companion for Postman ##
 ### ** Not an official task **

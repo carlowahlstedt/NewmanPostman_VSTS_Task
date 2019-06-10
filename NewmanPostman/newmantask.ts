@@ -43,6 +43,8 @@ function GetToolRunner(collectionToRun: string) {
     newman.argIf(typeof reporterHtmlExtraExport != 'undefined' && tl.filePathSupplied('reporterHtmlExtraExport'), ['--reporter-htmlextra-export', reporterHtmlExtraExport]);
     let htmlExtraDarkTheme = tl.getBoolInput('htmlExtraDarkTheme');
     newman.argIf(htmlExtraDarkTheme, ['--reporter-htmlextra-darkTheme']);
+    let htmlExtraLogs = tl.getBoolInput('htmlExtraLogs');
+    newman.argIf(htmlExtraLogs, ['--reporter-htmlextra-logs']);
     let htmlExtraTestPaging = tl.getBoolInput('htmlExtraTestPaging');
     newman.argIf(htmlExtraTestPaging, ['--reporter-htmlextra-testPaging']);
     let htmlExtraReportTitle = tl.getInput('htmlExtraReportTitle');

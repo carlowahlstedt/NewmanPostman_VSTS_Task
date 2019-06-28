@@ -47,6 +47,9 @@ steps:
     verbose: false
     customCommand: 'run compile'
 
+- task: TfxInstaller@1
+  inputs:
+    version: 'v0.7.x'
 
 - task: ms-devlabs.vsts-developer-tools-build-tasks.package-extension-build-task.PackageVSTSExtension@1
   displayName: 'Package Extension: '

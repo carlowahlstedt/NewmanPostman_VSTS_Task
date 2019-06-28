@@ -62,6 +62,12 @@ Following command line options are **not supported**:
 - `--ssl-client-passphrase`
 - None of the [CLI option](https://github.com/postmanlabs/newman#cli-reporter-options)
 
+### Breaking change(s) ###
+
+#### Version 4.x
+
+* The `sslStrict` parameter is renamed as `sslInsecure` in order to better match with the actual behavior of the parameter: setting it to `true` will use newman `--insecure` option to disable the strict SSL verification.
+
 ### Known issue(s) ###
 
 - None

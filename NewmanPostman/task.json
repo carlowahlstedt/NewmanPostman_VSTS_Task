@@ -309,6 +309,13 @@
       "groupName": "report"
     },
     {
+      "name": "htmlExtraLogs",
+      "type": "boolean",
+      "label": "Enable HTML Extra Console Logs",
+      "helpMarkDown": "Set this optional flag to enable additional console logs from the reporter.",
+      "groupName": "report"
+    },
+    {
       "name": "htmlExtraTestPaging",
       "type": "boolean",
       "label": "Enable pagination.",

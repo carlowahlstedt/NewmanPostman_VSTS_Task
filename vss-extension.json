@@ -4,31 +4,20 @@
   "version": "3.0.23",
   "name": "Newman the cli Companion for Postman",
   "scopes": [],
-  "description": "Using Newman, one can effortlessly run and test a Postman Collections directly from the command-line. Now in a task!",
+  "description": "Using Newman, one can effortlessly run and test a Postman Collections directly from the command-line. Now in a task! ** Not an official task **",
   "publisher": "carlowahlstedt",
   "icons": {
-    "default": "static/images/logo.png"
+    "default": "static/images/logo-mark-404.png"
   },
-  "galleryFlags": [
-    "Public"
-  ],
+  "galleryFlags": ["Public"],
   "targets": [
     {
       "id": "Microsoft.VisualStudio.Services"
     }
   ],
-  "demands": [
-    "api-version/3.0"
-  ],
-  "tags": [
-    "Newman",
-    "Postman",
-    "Rest",
-    "Test"
-  ],
-  "categories": [
-    "Build and release"
-  ],
+  "demands": ["api-version/3.0"],
+  "tags": ["Newman", "Postman", "Rest", "Test"],
+  "categories": ["Build and release"],
   "screenshots": [
     {
       "path": "static/images/screenshot.png"
@@ -65,8 +54,8 @@
     "url": "https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task/issues"
   },
   "branding": {
-    "color": "rgb(0, 165, 255)",
-    "theme": "light"
+    "color": "rgb(28, 37, 42)",
+    "theme": "dark"
   },
   "files": [
     {
@@ -76,9 +65,7 @@
   "contributions": [
     {
       "id": "NewmanPostman",
-      "targets": [
-        "ms.vss-distributed-task.tasks"
-      ],
+      "targets": ["ms.vss-distributed-task.tasks"],
       "type": "ms.vss-distributed-task.task",
       "properties": {
         "name": "NewmanPostman"

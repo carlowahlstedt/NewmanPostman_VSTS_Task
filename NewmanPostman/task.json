@@ -5,10 +5,7 @@
   "description": "Using Newman, one can effortlessly run and test a Postman Collections directly from the command-line. Now in a task!",
   "helpMarkDown": "[More Information](https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task/blob/master/README.md)",
   "category": "Test",
-  "visibility": [
-    "Build",
-    "Release"
-  ],
+  "visibility": ["Build", "Release"],
   "author": "Carlo Wahlstedt",
   "version": {
     "Major": 4,
@@ -241,7 +238,7 @@
       "groupName": "ssl"
     },
     {
-      "name": "sslInsecure",
+      "name": "sslStrict",
       "type": "boolean",
       "label": "Disable Strict SSL",
       "helpMarkDown": "Disables strict ssl",

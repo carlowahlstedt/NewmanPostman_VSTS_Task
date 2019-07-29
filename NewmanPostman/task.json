@@ -237,10 +237,10 @@
             "groupName": "ssl"
         },
         {
-            "name": "sslStrict",
+            "name": "sslAllowInsecure",
             "type": "boolean",
-            "label": "Disable Strict SSL",
-            "helpMarkDown": "Disables strict ssl",
+            "label": "Allow insecure certificates",
+            "helpMarkDown": "Disables SSL verification checks and allows self-signed SSL certificates",
             "groupName": "ssl"
         },
         {

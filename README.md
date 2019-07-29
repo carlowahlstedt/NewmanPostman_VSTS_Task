@@ -95,6 +95,7 @@ We thank the following contributor(s) for this extension:
 - [jeffpriz](https://github.com/jeffpriz)
 - [esbenbach](https://github.com/esbenbach)
 - [Scott-Emberson](https://github.com/Scott-Emberson)
+- [afeblot](https://github.com/afeblot)
 
 ### Feedback ###
 

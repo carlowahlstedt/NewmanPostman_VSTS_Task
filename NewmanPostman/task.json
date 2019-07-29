@@ -238,7 +238,7 @@
       "groupName": "ssl"
     },
     {
-      "name": "sslStrict",
+      "name": "sslInsecure",
       "type": "boolean",
       "label": "Disable Strict SSL",
       "helpMarkDown": "Disables strict ssl",

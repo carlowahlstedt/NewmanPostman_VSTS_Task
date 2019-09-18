@@ -140,6 +140,14 @@
       "helpMarkDown": "Global variables to provide to command line in a key=value format. Multiple values can be added."
     },
     {
+      "name": "envVars",
+      "type": "multiline",
+      "label": "Environment Variables",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Environment variables to provide to command line in a key=value format. Multiple values can be added."
+    },
+    {
       "name": "dataFile",
       "type": "filePath",
       "label": "Data",

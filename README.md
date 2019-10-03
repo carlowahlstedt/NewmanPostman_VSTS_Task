@@ -54,6 +54,15 @@ Execution is now reported with test statistics.
 
 1. Select "htmlextra" from the reports list
 
+#### Note About Failed Tests
+
+If your tests are failing, then you will not see the results in the test tab. You can [read more about it here](https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task/issues/10#issuecomment-373421482), but to resolve that you can:
+
+1. On the task for the Postman tests mark the checkbox for Continue on Error.   
+2. Add a Publish Test Results task and have it search for the following test file **\newman-*.xml.
+
+Realize that this will then NOT fail your pipeline because your tests failed. There is currently no documented way around this.
+
 ### Limitations ###
 
 Following command line options are **not supported**:

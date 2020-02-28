@@ -94,7 +94,7 @@ function GetToolRunner(collectionToRun: string) {
     newman.argIf(typeof folder != 'undefined' && folder, ['--folder', folder]);
     let globalVars: string[] = tl.getDelimitedInput('globalVars', '\n');
     globalVars.forEach(globVar => {
-        newman.arg(['--global-var', globVar]);
+        newman.arg(['--global-var', globVar.trim()]);
     });
     let ignoreRedirect = tl.getBoolInput('ignoreRedirect');
     newman.argIf(ignoreRedirect, ['--ignore-redirects']);

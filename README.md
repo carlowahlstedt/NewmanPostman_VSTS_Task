@@ -105,6 +105,8 @@ We thank the following contributor(s) for this extension:
 - [esbenbach](https://github.com/esbenbach)
 - [Scott-Emberson](https://github.com/Scott-Emberson)
 - [afeblot](https://github.com/afeblot)
+- [okcomputer-programmer](https://github.com/okcomputer-programmer)
+- [saekiAtBeng](https://github.com/saekiAtBeng)
 
 ### Feedback ###
 

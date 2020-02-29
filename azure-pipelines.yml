@@ -21,12 +21,12 @@ steps:
     customCommand: 'run install-task-lib'
 
 
-- task: Npm@1
-  displayName: 'npm test'
-  inputs:
-    command: custom
-    verbose: false
-    customCommand: 'run test'
+# - task: Npm@1
+#   displayName: 'npm test'
+#   inputs:
+#     command: custom
+#     verbose: false
+#     customCommand: 'run test'
 
 - task: PublishTestResults@2
   inputs:

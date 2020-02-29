@@ -98,7 +98,7 @@ function GetToolRunner(collectionToRun: string) {
     });
     let envVars: string[] = tl.getDelimitedInput('envVars', '\n');
     envVars.forEach(envVar => {
-        newman.arg(['--env-var', envVar]);
+        newman.arg(['--env-var', envVar.trim()]);
     });
     let ignoreRedirect = tl.getBoolInput('ignoreRedirect');
     newman.argIf(ignoreRedirect, ['--ignore-redirects']);

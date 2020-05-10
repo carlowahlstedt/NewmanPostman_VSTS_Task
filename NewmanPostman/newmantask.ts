@@ -90,8 +90,15 @@ function GetToolRunner(collectionToRun: string) {
     newman.argIf(typeof globalVariable != 'undefined' && tl.filePathSupplied('globalVariables'), ['--globals', globalVariable]);
     let dataFile = tl.getPathInput('dataFile', false, true);
     newman.argIf(typeof globalVariable != 'undefined' && tl.filePathSupplied('dataFile'), ['--iteration-data', dataFile]);
+
     let folder = tl.getInput('folder');
-    newman.argIf(typeof folder != 'undefined' && folder, ['--folder', folder]);
+    if(typeof folder != 'undefined' && folder) {
+        const splitted = folder.split(","); 
+        splitted.forEach(folder => {
+            newman.arg(['--folder', folder.trim()]);
+        });
+    }
+
     let globalVars: string[] = tl.getDelimitedInput('globalVars', '\n');
     globalVars.forEach(globVar => {
         newman.arg(['--global-var', globVar.trim()]);

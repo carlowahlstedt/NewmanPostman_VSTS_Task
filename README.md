@@ -23,7 +23,7 @@ You can include this task in a build or release pipeline. Here's a quick 'How To
 
 1. Set `custom` as command
 
-1. As 'Command and arguments' set `install newman -g`
+1. As 'Command and arguments' set `install newman -g`. Note that if the task version doesn't yet support the latest Newman version, an older version can be used, e.g. `install newman@4.6.1 -g`.
 
 ### Execution
 

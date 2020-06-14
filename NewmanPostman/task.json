@@ -90,7 +90,7 @@
       "label": "Folder",
       "defaultValue": "",
       "required": false,
-      "helpMarkDown": "Run requests within a particular folder in a collection"
+      "helpMarkDown": "Run requests within a particular folder in a collection. To use multiple folders, separate with commas."
     },
     {
       "name": "environmentSourceType",

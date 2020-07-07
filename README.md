@@ -9,7 +9,7 @@
 ![](https://carlo.vsrm.visualstudio.com/_apis/public/Release/badge/2a4da4b3-df80-44fa-b40f-1f86827ea145/1/1)
 [![Badge for version for Visual Studio Code extension naereen.makefiles-support-for-vscode](https://vsmarketplacebadge.apphb.com/version/carlowahlstedt.NewmanPostman.svg)](https://marketplace.visualstudio.com/items?itemName=carlowahlstedt.NewmanPostman)
 
-Using [Newman](https://www.getpostman.com/docs/postman/collection_runs/command_line_integration_with_newman), one can effortlessly run and test a Postman Collections directly from the command-line. Now in a task!
+Using [Newman](https://learning.postman.com/docs/running-collections/using-newman-cli/command-line-integration-with-newman/), one can effortlessly run and test a Postman Collections directly from the command-line. Now in a task!
 
 ## How to
 
@@ -89,7 +89,7 @@ The [source](https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task/) to this
 
 [View Notices](https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task/blob/master/ThirdPartyNotices.txt) for third party software included in this extension.
 
-If you use a [Postman Enterprise](https://www.getpostman.com/enterprise) account workspace check out [this task](https://marketplace.visualstudio.com/items?itemName=OneLuckiDev.getPostmanJSON) to use in a pipeline. Here's [the post explaining it](http://blog.oneluckidev.com/post/using-postman-and-newman-in-your-azure-devops-pipeline) from the tasks author.
+If you use a [Postman Enterprise](https://www.postman.com/postman-enterprise/) account workspace check out [this task](https://marketplace.visualstudio.com/items?itemName=OneLuckiDev.getPostmanJSON) to use in a pipeline. Here's [the post explaining it](http://blog.oneluckidev.com/post/using-postman-and-newman-in-your-azure-devops-pipeline) from the tasks author.
 
 ### Minimum supported environments
 

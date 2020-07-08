@@ -109,6 +109,7 @@ We thank the following contributor(s) for this extension:
 - [okcomputer-programmer](https://github.com/okcomputer-programmer)
 - [saekiAtBeng](https://github.com/saekiAtBeng)
 - [Skiepp](https://github.com/Skiepp)
+- [ch264](https://github.com/ch264)
 
 ### Feedback
 

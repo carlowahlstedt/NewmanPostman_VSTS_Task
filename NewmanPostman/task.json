@@ -43,6 +43,11 @@
       "name": "export",
       "displayName": "Export Options",
       "isExpanded": false
+    },
+    {
+      "name": "advanced",
+      "displayName": "Advanced Options",
+      "isExpanded": false
     }
   ],
   "inputs": [
@@ -414,6 +419,13 @@
       "required": false,
       "helpMarkDown": "Specify a path where the collection file will be output before completing a run",
       "groupName": "export"
+    },
+    {
+      "name": "verbose",
+      "type": "boolean",
+      "label": "Show detailed information",
+      "helpMarkDown": "Show detailed information of collection run and each request sent.",
+      "groupName": "advanced"
     }
   ],
   "instanceNameFormat": "Newman - Postman",

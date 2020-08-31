@@ -55,6 +55,9 @@ function GetToolRunner(collectionToRun: string) {
     let reporterJUnitExport = tl.getPathInput('reporterJUnitExport', false, false);
     newman.argIf(typeof reporterJUnitExport != 'undefined' && tl.filePathSupplied('reporterJUnitExport'), ['--reporter-junit-export', reporterJUnitExport]);
 
+    let verbose = tl.getBoolInput('verbose');
+    newman.argIf(verbose, ['--verbose']);
+
     let reporterList = tl.getInput('reporters');
     let customReporter = tl.getInput('customReporter');
     let newReporterList = "";
@@ -93,7 +96,7 @@ function GetToolRunner(collectionToRun: string) {
 
     let folder = tl.getInput('folder');
     if(typeof folder != 'undefined' && folder) {
-        const splitted = folder.split(","); 
+        const splitted = folder.split(",");
         splitted.forEach(folder => {
             newman.arg(['--folder', folder.trim()]);
         });

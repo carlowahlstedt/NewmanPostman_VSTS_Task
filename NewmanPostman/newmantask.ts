@@ -1,3 +1,4 @@
+import fs = require('fs');
 import path = require('path');
 import tl = require('azure-pipelines-task-lib/task');
 import trm = require('azure-pipelines-task-lib/toolrunner');
@@ -30,17 +31,18 @@ function GetToolRunner(collectionToRun: string) {
     let forceNoColor = tl.getBoolInput('forceNoColor');
     newman.argIf(forceNoColor, ['--no-color']);
 
+    let useCollectionNameAsFilename = tl.getBoolInput('useCollectionNameAsFilename');
+    let collectionName = useCollectionNameAsFilename ? getCollectionName(collectionToRun) : '';
+
     let reporterHtmlTemplate = tl.getPathInput('reporterHtmlTemplate', false, true);
     newman.argIf(typeof reporterHtmlTemplate != 'undefined' && tl.filePathSupplied('reporterHtmlTemplate'), ['--reporter-html-template', reporterHtmlTemplate]);
-    let reporterHtmlExport = tl.getPathInput('reporterHtmlExport');
-    newman.argIf(typeof reporterHtmlExport != 'undefined' && tl.filePathSupplied('reporterHtmlExport'), ['--reporter-html-export', reporterHtmlExport]);
+    addReporterExportOption(newman, 'reporterHtmlExport', '--reporter-html-export', '.html', collectionName, 'html');
     /**
     * Items for HTML extra https://www.npmjs.com/package/newman-reporter-htmlextra.
     */
     let reporterHtmlExtraTemplate = tl.getPathInput('reporterHtmlExtraTemplate', false, true);
     newman.argIf(typeof reporterHtmlExtraTemplate != 'undefined' && tl.filePathSupplied('reporterHtmlExtraTemplate'), ['--reporter-htmlextra-template ', reporterHtmlTemplate]);
-    let reporterHtmlExtraExport = tl.getPathInput('reporterHtmlExtraExport');
-    newman.argIf(typeof reporterHtmlExtraExport != 'undefined' && tl.filePathSupplied('reporterHtmlExtraExport'), ['--reporter-htmlextra-export', reporterHtmlExtraExport]);
+    addReporterExportOption(newman, 'reporterHtmlExtraExport', '--reporter-htmlextra-export', '.html', collectionName, 'htmlextra');
     let htmlExtraDarkTheme = tl.getBoolInput('htmlExtraDarkTheme');
     newman.argIf(htmlExtraDarkTheme, ['--reporter-htmlextra-darkTheme']);
     let htmlExtraLogs = tl.getBoolInput('htmlExtraLogs');
@@ -50,10 +52,8 @@ function GetToolRunner(collectionToRun: string) {
     let htmlExtraReportTitle = tl.getInput('htmlExtraReportTitle');
     newman.argIf(typeof htmlExtraReportTitle != 'undefined' && htmlExtraReportTitle, ['--reporter-htmlextra-title', htmlExtraReportTitle]);
 
-    let reporterJsonExport = tl.getPathInput('reporterJsonExport');
-    newman.argIf(typeof reporterJsonExport != 'undefined' && tl.filePathSupplied('reporterJsonExport'), ['--reporter-json-export', reporterJsonExport]);
-    let reporterJUnitExport = tl.getPathInput('reporterJUnitExport', false, false);
-    newman.argIf(typeof reporterJUnitExport != 'undefined' && tl.filePathSupplied('reporterJUnitExport'), ['--reporter-junit-export', reporterJUnitExport]);
+    addReporterExportOption(newman, 'reporterJsonExport', '--reporter-json-export', '.json', collectionName, 'json');
+    addReporterExportOption(newman, 'reporterJUnitExport', '--reporter-junit-export', '.xml', collectionName, 'junit');
 
     let verbose = tl.getBoolInput('verbose');
     newman.argIf(verbose, ['--verbose']);
@@ -95,7 +95,7 @@ function GetToolRunner(collectionToRun: string) {
     newman.argIf(typeof globalVariable != 'undefined' && tl.filePathSupplied('dataFile'), ['--iteration-data', dataFile]);
 
     let folder = tl.getInput('folder');
-    if(typeof folder != 'undefined' && folder) {
+    if (typeof folder != 'undefined' && folder) {
         const splitted = folder.split(",");
         splitted.forEach(folder => {
             newman.arg(['--folder', folder.trim()]);
@@ -137,6 +137,50 @@ function GetToolRunner(collectionToRun: string) {
         console.info('No environment set, no need to add it in argument');
     }
     return newman;
+}
+
+function addReporterExportOption(newman: any, inputName: string, newmanArg: string, fileExt: string, collectionName: string, reporter: string) {
+    let reporterExport: string = tl.getPathInput(inputName);
+    let base = '';
+    if (typeof reporterExport != 'undefined' && tl.filePathSupplied(inputName)) {
+        if (collectionName == '' || reporterExport.toUpperCase().endsWith(fileExt.toUpperCase())) {
+            // We either
+            //   - do not have collection name, or
+            //   - provided value already has extension - assume user filled in explicit filename she wants.
+            // So just use provided value.
+            newman.arg([newmanArg, reporterExport]);
+            return;
+        } else {
+            // Otherwise use the value as base directory.
+            base = reporterExport;
+        }
+    }
+    if (collectionName != '') {
+        if (base == '') {
+            // Explicit export value for the reporter was not provided, but we have collection name.
+            // So just use default output directory and add filename based on collection name.
+            base = 'newman/';
+        }
+        if (!base.endsWith('/') && !base.endsWith('\\')) {
+            base.concat('/');
+        }
+        newman.arg([newmanArg, base.concat(collectionName, '-', reporter, fileExt)]);
+    }
+}
+
+function getCollectionName(collectionFile: string): string {
+    if (!tl.exist(collectionFile)) {
+        return '';
+    }
+    let postmanCollection = JSON.parse(fs.readFileSync(collectionFile, 'utf8'));
+    let name: string = postmanCollection.info.name;
+    if (name == '') {
+        // Get just name of the file without extension and without path.
+        let nameStart = Math.max(collectionFile.lastIndexOf('/'), collectionFile.lastIndexOf('\\'));
+        name = collectionFile.substring(nameStart + 1, collectionFile.lastIndexOf('.'));
+    }
+    let invalidChars = /[\"<>|:\*\?\\\/\x00\x01\x02\x03\x04\x05\x06\x07\x08\x0B\x0C\x0E\x0F\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1A\x1B\x1C\x1D\x1E\x1F]+/gi;
+    return name.replace(invalidChars, '-');
 }
 
 async function run() {

@@ -181,12 +181,17 @@
       "groupName": "output"
     },
     {
-      "name": "forceNoColor",
-      "type": "boolean",
-      "label": "No color",
-      "defaultValue": false,
+      "name": "color",
+      "type": "radio",
+      "label": "Colored Output",
+      "defaultValue": "auto",
+      "options": {
+        "auto": "Auto",
+        "on": "On",
+        "off": "Off"
+      },
       "required": false,
-      "helpMarkDown": "Turn off usage of color in terminal output.",
+      "helpMarkDown": "Enable or disable colored CLI output.",
       "groupName": "output"
     },
     {

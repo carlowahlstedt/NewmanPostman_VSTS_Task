@@ -27,8 +27,8 @@ function GetToolRunner(collectionToRun: string) {
     let unicodeDisabled = tl.getBoolInput('unicodeDisabled');
     newman.argIf(unicodeDisabled, ['--disable-unicode']);
 
-    let forceNoColor = tl.getBoolInput('forceNoColor');
-    newman.argIf(forceNoColor, ['--no-color']);
+    let color = tl.getInput('color');
+    newman.argIf((typeof color != 'undefined') && ((color == 'on') || (color == 'off')), ['--color', color]);
 
     let reporterHtmlTemplate = tl.getPathInput('reporterHtmlTemplate', false, true);
     newman.argIf(typeof reporterHtmlTemplate != 'undefined' && tl.filePathSupplied('reporterHtmlTemplate'), ['--reporter-html-template', reporterHtmlTemplate]);
@@ -93,7 +93,7 @@ function GetToolRunner(collectionToRun: string) {
 
     let folder = tl.getInput('folder');
     if(typeof folder != 'undefined' && folder) {
-        const splitted = folder.split(","); 
+        const splitted = folder.split(",");
         splitted.forEach(folder => {
             newman.arg(['--folder', folder.trim()]);
         });

@@ -69,7 +69,6 @@ Realize that this will then NOT fail your pipeline because your tests failed. Th
 Following command line options are **not supported**:
 
 - `-x`,`--suppress-exit-code`
-- `-color`
 - `--ssl-client-passphrase`
 - None of the [CLI option](https://github.com/postmanlabs/newman#cli-reporter-options)
 

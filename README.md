@@ -110,6 +110,7 @@ We thank the following contributor(s) for this extension:
 - [saekiAtBeng](https://github.com/saekiAtBeng)
 - [Skiepp](https://github.com/Skiepp)
 - [ch264](https://github.com/ch264)
+- [satano](https://github.com/satano)
 
 ### Feedback
 

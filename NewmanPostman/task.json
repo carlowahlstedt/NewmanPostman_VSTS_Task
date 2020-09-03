@@ -276,6 +276,15 @@
       "groupName": "report"
     },
     {
+      "name": "useCollectionNameAsFilename",
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "label": "Use collection name as filename",
+      "helpMarkDown": "Output files from reporters will have the same name as test collection.",
+      "groupName": "report"
+    },
+    {
       "name": "reporterHtmlTemplate",
       "type": "filePath",
       "label": "Reporter Html Template",

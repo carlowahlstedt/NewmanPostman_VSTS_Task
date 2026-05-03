@@ -1,9 +1,8 @@
 resources:
 - repo: self
   clean: true
-queue:
-  name: Hosted VS2017
-  demands: npm
+pool:
+  vmImage: 'windows-latest'
 
 #Your build pipeline references an undefined variable named ‘Extension.OutputPath’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
 steps:
@@ -21,12 +20,12 @@ steps:
     customCommand: 'run install-task-lib'
 
 
-# - task: Npm@1
-#   displayName: 'npm test'
-#   inputs:
-#     command: custom
-#     verbose: false
-#     customCommand: 'run test'
+- task: Npm@1
+  displayName: 'npm test'
+  inputs:
+    command: custom
+    verbose: false
+    customCommand: 'run test'
 
 - task: PublishTestResults@2
   inputs:

@@ -49,7 +49,7 @@ Tests use `azure-pipelines-task-lib/mock-test` and `mock-run`, which is the stan
 
 ## CI
 
-`azure-pipelines.yml` runs npm install, `install-task-lib`, `compile`, packages the `.vsix` via `PackageVSTSExtension@1`, and publishes the artifact. The `npm test` step is **commented out**, so CI does not currently gate on the mocha suite — run it locally before sending changes.
+`azure-pipelines.yml` runs npm install, `install-task-lib`, `npm test`, `compile`, packages the `.vsix` via `PackageVSTSExtension@1`, and publishes the artifact on `master`. The pipeline runs on `pool: { vmImage: 'windows-latest' }`. `PublishTestResults@2` looks for `**/TEST-*.xml` but the mocha suite doesn't emit JUnit, so that step is currently a no-op.
 
 ## Pinned old toolchain
 

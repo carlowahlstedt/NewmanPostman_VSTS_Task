@@ -1,64 +1,106 @@
 resources:
 - repo: self
   clean: true
-pool:
-  vmImage: 'ubuntu-latest'
 
-#Your build pipeline references an undefined variable named ‘Extension.OutputPath’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
-steps:
-- task: Npm@1
-  displayName: 'npm install'
-  inputs:
-    verbose: false
+stages:
+- stage: Build
+  displayName: Build and Test
+  jobs:
+  - job: Build
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: Npm@1
+      displayName: 'npm install'
+      inputs:
+        verbose: false
 
+    - task: Npm@1
+      displayName: 'npm install-task-lib'
+      inputs:
+        command: custom
+        verbose: false
+        customCommand: 'run install-task-lib'
 
-- task: Npm@1
-  displayName: 'npm install-task-lib'
-  inputs:
-    command: custom
-    verbose: false
-    customCommand: 'run install-task-lib'
+    - task: Npm@1
+      displayName: 'npm test'
+      inputs:
+        command: custom
+        verbose: false
+        customCommand: 'run test'
 
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: '**/TEST-*.xml'
 
-- task: Npm@1
-  displayName: 'npm test'
-  inputs:
-    command: custom
-    verbose: false
-    customCommand: 'run test'
+    - task: Npm@1
+      displayName: 'npm compile'
+      inputs:
+        command: custom
+        verbose: false
+        customCommand: 'run compile'
 
-- task: PublishTestResults@2
-  inputs:
-    testResultsFormat: 'JUnit' # Options: JUnit, NUnit, VSTest, xUnit
-    testResultsFiles: '**/TEST-*.xml' 
-    #searchFolder: '$(System.DefaultWorkingDirectory)' # Optional
-    #mergeTestResults: false # Optional
-    #failTaskOnFailedTests: false # Optional
-    #testRunTitle: # Optional
-    #buildPlatform: # Optional
-    #buildConfiguration: # Optional
-    #publishRunAttachments: true # Optional
+    - task: TfxInstaller@1
+      inputs:
+        version: 'v0.17.x'
 
-- task: Npm@1
-  displayName: 'npm compile'
-  inputs:
-    command: custom
-    verbose: false
-    customCommand: 'run compile'
+    - task: ms-devlabs.vsts-developer-tools-build-tasks.package-extension-build-task.PackageVSTSExtension@1
+      displayName: 'Package Extension'
+      inputs:
+        outputPath: 'drop/output.vsix'
 
-- task: TfxInstaller@1
-  inputs:
-    version: 'v0.17.x'
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: drop'
+      condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+      inputs:
+        PathtoPublish: '$(Extension.OutputPath)'
+        ArtifactName: drop
 
-- task: ms-devlabs.vsts-developer-tools-build-tasks.package-extension-build-task.PackageVSTSExtension@1
-  displayName: 'Package Extension: '
-  inputs:
-    outputPath: 'drop/output.vsix'
+- stage: Publish
+  displayName: Publish to Marketplace
+  dependsOn: Build
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  jobs:
+  - deployment: PublishMarketplace
+    displayName: Publish .vsix and tag GitHub release
+    pool:
+      vmImage: 'ubuntu-latest'
+    environment: marketplace
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: ms-devlabs.vsts-developer-tools-build-tasks.tfx-installer-build-task.TfxInstaller@3
+            displayName: 'Use Node CLI for Azure DevOps (tfx-cli): v0.17.x'
+            inputs:
+              version: 'v0.17.x'
 
+          - task: ms-devlabs.vsts-developer-tools-build-tasks.extension-version-build-task.ExtensionVersion@1
+            displayName: 'Query Extension Version: carlowahlstedt.NewmanPostman'
+            inputs:
+              connectedServiceName: 'carlowahlstedt-VSTS'
+              publisherId: carlowahlstedt
+              extensionId: NewmanPostman
+              versionAction: Patch
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: drop'
-  inputs:
-    PathtoPublish: '$(Extension.OutputPath)'
-    condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+          - task: ms-devlabs.vsts-developer-tools-build-tasks.publish-extension-build-task.PublishExtension@1
+            displayName: 'Publish Extension'
+            inputs:
+              connectedServiceName: 'carlowahlstedt-VSTS'
+              fileType: vsix
+              vsixFile: '$(Pipeline.Workspace)/drop/output.vsix'
+              extensionVersion: '$(Extension.Version)'
 
+          - task: GitHubRelease@1
+            displayName: 'Create GitHub Release'
+            inputs:
+              gitHubConnection: 'GitHub connection 1'
+              repositoryName: 'carlowahlstedt/NewmanPostman_VSTS_Task'
+              action: Create
+              tagSource: userSpecifiedTag
+              tag: 'v$(Extension.Version)'
+              releaseNotesSource: filePath
+              releaseNotesFilePath: CHANGELOG.md
+              assets: |
+                $(Pipeline.Workspace)/drop/*

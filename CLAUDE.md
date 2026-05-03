@@ -47,9 +47,9 @@ Tests use `azure-pipelines-task-lib/mock-test` and `mock-run`, which is the stan
 - Each `Tests/<scenario>.ts` (e.g. `folderAsSource.ts`, `useEnvironmentURL.ts`) is a standalone script that builds a `TaskMockRunner` for `NewmanPostman/newmantask.js`, sets inputs via `runner.setInput(...)`, registers mock answers for `which`/`stats`/`find`/`exec`/`checkPath`, optionally overrides `runMockExport('stats', ...)`, and calls `runner.run()`.
 - When you add a new task input or change CLI translation logic in `newmantask.ts`, update or add a `Tests/<scenario>.ts` file **and** wire a corresponding `it(...)` block into `TestSuite.ts` — the suite does not auto-discover scenario files.
 
-## CI
+## CI / CD
 
-`azure-pipelines.yml` runs npm install, `install-task-lib`, `npm test`, `compile`, packages the `.vsix` via `PackageVSTSExtension@1`, and publishes the artifact on `master`. The pipeline runs on `pool: { vmImage: 'ubuntu-latest' }` — the test mocks hardcode Unix-style paths in their `answers.exec[...]` keys (e.g. `n run /srcDir/collection1.json` in `Tests/TestSuite.ts`), so the suite only passes on Linux. `PublishTestResults@2` looks for `**/TEST-*.xml` but the mocha suite doesn't emit JUnit, so that step is currently a no-op.
+`azure-pipelines.yml` is a multi-stage pipeline. The **Build** stage runs npm install, `install-task-lib`, `npm test`, `compile`, packages the `.vsix` via `PackageVSTSExtension@1`, and publishes the artifact named `drop` on `master`. The **Publish** stage runs only on `master` and only after Build succeeds; it deploys to the `marketplace` ADO environment (gate manual approval there), runs `ExtensionVersion@1` + `PublishExtension@1` against the `carlowahlstedt-VSTS` service connection, then `GitHubRelease@1` against the `GitHub connection 1` service connection to tag `v$(Extension.Version)` and attach the `.vsix`. The pipeline runs on `pool: { vmImage: 'ubuntu-latest' }` — the test mocks hardcode Unix-style paths in their `answers.exec[...]` keys (e.g. `n run /srcDir/collection1.json` in `Tests/TestSuite.ts`), so the suite only passes on Linux. `PublishTestResults@2` looks for `**/TEST-*.xml` but the mocha suite doesn't emit JUnit, so that step is currently a no-op.
 
 ## Toolchain
 

@@ -183,6 +183,14 @@ describe('Normal behavior', function () {
         // console.error(runner.stdout);
         assert(runner.succeeded, 'Should be in success');
     })
+    it('htmlExtra template path is forwarded to newman with the correct flag', async () => {
+        this.timeout(1000);
+        let testPath = path.join(__dirname, 'htmlExtraTemplateTest.js');
+        let runner: mocktest.MockTestRunner = new mocktest.MockTestRunner(testPath);
+        await runner.runAsync();
+        assert(runner.succeeded, 'Should be in success');
+        assert(runner.stdOutContained('--reporter-htmlextra-template ' + path.normalize('/srcDir/htmlExtra.hbs')), 'htmlextra template is added as arg');
+    })
 });
 
 

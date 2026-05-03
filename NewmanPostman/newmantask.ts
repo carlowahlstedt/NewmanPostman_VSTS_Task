@@ -38,7 +38,7 @@ function GetToolRunner(collectionToRun: string) {
     * Items for HTML extra https://www.npmjs.com/package/newman-reporter-htmlextra.
     */
     let reporterHtmlExtraTemplate = tl.getPathInput('reporterHtmlExtraTemplate', false, true);
-    newman.argIf(typeof reporterHtmlExtraTemplate != 'undefined' && tl.filePathSupplied('reporterHtmlExtraTemplate'), ['--reporter-htmlextra-template ', reporterHtmlTemplate]);
+    newman.argIf(typeof reporterHtmlExtraTemplate != 'undefined' && tl.filePathSupplied('reporterHtmlExtraTemplate'), ['--reporter-htmlextra-template', reporterHtmlExtraTemplate]);
     let reporterHtmlExtraExport = tl.getPathInput('reporterHtmlExtraExport');
     newman.argIf(typeof reporterHtmlExtraExport != 'undefined' && tl.filePathSupplied('reporterHtmlExtraExport'), ['--reporter-htmlextra-export', reporterHtmlExtraExport]);
     let htmlExtraDarkTheme = tl.getBoolInput('htmlExtraDarkTheme');

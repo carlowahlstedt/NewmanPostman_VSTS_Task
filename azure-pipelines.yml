@@ -2,7 +2,7 @@ resources:
 - repo: self
   clean: true
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-latest'
 
 #Your build pipeline references an undefined variable named ‘Extension.OutputPath’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
 steps:
@@ -53,7 +53,7 @@ steps:
 - task: ms-devlabs.vsts-developer-tools-build-tasks.package-extension-build-task.PackageVSTSExtension@1
   displayName: 'Package Extension: '
   inputs:
-    outputPath: 'drop\output.vsix'
+    outputPath: 'drop/output.vsix'
 
 
 - task: PublishBuildArtifacts@1

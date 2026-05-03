@@ -49,7 +49,7 @@ Tests use `azure-pipelines-task-lib/mock-test` and `mock-run`, which is the stan
 
 ## CI
 
-`azure-pipelines.yml` runs npm install, `install-task-lib`, `npm test`, `compile`, packages the `.vsix` via `PackageVSTSExtension@1`, and publishes the artifact on `master`. The pipeline runs on `pool: { vmImage: 'windows-latest' }`. `PublishTestResults@2` looks for `**/TEST-*.xml` but the mocha suite doesn't emit JUnit, so that step is currently a no-op.
+`azure-pipelines.yml` runs npm install, `install-task-lib`, `npm test`, `compile`, packages the `.vsix` via `PackageVSTSExtension@1`, and publishes the artifact on `master`. The pipeline runs on `pool: { vmImage: 'ubuntu-latest' }` — the test mocks hardcode Unix-style paths in their `answers.exec[...]` keys (e.g. `n run /srcDir/collection1.json` in `Tests/TestSuite.ts`), so the suite only passes on Linux. `PublishTestResults@2` looks for `**/TEST-*.xml` but the mocha suite doesn't emit JUnit, so that step is currently a no-op.
 
 ## Pinned old toolchain
 

@@ -35,7 +35,7 @@ describe('Error handling', function () {
         runner.run();
         // console.error(runner.stdout);
         assert(runner.failed, 'Should be in Failed status');
-        assert(runner.stdOutContained('Input required: environmentFile'), 'Empty environment file should raise an error if envt type is \'file\'');
+        assert(runner.stdOutContained('Input required: environment'), 'Empty environment file should raise an error if envt type is \'file\'');
         done();
     });
     it('Error if environement is set as a URL and none set', (done: MochaDone) => {

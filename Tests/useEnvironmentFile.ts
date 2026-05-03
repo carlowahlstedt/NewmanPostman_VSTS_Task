@@ -11,7 +11,7 @@ let environment = path.normalize('/srcDir/environment.json');
 runner.setInput("collectionSourceType", 'file');
 runner.setInput("environmentSourceType", 'file');
 runner.setInput("collectionFileSource", filePath);
-runner.setInput("environmentFile", environment);
+runner.setInput("environment", environment);
 
 
 let answers = <mockanswer.TaskLibAnswers>{

@@ -10,17 +10,17 @@
     "test": "npx mocha Tests//TestSuite.js"
   },
   "devDependencies": {
-    "@types/mocha": "^5.2.5",
-    "@types/node": "^8.0.7",
-    "tfx-cli": "^0.7.8",
-    "typescript": "2.3.4"
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^20.17.10",
+    "tfx-cli": "^0.17.0",
+    "typescript": "^5.7.2"
   },
   "name": "vstsexttask",
   "private": true,
   "version": "0.0.1",
   "dependencies": {
-    "azure-pipelines-task-lib": "^2.8.0",
+    "azure-pipelines-task-lib": "^4.17.3",
     "is-url": "^1.2.4",
-    "mocha": "^5.2.0"
+    "mocha": "^10.8.2"
   }
 }

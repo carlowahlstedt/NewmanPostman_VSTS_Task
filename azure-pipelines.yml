@@ -48,13 +48,13 @@ stages:
     - task: ms-devlabs.vsts-developer-tools-build-tasks.package-extension-build-task.PackageVSTSExtension@5
       displayName: 'Package Extension'
       inputs:
-        outputPath: 'drop/output.vsix'
+        outputPath: '$(Build.ArtifactStagingDirectory)/output.vsix'
 
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: drop'
       condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
       inputs:
-        PathtoPublish: '$(Extension.OutputPath)'
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/output.vsix'
         ArtifactName: drop
 
 - stage: Publish

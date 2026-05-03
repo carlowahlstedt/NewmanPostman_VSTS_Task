@@ -13,7 +13,7 @@ runner.setInput("collectionSourceType", 'file');
 runner.setInput("environmentSourceType", 'file');
 runner.setInput("collectionFileSource", filePath);
 runner.setInput("Contents", path.normalize("**/collection.json"));
-runner.setInput("environmentFile", environment);
+runner.setInput("environment", environment);
 runner.setInput("reporters", 'cli,json');
 
 let answers = <mockanswer.TaskLibAnswers>{

@@ -19,7 +19,7 @@
   "private": true,
   "version": "0.0.1",
   "dependencies": {
-    "azure-pipelines-task-lib": "^4.17.3",
+    "azure-pipelines-task-lib": "^5.2.10",
     "is-url": "^1.2.4",
     "mocha": "^10.8.2"
   }

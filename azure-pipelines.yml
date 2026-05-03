@@ -79,6 +79,7 @@ stages:
           - task: ms-devlabs.vsts-developer-tools-build-tasks.extension-version-build-task.ExtensionVersion@5
             displayName: 'Query Extension Version: carlowahlstedt.NewmanPostman'
             inputs:
+              connectTo: 'VsTeam'
               connectedServiceName: 'carlowahlstedt-VSTS'
               publisherId: carlowahlstedt
               extensionId: NewmanPostman
@@ -87,6 +88,7 @@ stages:
           - task: ms-devlabs.vsts-developer-tools-build-tasks.publish-extension-build-task.PublishExtension@5
             displayName: 'Publish Extension'
             inputs:
+              connectTo: 'VsTeam'
               connectedServiceName: 'carlowahlstedt-VSTS'
               fileType: vsix
               vsixFile: '$(Pipeline.Workspace)/drop/output.vsix'

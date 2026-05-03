@@ -9,7 +9,7 @@
   "author": "Carlo Wahlstedt",
   "version": {
     "Major": 4,
-    "Minor": 0,
+    "Minor": 1,
     "Patch": 0
   },
   "demands": [],
@@ -430,7 +430,7 @@
   ],
   "instanceNameFormat": "Newman - Postman",
   "execution": {
-    "Node": {
+    "Node20_1": {
       "target": "newmantask.js"
     }
   }

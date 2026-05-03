@@ -41,11 +41,11 @@ stages:
         verbose: false
         customCommand: 'run compile'
 
-    - task: TfxInstaller@1
+    - task: TfxInstaller@5
       inputs:
         version: 'v0.17.x'
 
-    - task: ms-devlabs.vsts-developer-tools-build-tasks.package-extension-build-task.PackageVSTSExtension@1
+    - task: ms-devlabs.vsts-developer-tools-build-tasks.package-extension-build-task.PackageVSTSExtension@5
       displayName: 'Package Extension'
       inputs:
         outputPath: 'drop/output.vsix'
@@ -71,12 +71,12 @@ stages:
       runOnce:
         deploy:
           steps:
-          - task: ms-devlabs.vsts-developer-tools-build-tasks.tfx-installer-build-task.TfxInstaller@3
+          - task: ms-devlabs.vsts-developer-tools-build-tasks.tfx-installer-build-task.TfxInstaller@5
             displayName: 'Use Node CLI for Azure DevOps (tfx-cli): v0.17.x'
             inputs:
               version: 'v0.17.x'
 
-          - task: ms-devlabs.vsts-developer-tools-build-tasks.extension-version-build-task.ExtensionVersion@1
+          - task: ms-devlabs.vsts-developer-tools-build-tasks.extension-version-build-task.ExtensionVersion@5
             displayName: 'Query Extension Version: carlowahlstedt.NewmanPostman'
             inputs:
               connectedServiceName: 'carlowahlstedt-VSTS'
@@ -84,7 +84,7 @@ stages:
               extensionId: NewmanPostman
               versionAction: Patch
 
-          - task: ms-devlabs.vsts-developer-tools-build-tasks.publish-extension-build-task.PublishExtension@1
+          - task: ms-devlabs.vsts-developer-tools-build-tasks.publish-extension-build-task.PublishExtension@5
             displayName: 'Publish Extension'
             inputs:
               connectedServiceName: 'carlowahlstedt-VSTS'

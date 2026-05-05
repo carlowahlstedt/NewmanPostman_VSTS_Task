@@ -71,6 +71,8 @@ stages:
       runOnce:
         deploy:
           steps:
+          - checkout: self
+
           - task: ms-devlabs.vsts-developer-tools-build-tasks.tfx-installer-build-task.TfxInstaller@5
             displayName: 'Use Node CLI for Azure DevOps (tfx-cli): v0.17.x'
             inputs:

@@ -429,9 +429,15 @@
     }
   ],
   "instanceNameFormat": "Newman - Postman",
+  "minimumAgentVersion": "4.265.1",
   "execution": {
     "Node20_1": {
-      "target": "newmantask.js"
+      "target": "newmantask.js",
+      "argumentFormat": ""
+    },
+    "Node24": {
+      "target": "newmantask.js",
+      "argumentFormat": ""
     }
   }
 }

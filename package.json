@@ -5,13 +5,13 @@
     "gallery-publish-rev": "tfx extension publish --rev-version",
     "clean": "rimraf ./*.vsix",
     "compile": "tsc -p .",
-    "install-task-lib": "cd NewmanPostman && npm install --save-dev",
+    "install-task-lib": "cd NewmanPostman && npm install",
     "pretest": "tsc -p .",
-    "test": "npx mocha Tests//TestSuite.js"
+    "test": "npx mocha Tests/TestSuite.js"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
-    "@types/node": "^20.17.10",
+    "@types/node": "^24.10.0",
     "tfx-cli": "^0.23.1",
     "typescript": "^5.7.2"
   },
@@ -21,6 +21,6 @@
   "dependencies": {
     "azure-pipelines-task-lib": "^5.2.10",
     "is-url": "^1.2.4",
-    "mocha": "^10.8.2"
+    "mocha": "^11.0.0"
   }
 }

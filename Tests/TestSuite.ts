@@ -191,6 +191,15 @@ describe('Normal behavior', function () {
         assert(runner.succeeded, 'Should be in success');
         assert(runner.stdOutContained('--reporter-htmlextra-template ' + path.normalize('/srcDir/htmlExtra.hbs')), 'htmlextra template is added as arg');
     })
+    it('forceNoColor input forwards the supported --color off flag', async () => {
+        this.timeout(1000);
+        let testPath = path.join(__dirname, 'forceNoColorTest.js');
+        let runner: mocktest.MockTestRunner = new mocktest.MockTestRunner(testPath);
+        await runner.runAsync();
+        assert(runner.succeeded, 'Should be in success');
+        assert(runner.stdOutContained('--color off'), 'newman should be invoked with --color off');
+        assert(!runner.stdOutContained('--no-color'), 'the removed --no-color flag should not be emitted');
+    })
 });
 
 

@@ -28,7 +28,7 @@ function GetToolRunner(collectionToRun: string) {
     newman.argIf(unicodeDisabled, ['--disable-unicode']);
 
     let forceNoColor = tl.getBoolInput('forceNoColor');
-    newman.argIf(forceNoColor, ['--no-color']);
+    newman.argIf(forceNoColor, ['--color', 'off']);
 
     let reporterHtmlTemplate = tl.getPathInput('reporterHtmlTemplate', false, true);
     newman.argIf(typeof reporterHtmlTemplate != 'undefined' && tl.filePathSupplied('reporterHtmlTemplate'), ['--reporter-html-template', reporterHtmlTemplate]);

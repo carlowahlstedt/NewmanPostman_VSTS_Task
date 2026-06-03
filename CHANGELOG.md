@@ -1,5 +1,15 @@
 # Changelog
 
+## v4.2.0 — task / 3.1.0 — extension
+
+### Changed
+- When the task iterates over multiple collections in a folder (via `collectionFileSource` + `Contents`), each per-collection reporter export filename is now suffixed with the collection's base name. For example, `reporterJUnitExport: /out/report.xml` now produces `/out/report-collection1.xml`, `/out/report-collection2.xml`, etc. — so the per-collection results no longer overwrite each other. Single-file runs are unchanged. Affects the html, htmlextra, json, and junit reporter export paths. (#102, #66, #62)
+
+## v4.1.2 — task / 3.0.26 — extension
+
+### Fixed
+- The `forceNoColor` input now emits `--color off` instead of the removed `--no-color` flag, so newman correctly disables colored CLI output. The previous code silently failed on any newman version released since 2019. (#50)
+
 ## v4.1.1 — task / 3.0.25 — extension
 
 ### Fixed

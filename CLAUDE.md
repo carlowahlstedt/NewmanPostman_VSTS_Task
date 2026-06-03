@@ -54,3 +54,7 @@ Tests use `azure-pipelines-task-lib/mock-test` and `mock-run`, which is the stan
 ## Toolchain
 
 Targets Node 20 in production (`task.json` → `execution.Node20_1`). Dev deps: `typescript@^5`, `@types/node@^20`, `mocha@^10`, `@types/mocha@^10`, `tfx-cli@^0.17`. Runtime: `azure-pipelines-task-lib@^4`. `MockTestRunner.runAsync()` (the v4 replacement for `run()`) returns a Promise, so test cases in `Tests/TestSuite.ts` are `async` and `await` it.
+
+## Issue triage
+
+Before commenting on, closing, or opening a PR for any GitHub issue, read `.github/ISSUE_TRIAGE.md`. It defines the buckets (`BUG_FIXABLE`, `FEATURE`, `DOCS`, `USER_ERROR_OR_CONFIG`, `INSUFFICIENT_INFO`, `STALE_FIXED_UPSTREAM`, `WONT_FIX`), the canned reply templates, and the authority rules — in particular which actions are auto-fire vs. which require confirmation from the maintainer. Honor those rules; they exist so the backlog stays predictable in maintenance mode.

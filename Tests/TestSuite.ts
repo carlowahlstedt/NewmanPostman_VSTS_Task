@@ -200,6 +200,16 @@ describe('Normal behavior', function () {
         assert(runner.stdOutContained('--color off'), 'newman should be invoked with --color off');
         assert(!runner.stdOutContained('--no-color'), 'the removed --no-color flag should not be emitted');
     })
+    it('Reporter export paths are suffixed per collection when iterating over a folder', async () => {
+        this.timeout(1000);
+        let testPath = path.join(__dirname, 'multiCollectionReportNamingTest.js');
+        let runner: mocktest.MockTestRunner = new mocktest.MockTestRunner(testPath);
+        await runner.runAsync();
+        assert(runner.succeeded, 'Should be in success');
+        assert(runner.stdOutContained('--reporter-junit-export ' + path.normalize('/out/report-collection1.xml')), 'collection1 export filename is suffixed');
+        assert(runner.stdOutContained('--reporter-junit-export ' + path.normalize('/out/report-collection2.xml')), 'collection2 export filename is suffixed');
+        assert(!runner.stdOutContained('--reporter-junit-export ' + path.normalize('/out/report.xml')), 'the unsuffixed export path should not be emitted when multiple collections match');
+    })
 });
 
 

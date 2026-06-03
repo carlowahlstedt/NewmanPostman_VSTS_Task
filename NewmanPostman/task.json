@@ -9,7 +9,7 @@
   "author": "Carlo Wahlstedt",
   "version": {
     "Major": 4,
-    "Minor": 2,
+    "Minor": 3,
     "Patch": 0
   },
   "demands": [],
@@ -175,6 +175,15 @@
       "defaultValue": "",
       "required": false,
       "helpMarkDown": "Use if your build agent can't find newman automatically and you want to specify the path"
+    },
+    {
+      "name": "workingDir",
+      "type": "filePath",
+      "label": "Working Directory",
+      "defaultValue": "",
+      "required": false,
+      "groupName": "advanced",
+      "helpMarkDown": "Newman's `--working-dir <path>`. Sets the directory used when the collection references files with relative paths (e.g. data files referenced from a request body). Defaults to the agent's current directory."
     },
     {
       "name": "unicodeDisabled",

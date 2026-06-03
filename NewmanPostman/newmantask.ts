@@ -3,7 +3,14 @@ import tl = require('azure-pipelines-task-lib/task');
 import trm = require('azure-pipelines-task-lib/toolrunner');
 import isurl = require('is-url');
 
-function GetToolRunner(collectionToRun: string) {
+function suffixExportPath(p: string | undefined, suffix: string | undefined): string | undefined {
+    if (!p || !suffix) return p;
+    const parsed = path.parse(p);
+    if (!parsed.ext || !parsed.name) return p;
+    return path.join(parsed.dir, `${parsed.name}-${suffix}${parsed.ext}`);
+}
+
+function GetToolRunner(collectionToRun: string, exportSuffix?: string) {
     let pathToNewman = tl.getInput('pathToNewman', false);
     if (typeof pathToNewman != 'undefined' && pathToNewman) {
         console.info("Specific path to newman found");
@@ -32,14 +39,14 @@ function GetToolRunner(collectionToRun: string) {
 
     let reporterHtmlTemplate = tl.getPathInput('reporterHtmlTemplate', false, true);
     newman.argIf(typeof reporterHtmlTemplate != 'undefined' && tl.filePathSupplied('reporterHtmlTemplate'), ['--reporter-html-template', reporterHtmlTemplate]);
-    let reporterHtmlExport = tl.getPathInput('reporterHtmlExport');
+    let reporterHtmlExport = suffixExportPath(tl.getPathInput('reporterHtmlExport'), exportSuffix);
     newman.argIf(typeof reporterHtmlExport != 'undefined' && tl.filePathSupplied('reporterHtmlExport'), ['--reporter-html-export', reporterHtmlExport]);
     /**
     * Items for HTML extra https://www.npmjs.com/package/newman-reporter-htmlextra.
     */
     let reporterHtmlExtraTemplate = tl.getPathInput('reporterHtmlExtraTemplate', false, true);
     newman.argIf(typeof reporterHtmlExtraTemplate != 'undefined' && tl.filePathSupplied('reporterHtmlExtraTemplate'), ['--reporter-htmlextra-template', reporterHtmlExtraTemplate]);
-    let reporterHtmlExtraExport = tl.getPathInput('reporterHtmlExtraExport');
+    let reporterHtmlExtraExport = suffixExportPath(tl.getPathInput('reporterHtmlExtraExport'), exportSuffix);
     newman.argIf(typeof reporterHtmlExtraExport != 'undefined' && tl.filePathSupplied('reporterHtmlExtraExport'), ['--reporter-htmlextra-export', reporterHtmlExtraExport]);
     let htmlExtraDarkTheme = tl.getBoolInput('htmlExtraDarkTheme');
     newman.argIf(htmlExtraDarkTheme, ['--reporter-htmlextra-darkTheme']);
@@ -50,9 +57,9 @@ function GetToolRunner(collectionToRun: string) {
     let htmlExtraReportTitle = tl.getInput('htmlExtraReportTitle');
     newman.argIf(typeof htmlExtraReportTitle != 'undefined' && htmlExtraReportTitle, ['--reporter-htmlextra-title', htmlExtraReportTitle]);
 
-    let reporterJsonExport = tl.getPathInput('reporterJsonExport');
+    let reporterJsonExport = suffixExportPath(tl.getPathInput('reporterJsonExport'), exportSuffix);
     newman.argIf(typeof reporterJsonExport != 'undefined' && tl.filePathSupplied('reporterJsonExport'), ['--reporter-json-export', reporterJsonExport]);
-    let reporterJUnitExport = tl.getPathInput('reporterJUnitExport', false, false);
+    let reporterJUnitExport = suffixExportPath(tl.getPathInput('reporterJUnitExport', false, false), exportSuffix);
     newman.argIf(typeof reporterJUnitExport != 'undefined' && tl.filePathSupplied('reporterJUnitExport'), ['--reporter-junit-export', reporterJUnitExport]);
 
     let verbose = tl.getBoolInput('verbose');
@@ -158,8 +165,10 @@ async function run() {
                 console.log("found %d files", matchedFiles.length);
 
                 if (matchedFiles.length > 0) {
+                    const multipleFiles = matchedFiles.length > 1;
                     matchedFiles.forEach((file: string) => {
-                        var newman: trm.ToolRunner = GetToolRunner(file);
+                        const suffix = multipleFiles ? path.parse(file).name : undefined;
+                        var newman: trm.ToolRunner = GetToolRunner(file, suffix);
                         var execResponse = newman.execSync();
                         // tl.debug(execResponse.stdout);
                         if (execResponse.code === 1) {

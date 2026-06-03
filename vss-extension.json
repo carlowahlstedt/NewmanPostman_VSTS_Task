@@ -1,7 +1,7 @@
 {
   "manifestVersion": 1,
   "id": "NewmanPostman",
-  "version": "3.0.25",
+  "version": "3.0.26",
   "name": "Newman the cli Companion for Postman",
   "scopes": [],
   "description": "Using Newman, one can effortlessly run and test a Postman Collections directly from the command-line. Now in a task! ** Not an official task **",

@@ -1,5 +1,10 @@
 # Changelog
 
+## v4.1.2 — task / 3.0.26 — extension
+
+### Fixed
+- The `forceNoColor` input now emits `--color off` instead of the removed `--no-color` flag, so newman correctly disables colored CLI output. The previous code silently failed on any newman version released since 2019. (#50)
+
 ## v4.1.1 — task / 3.0.25 — extension
 
 ### Fixed

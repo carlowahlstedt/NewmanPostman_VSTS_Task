@@ -1,5 +1,10 @@
 # Changelog
 
+## v4.3.0 — task / 3.2.0 — extension
+
+### Added
+- New `Working Directory` input (advanced group) that forwards `--working-dir <path>` to newman. Set it when your collection references files via relative paths (e.g. iteration data referenced from a request body) and those files live somewhere other than the agent's current directory. (#104)
+
 ## v4.2.0 — task / 3.1.0 — extension
 
 ### Changed

@@ -101,6 +101,9 @@ function GetToolRunner(collectionToRun: string, exportSuffix?: string) {
     let dataFile = tl.getPathInput('dataFile', false, true);
     newman.argIf(typeof globalVariable != 'undefined' && tl.filePathSupplied('dataFile'), ['--iteration-data', dataFile]);
 
+    let workingDir = tl.getPathInput('workingDir', false, true);
+    newman.argIf(typeof workingDir != 'undefined' && tl.filePathSupplied('workingDir'), ['--working-dir', workingDir]);
+
     let folder = tl.getInput('folder');
     if(typeof folder != 'undefined' && folder) {
         const splitted = folder.split(",");

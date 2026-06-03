@@ -210,6 +210,14 @@ describe('Normal behavior', function () {
         assert(runner.stdOutContained('--reporter-junit-export ' + path.normalize('/out/report-collection2.xml')), 'collection2 export filename is suffixed');
         assert(!runner.stdOutContained('--reporter-junit-export ' + path.normalize('/out/report.xml')), 'the unsuffixed export path should not be emitted when multiple collections match');
     })
+    it('workingDir input forwards --working-dir to newman', async () => {
+        this.timeout(1000);
+        let testPath = path.join(__dirname, 'workingDirTest.js');
+        let runner: mocktest.MockTestRunner = new mocktest.MockTestRunner(testPath);
+        await runner.runAsync();
+        assert(runner.succeeded, 'Should be in success');
+        assert(runner.stdOutContained('--working-dir ' + path.normalize('/srcDir/data')), 'workingDir is added as arg');
+    })
 });
 
 

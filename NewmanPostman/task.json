@@ -10,7 +10,7 @@
   "version": {
     "Major": 4,
     "Minor": 3,
-    "Patch": 0
+    "Patch": 1
   },
   "demands": [],
   "groups": [
@@ -184,6 +184,15 @@
       "required": false,
       "groupName": "advanced",
       "helpMarkDown": "Newman's `--working-dir <path>`. Sets the directory used when the collection references files with relative paths (e.g. data files referenced from a request body). Defaults to the agent's current directory."
+    },
+    {
+      "name": "useNpx",
+      "type": "boolean",
+      "label": "Use npx to invoke newman",
+      "defaultValue": false,
+      "required": false,
+      "groupName": "advanced",
+      "helpMarkDown": "When enabled, runs `npx newman` instead of looking for newman on the agent. Use this on build agents that disallow global npm installs. If `Path to Newman` is set it takes precedence; otherwise resolution order is: local `./node_modules/.bin/newman` → global `newman` on PATH."
     },
     {
       "name": "unicodeDisabled",

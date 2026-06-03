@@ -1,5 +1,13 @@
 # Changelog
 
+## v4.3.1 — task / 3.2.1 — extension
+
+### Added
+- New `Use npx to invoke newman` checkbox (advanced group) — when enabled, the task runs `npx newman` instead of looking up a global `newman` binary. Use this on build agents that disallow global npm installs. (#55)
+- The task now automatically prefers `./node_modules/.bin/newman` (relative to the agent's current directory) when `Path to Newman` is unset, `Use npx` is unchecked, and the local binary exists. Falls through to the global `newman` on PATH if not found. (#105)
+
+The resolution order is: `pathToNewman` → `useNpx` → local `./node_modules/.bin/newman` → global `newman`.
+
 ## v4.3.0 — task / 3.2.0 — extension
 
 ### Added

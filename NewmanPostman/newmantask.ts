@@ -12,14 +12,27 @@ function suffixExportPath(p: string | undefined, suffix: string | undefined): st
 
 function GetToolRunner(collectionToRun: string, exportSuffix?: string) {
     let pathToNewman = tl.getInput('pathToNewman', false);
+    let useNpx = tl.getBoolInput('useNpx');
+
+    let newman: trm.ToolRunner;
     if (typeof pathToNewman != 'undefined' && pathToNewman) {
         console.info("Specific path to newman found");
+        newman = tl.tool(tl.which(pathToNewman, true));
+    } else if (useNpx) {
+        console.info("useNpx is set, invoking newman via npx");
+        newman = tl.tool(tl.which('npx', true));
+        newman.arg('newman');
     } else {
-        console.info("No specific path to newman, using default of 'newman'");
-        pathToNewman = "newman";
+        let localBin = path.join(process.cwd(), 'node_modules', '.bin',
+            process.platform === 'win32' ? 'newman.cmd' : 'newman');
+        if (tl.exist(localBin)) {
+            console.info(`Using local newman at ${localBin}`);
+            newman = tl.tool(localBin);
+        } else {
+            console.info("No specific path to newman, using default of 'newman'");
+            newman = tl.tool(tl.which('newman', true));
+        }
     }
-
-    var newman: trm.ToolRunner = tl.tool(tl.which(pathToNewman, true));
 
     newman.arg('run');
     newman.arg(collectionToRun);

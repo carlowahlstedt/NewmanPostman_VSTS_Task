@@ -136,6 +136,8 @@ We thank the following contributor(s) for this extension:
 - [Skiepp](https://github.com/Skiepp)
 - [ch264](https://github.com/ch264)
 - [satano](https://github.com/satano)
+- [jwigert](https://github.com/jwigert)
+- [yossarian123](https://github.com/yossarian123)
 
 ### Feedback
 

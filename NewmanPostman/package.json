@@ -14,5 +14,8 @@
     "@types/node": "^20.17.10",
     "@types/q": "1.5.8",
     "is-url": "^1.2.4"
+  },
+  "overrides": {
+    "minimatch": "^9.0.5"
   }
 }

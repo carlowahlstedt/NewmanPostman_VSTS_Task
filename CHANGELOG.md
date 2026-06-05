@@ -1,5 +1,12 @@
 # Changelog
 
+## v4.3.2 — task / 3.2.2 — extension
+
+### Security
+- Pin transitive `minimatch` to `^9.0.5` via npm `overrides` in both `package.json` files. Patches three high-severity ReDoS advisories (GHSA-3ppc-4f35-3m26, GHSA-7r86-cg39-jmmj, GHSA-23c5-xmqv-rm74) that affected `minimatch <= 3.1.3`, which was being pulled in by `azure-pipelines-task-lib`. The packaged `.vsix` now ships minimatch 9.x for the `Contents` glob matching in folder-mode runs.
+- Pin transitive `serialize-javascript` to `^7.0.5` at root. Patches two advisories (RCE via `RegExp.flags`/`Date.prototype.toISOString`, CPU-exhaustion DoS) that affected the dev-only mocha → serialize-javascript chain. No runtime impact.
+- Residual: `uuid <11.1.1` (GHSA-w5hq-g745-h8pq, moderate) remains in `azure-pipelines-task-lib`'s dependency tree because the task-lib uses the legacy `require('uuid/v4')` deep import, which uuid 7+ removed. The vulnerable code path requires a `buf` argument that the task-lib never passes, so the practical exposure is nil. A full fix requires the upstream task-lib to migrate off the deep-import API.
+
 ## v4.3.1 — task / 3.2.1 — extension
 
 ### Added

@@ -1,5 +1,18 @@
 # Changelog
 
+## v4.3.3 — task / 3.2.3 — extension
+
+### Added
+- New `Node24` execution handler in `task.json` alongside the existing `Node20_1`. Agents that support Node 24 will prefer it; older agents fall through to Node 20 with no change in behavior. Sets `minimumAgentVersion: 4.265.1` (required for the Node 24 handler) — self-hosted agents older than that will need to upgrade. (#126)
+
+### Changed
+- TypeScript `compilerOptions.target` raised from ES6 to ES2022. Node 20+ supports the full ES2022 surface natively; output bundle is unchanged for the runtime task but allows newer syntax in future contributions.
+- Test suite refactored: each `it()` now goes through a `makeRunner()` helper that pins `runner.nodePath = process.execPath`. This stops the mock test runner from downloading `node-v16.20.2-linux-x64.tar.gz` on the first test of a cold CI agent — which was the root cause of the flake hot-fixed in v3.2.2. Reverts the `--timeout 30000` mocha flag added then.
+- Defensive catch typing in `newmantask.ts`: `err.message` → `err instanceof Error ? err.message : String(err)`, conforming to TS 5's `unknown` catch parameter.
+- Test script path typo `Tests//TestSuite.js` → `Tests/TestSuite.js`.
+
+Credit to @esbenbach (#126) for the Node 24 handler, the `nodePath` test-runner fix, and the catch-typing pattern.
+
 ## v4.3.2 — task / 3.2.2 — extension
 
 ### Security

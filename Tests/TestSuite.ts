@@ -218,6 +218,26 @@ describe('Normal behavior', function () {
         assert(runner.succeeded, 'Should be in success');
         assert(runner.stdOutContained('--working-dir ' + path.normalize('/srcDir/data')), 'workingDir is added as arg');
     })
+    it('Local node_modules/.bin/newman is preferred when neither pathToNewman nor useNpx is set', async () => {
+        this.timeout(1000);
+        let testPath = path.join(__dirname, 'localNewmanFallbackTest.js');
+        let runner: mocktest.MockTestRunner = new mocktest.MockTestRunner(testPath);
+        await runner.runAsync();
+        assert(runner.succeeded, 'Should be in success');
+        let localBin = path.join(process.cwd(), 'node_modules', '.bin',
+            process.platform === 'win32' ? 'newman.cmd' : 'newman');
+        assert(runner.stdOutContained('Using local newman at ' + localBin), 'task should log the local newman path');
+        assert(runner.stdOutContained(localBin + ' run'), 'task should invoke the local newman binary');
+    })
+    it('useNpx checkbox runs newman through npx', async () => {
+        this.timeout(1000);
+        let testPath = path.join(__dirname, 'useNpxTest.js');
+        let runner: mocktest.MockTestRunner = new mocktest.MockTestRunner(testPath);
+        await runner.runAsync();
+        assert(runner.succeeded, 'Should be in success');
+        assert(runner.stdOutContained('useNpx is set'), 'task should log that npx was chosen');
+        assert(runner.stdOutContained('npx newman run'), 'task should invoke `npx newman run`');
+    })
 });
 
 

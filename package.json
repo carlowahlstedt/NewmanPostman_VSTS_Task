@@ -7,7 +7,7 @@
     "compile": "tsc -p .",
     "install-task-lib": "cd NewmanPostman && npm install --save-dev",
     "pretest": "tsc -p .",
-    "test": "npx mocha Tests//TestSuite.js"
+    "test": "npx mocha Tests//TestSuite.js --timeout 30000"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",

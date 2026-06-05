@@ -52,6 +52,34 @@ Execution is now reported with test statistics.
 
 1. Select "htmlextra" from the reports list
 
+### Accessing reports as build artifacts
+
+The `cli`, `json`, `html`, `htmlextra`, and `junit` reporters write to the build agent's filesystem. Once the agent is recycled the files are gone, so to keep them you need to publish them as artifacts in the same pipeline run. Two pieces:
+
+1. **Point the reporter export at the agent's staging directory.** For example, set `Reporter Junit Export` to `$(Build.ArtifactStagingDirectory)/newman/results.xml` and `Reporter Html Extra Export` to `$(Build.ArtifactStagingDirectory)/newman/report.html`. (When `Collection File Source` points at a directory and matches multiple collections, the task suffixes each export filename with the collection name so per-collection results don't overwrite each other.)
+2. **Add a Publish step** after this task:
+
+   ```yaml
+   - task: PublishBuildArtifacts@1
+     condition: succeededOrFailed()
+     inputs:
+       PathtoPublish: '$(Build.ArtifactStagingDirectory)/newman'
+       ArtifactName: 'newman-reports'
+   ```
+
+   `condition: succeededOrFailed()` makes sure the artifact is uploaded even when test assertions fail (which causes the Newman task itself to fail). The reports then appear under the run's **Artifacts** page; HTML reports can be downloaded and opened locally.
+
+For JUnit specifically, the more idiomatic flow is to keep `Reporter Junit Export` under `$(Build.ArtifactStagingDirectory)` and hand the same path to a `PublishTestResults@2` step (see [Report](#report)), so the results show up under the run's **Tests** tab instead.
+
+### Viewing test output in pipeline logs
+
+The Newman `cli` reporter is what prints the run summary table, per-request status, and any assertion failures into the pipeline log. If your `Reporters` field has only `junit` (or only `html`/`json`) the log will look almost empty — the test results are real, they're just in the file you exported, not in stdout.
+
+To see test output in the pipeline log:
+
+- Make sure **`cli`** is included in the `Reporters` field (e.g. `cli,junit`). `cli` is selected by default in the UI but easy to drop accidentally when editing YAML.
+- For per-request request/response details, enable the **Show detailed information** input (Advanced group) — this forwards Newman's `--verbose` flag.
+
 #### Note About Failed Tests
 
 If your tests are failing, then you will not see the results in the test tab. You can [read more about it here](https://github.com/carlowahlstedt/NewmanPostman_VSTS_Task/issues/10#issuecomment-373421482), but to resolve that you can:

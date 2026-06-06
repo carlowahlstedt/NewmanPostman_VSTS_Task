@@ -10,7 +10,7 @@
   "version": {
     "Major": 4,
     "Minor": 3,
-    "Patch": 2
+    "Patch": 3
   },
   "demands": [],
   "groups": [
@@ -447,8 +447,12 @@
     }
   ],
   "instanceNameFormat": "Newman - Postman",
+  "minimumAgentVersion": "4.265.1",
   "execution": {
     "Node20_1": {
+      "target": "newmantask.js"
+    },
+    "Node24": {
       "target": "newmantask.js"
     }
   }

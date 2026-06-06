@@ -1,3 +1,13 @@
+trigger:
+  branches:
+    include:
+      - master
+
+pr:
+  branches:
+    include:
+      - master
+
 resources:
 - repo: self
   clean: true
